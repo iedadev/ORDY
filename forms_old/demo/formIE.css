@@ -1,0 +1,68 @@
+﻿
+ul.form{
+margin: 0px 0px 20px 0px;
+}
+article hgroup h2{
+padding: 0px 0px 20px 0px;
+}
+
+
+ul.form li div{
+display: block;
+float: left;
+width: auto;
+margin: 0px 0px 0px 36px;
+}
+ul.form li.one div{width: 500px; margin: 0px 0px 0px 0px;}
+ul.form li.two div{width: 232px; margin: 0px 0px 0px 36px;}
+ul.form li.three div{width: 142px; margin: 0px 0px 0px 37px;}
+
+ul.form li.two div.mini{width: 142px;}
+ul.form li.two div.large{width: 322px;}
+
+
+ul.form li div:first-child{
+margin: 0px 0px 0px 0px;
+}
+ul.form li label+div,
+ul.form li.check div+div{
+margin: 0px 0px 0px 0px!important;
+}
+
+
+
+/**/
+
+ul.form li input{
+display: block;
+float: right;
+width: 200px;
+height: 28px;
+padding: 12px 15px 0px 15px;
+font-size: 14px!important;
+line-height: 16px;
+margin: 0px;
+font-weight: bold!important;
+color: #494949!important;
+border: 1px solid #dfdfdf;
+background: #fff;
+}
+
+div.selector,
+div.selector span,
+div.checker span,
+div.radio span,
+div.uploader,
+div.uploader span.action,
+div.button,
+div.button span {
+  background-image: url(sprite_ie.png); }
+
+
+
+
+
+
+
+
+

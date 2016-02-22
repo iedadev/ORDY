@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Motherwords - Modulo Iscrizione Corsi Helen Doron</title>
+		<link rel="stylesheet" href="main.css">
+		<script language="JavaScript" src="jquery-1.7.2.min.js"></script>
+		<script language="JavaScript" src="jquery.blockUI.js"></script>
+		<script language="JavaScript" src="jquery.uniform.min.js"></script>
+		<link href="favicon.ico" rel="icon" /> 
+		<link href="reset.css" rel="stylesheet" type="text/css" title="default" />
+		<link rel="stylesheet" href="uniform.default.css" media="screen" />
+		<link href="form.css" rel="stylesheet" type="text/css" title="default" />
+		
+		<!--[if lt IE 9]>
+		<script>
+		document.createElement('header');
+		document.createElement('nav');
+		document.createElement('section');
+		document.createElement('article');
+		document.createElement('aside');
+		document.createElement('footer');
+		document.createElement('hgroup');
+		</script>
+		
+		<link href="formIE.css" rel="stylesheet" type="text/css" title="default" />
+		
+		<![endif]-->
+		<style type="text/css">
+			input.error, select.error{
+				background-color: #F9E4E4 !important;
+				border: 1px solid #D44D4D !important;
+			}
+			span.error{
+				background-position: 0 -217px !important;
+			}
+			span.error.checked{
+				background-position: -34px -217px !important;
+			}
+			.selector span.error{
+				background-position: right -328px !important;
+			}
+			div.selector.error{
+				background-position: 0 -370px !important;
+			}				
+		</style>
+
+	</head>
+	<body>			
+		<div class="container clearfix">
+			<header 
+			          >
+				<h1 class="logo"> <a href="#"></a>
+				</h1>
+				
+			</header>
+			<article>
+				<hgroup>
+					<h2><span id=":1tl" dir="ltr">Ciao Loretta,<br>&eacute; arrivata 
+					una nuova iscrizione al Summer Camp 2014</span></h2>
+				</hgroup>
+				<hgroup>
+					<h3>Dati del Genitore richiedente</h3>
+				</hgroup>
+				UCase(ModificaApici(Trim(Request("Gen_Nome")))) 
+				UCase(ModificaApici(Trim(Request("Gen_Cognome"))))<br>
+				UCase(ModificaApici(Trim(Request("Gen_Indirizzo")))) 
+				(Request("Gen_CAP") 
+				UCase(ModificaApici(Trim(Request("Gen_Citta")))) 
+				(UCase(ModificaApici(Trim(Request("Gen_Prov")))))<br>
+				<strong>Telefono:</strong> Gen_Phone<br>
+				<strong>Cellulare:</strong> Gen_Mobile<br>
+				<strong>Email:</strong> Gen_Email<br>
+				<strong>Codice Fiscale:</strong> Gen_CF<br>
+				<strong>Partita Iva:</strong> Gen_PI<br><br>
+				<hgroup>
+					<h3>Dati del bambino</h3>
+				</hgroup>
+				UCase(ModificaApici(Trim(Request("Stu_Nome")))) 
+				UCase(ModificaApici(Trim(Request("Stu_Cognome"))))<br>
+				<strong>Nato a:</strong> Stu_Nascita<br>
+				<strong>Data di Nascita:</strong> 
+				UCase(ModificaApici(Trim(Request("Stu_Giorno")))) "/" 
+				ModificaApici(Trim(Request("Stu_Mese"))) "/" 
+				ModificaApici(Trim(Request("Stu_Anno")))<br><br>
+				<hgroup>
+					<h3>Scelta del corso</h3>
+				</hgroup>
+				<strong>Corso:</strong> Corso<br>
+				<strong>Frequenza:</strong> Frequenza<br>
+				<strong>Giorno / Ora:</strong> Corso_Frequenza<br><br><br>
+			</article>
+			
+			<footer>
+				<div class="credits">Motherwords di Gamberini Lorenza - Via Gaetano Previati, 74 20149 Milano - Tel. 02-87381568 - <a href="mailto:direzione@motherwords.it">
+					direzione@motherwords.it
+					</a>- P.I. 04593400965</div>
+			</footer>
+		</div>
+	</body>
+</html>

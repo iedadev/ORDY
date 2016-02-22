@@ -1,0 +1,287 @@
+﻿/* Default pagine */
+
+body {
+	margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background-color: white;
+	}
+
+.menu_top {
+	background:#ffffff url(images/menu_bg.gif) bottom repeat-x;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	border-top:1px solid #b8b8b8;
+	border-bottom:1px solid #bfbfbf;
+	color:white;
+}
+
+.menu_voci {
+	font-family: Arial, Helvetica, sans-serif;
+	color:#0dabdb;
+	font-size: 20px;
+}
+
+.menu_voci a{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-decoration:none;
+	color:#0dabdb;
+}
+
+.menu_voci a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-decoration:none;
+	color:#ff0000;
+}
+
+.menu_voci a:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-decoration:none;
+	color:#0dabdb;
+}
+
+.menu_voci a:link {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-decoration:none;
+	color:#0dabdb;
+}
+
+.menu_voci a:active {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-decoration:none;
+	color:#0dabdb;
+}
+
+.HeaderTabella {
+	background:#6ed9ec;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color:black;
+	font-weight:bold;
+	text-align:left;
+	height: 32px;
+	border-bottom-style:solid;
+	border-width:1px;
+	align:left;
+}
+
+.HeaderTabella2 {
+	background:#6ed9ec;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	font-weight:bold;
+	text-align:left;
+	height: 15px;
+	width: 110px;
+	border-bottom-style:solid;
+	border-width:1px;
+	align:left;
+}
+
+.HeaderTabella2note {
+	background:#6ed9ec;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	font-weight:bold;
+	text-align:left;
+	height: 15px;
+	border-bottom-style:solid;
+	border-width:1px;
+	align:left;
+}
+
+.titolocella {
+	background:#f4f4f4;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	font-weight:bold;
+	text-align:left;
+	height: 10px;
+	width: 110px;
+	border-bottom-style:solid;
+	border-width:1px;
+}
+
+.daticella {
+	background:#ffffff;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	text-align:left;
+	height: 10px;
+	border-bottom-style:solid;
+	border-width:1px;
+}
+
+.titolocella2{
+	background:#f4f4f4;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	font-weight:bold;
+	text-align:left;
+	height: 10px;
+	width: 120px;
+	border-bottom-style:solid;
+	border-width:1px;
+}
+
+.daticella2 {
+	background:#ffffff;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	text-align:left;
+	height: 10px;
+	width: 120px;
+	border-bottom-style:solid;
+	border-width:1px;
+}
+
+.daticella2note {
+	background:#ffffff;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	text-align:left;
+	height: 10px;
+	width: 300px;
+	border-bottom-style:solid;
+	border-width:1px;
+}
+
+.daticella2euro {
+	background:#ffffff;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	text-align:right;
+	height: 10px;
+	width: 120px;
+	border-bottom-style:solid;
+	border-width:1px;
+}
+
+.daticella3 {
+	background:#ffff10;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:black;
+	text-align:left;
+	height: 10px;
+	border-bottom-style:solid;
+	border-width:1px;
+}
+
+.errore {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color:red;
+	font-weight:bold;
+}
+
+.piede {
+	background:#00aace;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:white;
+	font-weight:bold;
+	text-align:right;
+}
+
+.login {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color:#00234b;
+	font-weight:bold;
+}
+
+.splash {
+	text-align:center;
+}
+
+.hotspot {
+	color:#900;
+	padding-bottom:1px;
+	border-bottom:0px dotted #900;
+	cursor:pointer
+}
+
+#tt {position:absolute; display:block; background:url(images/tt_left.gif) top left no-repeat}
+#tttop {display:block; height:5px; margin-left:5px; background:url(images/tt_top.gif) top right no-repeat; overflow:hidden}
+#ttcont {display:block; padding:2px 12px 3px 7px; margin-left:5px; background:#666; color:#FFF}
+#ttbot {display:block; height:5px; margin-left:5px; background:url(images/tt_bottom.gif) top right no-repeat; overflow:hidden}
+
+/* Tag da verificare */
+
+.small {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+}
+
+.hdrNameBg {
+	 background:#ffffff url(images/header-bg.png) repeat-x;	
+}
+	 
+.showPanelBg {
+	background:url(images/homePageSeperator.gif) no-repeat;
+}
+
+
+
+
+.riga_azzurra {
+	background:#00aace;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:black;
+	font-weight:bold;
+	text-align:right;
+	height: 10px;
+}
+
+.riga_bianca {
+	background:#ffffff;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:black;
+	font-weight:bold;
+	text-align:center;
+	height: 10px;
+}
+
+
+.header_tabella {
+	background:#00aace;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color:white;
+	font-weight:bold;
+	text-align:center;
+}
+
+.riga_tabella {
+	background:#ffffff;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color:#00aace;
+	font-weight:bold;
+	text-align:left;
+}
+
+
+#showPanelTopLeft{visibility:hidden;}
+#showPanelTopRight{visibility:hidden;}
+
+.centrato {
+width: 90%;
+margin-left: auto;
+margin-right: auto;
+background:#ffffff;	
+}

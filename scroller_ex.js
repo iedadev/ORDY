@@ -1,0 +1,33 @@
+var caldef1 = {
+	firstday:0,
+	dtype:'dd/MM/yyyy',
+	width:250,
+	windoww:270,
+	windowh:170,
+	border_width:0,
+	border_color:'#ffffff',
+	dn_css:'clsDayName',
+	cd_css:'clsCurrentDay',
+	tw_css:'clsWorkDay',
+	wd_css:'clsWorkDay',
+	we_css:'clsWeekEnd',
+	wdom_css:'clsWorkDayOtherMonth',
+	weom_css:'clsWeekEndOtherMonth',
+	wdomcw_css:'clsWorkDayOthMonthCurWeek',
+	weomcw_css:'clsWeekEndOthMonthCurWeek',
+	wecd_css:'clsWeekEndCurDay',
+	wecw_css:'clsWeekEndCurWeek',
+	highlight_css:'clsCurrentDay',
+	headerstyle: {
+		type:'buttons',
+		css:'clsDayName',
+		imgnextm:'img/next.gif',
+		imgprevm:'img/prev.gif',
+		imgnexty:'img/next_year.gif',
+		imgprevy:'img/prev_year.gif'
+	},
+	monthnames :["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+	daynames: ["Do", "Lu", "Ma", "Me", "Gi", "Ve", "Sa"],
+	template_path:'',
+	img_path: 'img/'
+};
