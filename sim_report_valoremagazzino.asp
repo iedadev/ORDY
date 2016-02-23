@@ -232,7 +232,7 @@ Set rsd = dbConn.Execute(sss3)
 			});
         });
         </script>
-<script>
+        <script>
         $(function() {
             $(".datepicker").datepicker();
             $(".uniform_on").uniform();

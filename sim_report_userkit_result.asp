@@ -112,50 +112,121 @@ End If
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Report User Kit</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend>Report Result User Kit</legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                     <form name="P2" method="post" Action="sim_report_userkit_result.asp" class="form-horizontal" onsubmit="return controllo()">
-                                      <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Teacher: </label>
-                                          <div class="controls">
-                                          <select id="selectError" name="sim_Teacher">
-                                              <option value=""></option>
-                                              <%
-                                              Set rs0 = dbConn.Execute("SELECT * FROM SIM_USER ORDER BY Id_USR")
-                                              While Not rs0.EOF
-	                                              'Set rs = dbConn.Execute("SELECT * FROM SIM_Categorie WHERE IDcat = " & rs0("IDcat"))
-	                                              'If Not rs.EOF Then
-		                                              response.write "<option value='" & rs0("ID_USR") & "'>" & rs0("USR") & "</option>"
-		                                          'End If
-                                              rs0.MoveNext
-                                              Wend
-                                              %>
-                                            </select>
-                                          </div>
-                                        </div>
-                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Periodo dal: </label>
-                                          <div class="controls">
-                                            <input name="date_from" class="input-xlarge focused" id="focusedInput" placeholder="GG/MM/AAAA" type="text">
-                                          </div>
-                                        </div>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">al: </label>
-                                          <div class="controls">
-                                            <input name="date_to" class="input-xlarge focused" id="focusedInput" placeholder="GG/MM/AAAA" type="text">
-                                          </div>
-                                          </div>
-                                          
-                                        <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Subcategory">Search</button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
-                                        </div>
-                                      </fieldset>
-                                    </form>
-                               </div>
-                            </div>
+  									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+										<thead>
+                                           <%
+                                            
+                                            Dim s  
+                                            s1 = "SELECT USR"
+                                            s1 = s1 & " FROM SIM_User" 
+                                            s1 = s1 & " WHERE ID_USR = " & request("SIM_Teacher")
+
+                                            'response.write s1
+                                            Set rs1 = dbConn.Execute(s1)
+
+                                           %>     
+                                          <th>User: <%Response.write rs1("USR")%> 
+                                           <p>New Search <a href="sim_report_userkit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a></p>
+                                           Period from <%response.write(request.form("date_from"))%> to <%response.write(request.form("date_to"))%>
+                                               
+                                          </th>
+                                            <tr> 
+												<th>Barcode</th>
+												<th>Kit</th>
+                                                <th>Nr Kit</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+                                            <!-- calcolo ultimo mese -->
+
+                                          <!--  Dim dataInizio 
+                                            dataInizio = Now()
+                                            Dim dataFine 
+                                            dataFine=DateAdd("m", 1 , Now()) 
+                                            Response.write(dataInizio & dataFine) 
+
+                                            response.end
+                                           -->
+               
+                                            <%
+                                                
+
+                                            Dim sss, i                                          
+
+                                            i = 1
+                                            
+                                            sss = "SELECT COUNT(A.BARCODE) AS Totale, A.BARCODE, B.NOMEKIT"
+                                            sss = sss & " FROM SIM_StoricoInventario AS A INNER JOIN SIM_KIT AS B ON A.BARCODE = B.BARCODE" 
+                                            sss = sss & " WHERE A.DATA_IN BETWEEN #" & request("date_from") & "# AND #" & request("date_to") & "#"
+                                            sss = sss & " AND ID_USER = " & request("SIM_Teacher")
+                                            sss = sss & " GROUP BY A.BARCODE, B.NOMEKIT"
+
+                                            session("sss") = sss
+                                                           
+                                            'response.write sss
+                                            
+                                            'response.end
+
+                                            Set rs = dbConn.Execute(sss)
+                                           
+                                            While Not rs.EOF
+											i = i + 1
+ 
+                                            %>
+											<% If i/2 - Int(i/2) = 0 Then %>
+												<tr class="odd gradeA">
+											<% Else %>
+												<tr class="even gradeA">
+											<% End If %>
+												
+                                                    <td>
+                                            <%
+												If Not rs.eof Then
+												    Response.write rs("BARCODE")
+                                                    '& " " & rs("IDKIT")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+                                                     <td>
+                                            <%
+												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDMcat = " & rs("IDMcat"))
+                                                If Not rs.eof Then
+													'Response.write sss
+                                                    response.write rs("NOMEKIT")
+                                                    '& " " & rs("IDKIT")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+                                                <td>
+                                            <%
+												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDMcat = " & rs("IDMcat"))
+                                                If Not rs.eof Then
+													'Response.write sss
+                                                    response.write rs("Totale") 
+                                                    '& " " & rs("IDKIT")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+                                                </tr>
+											<%
+											rs.MoveNext
+											Wend
+											%>
+
+										</tbody>
+									</table>
+                                </div>
+                          </div>
                         </div>
                     </div>
                 </div>
