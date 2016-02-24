@@ -1,5 +1,4 @@
-
-<!-- Report estrazione teacher/kit utilizzati -->
+<!-- Report estrazione teacher/kit non scaricati -->
 
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
@@ -30,76 +29,6 @@ End If
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script type="text/javascript"> 
-        <!--
-        function controllo()
-        {
-		if (document.P2.kit_IDMCat.value == "")
-			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
-			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDMCat.focus();
-			return false;
-			}
-		if (document.P2.sim_categoria.value == "")
-			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
-			document.P2.sim_categoria.style.backgroundColor = 'Yellow';
-			document.P2.sim_categoria.focus();
-			return false;
-			}
-		if (document.P2.kit_IDSCat.value == "")
-			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
-			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDSCat.focus();
-			return false;
-			}
-		if (document.P2.kit_nomekit.value == "")
-			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
-			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
-			document.P2.kit_nomekit.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDPosizione.value == ""))
-			{
-			alert("Inserire la Posizione del Kit.Dato Obbligatorio!");
-			document.P2.kit_IDPosizione.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		if (document.P2.kit_quantita.value == "")
-			{
-			alert("Inserire la Quantità.Dato Obbligatorio!");
-			document.P2.kit_quantita.style.backgroundColor = 'Yellow';
-			document.P2.kit_quantita.focus();
-			return false;
-			}
-		if (document.P2.Kit_Data_Acquisto.value == "")
-			{
-			alert("Inserire Data di acquisto.Dato Obbligatorio!");
-			document.P2.Kit_Data_Acquisto.style.backgroundColor = 'Yellow';
-			document.P2.Kit_Data_Acquisto.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDStato.value == ""))
-			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			return false;
-			}	
-        if ((document.P2.kit_Barcode.value == ""))
-			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		}
-		//-->
-		</script> <!--funzione di controllo-->
-    
   </head>
     <body>
 	    <!--#include virtual file="include/menu.asp"-->
@@ -108,35 +37,27 @@ End If
              <% If session("ruolo") = "A" Then %>
 	            <!--#include virtual file="include/controlpanel.asp"-->    
             <% End If %>
-                <div class="span6" id="content">
+                <div class="span7" id="content">
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Report Result User Kit</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend>Report Result Status Kit Non scaricati</legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
-                                           <%
-                                            
-                                            Dim s  
-                                            s1 = "SELECT USR"
-                                            s1 = s1 & " FROM SIM_User" 
-                                            s1 = s1 & " WHERE ID_USR = " & request("SIM_Teacher")
-
-                                            'response.write s1
-                                            Set rs1 = dbConn.Execute(s1)
-
-                                           %>     
-                                          <th>User: <%Response.write rs1("USR")%> <br>
-                                           Period from <%response.write(request.form("date_from"))%> to <%response.write(request.form("date_to"))%>
+                                          <th>
+                                           <!--Period from <%'response.write(request.form("date_from"))%> to <%'response.write(request.form("date_to"))%>-->
+                                            Date: <%=Date()%>
                                            &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a><br>
-                                           &nbsp;&nbsp;<a href="sim_report_userkit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a><font size="0.5">New Search</font>
+                                          <!-- &nbsp;&nbsp;<a href="sim_report_statokit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a><font size="0.5">New Search</font>-->
                                           </th>
                                             <tr> 
 												<th>Barcode</th>
-												<th>Kit</th>
-                                                <th>Nr Kit</th>
+                                                <th>User</th>
+                                                <th>Stato In</th>
+                                                <th>Data In</th>
+                                                <th>&nbsp;</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -159,15 +80,17 @@ End If
 
                                             i = 1
                                             
-                                            sss = "SELECT COUNT(A.BARCODE) AS Totale, A.BARCODE, B.NOMEKIT"
-                                            sss = sss & " FROM SIM_StoricoInventario AS A INNER JOIN SIM_KIT AS B ON A.BARCODE = B.BARCODE" 
-                                            sss = sss & " WHERE A.DATA_IN BETWEEN #" & request("date_from") & "# AND #" & request("date_to") & "#"
-                                            sss = sss & " AND ID_USER = " & request("SIM_Teacher")
-                                            sss = sss & " GROUP BY A.BARCODE, B.NOMEKIT"
+                                            'sss = "SELECT BARCODE, ID_USER, DATA_IN, STATO_IN, DATA_OUT, STATO_OUT"
+                                            'sss = sss & " FROM SIM_StoricoInventario1" 
+                                            'sss = sss & " WHERE BARCODE IN (SELECT BARCODE FROM SIM_StoricoInventario2)"
+                                            'sss = sss & " AND ID_USER IN (SELECT ID_USER FROM SIM_StoricoInventario2)"
 
+                                            sss = "SELECT BARCODE, IDUSER, DATA, IN_OUT"
+                                            sss = sss & " FROM SIM_Temp_MagicBox" 
+                                            sss = sss & " WHERE IN_OUT = 'IN'" 
                                             session("sss") = sss
                                                            
-                                            'response.write sss
+                                            response.write sss
                                             
                                             'response.end
 
@@ -193,12 +116,10 @@ End If
 												End If
 												%>
 												</td>
-                                                     <td>
+                                                <td>
                                             <%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDMcat = " & rs("IDMcat"))
-                                                If Not rs.eof Then
-													'Response.write sss
-                                                    response.write rs("NOMEKIT")
+												If Not rs.eof Then
+												    Response.write rs("IDUSER")
                                                     '& " " & rs("IDKIT")
 												Else
 													Response.write "&nbsp;"
@@ -207,16 +128,27 @@ End If
 												</td>
                                                 <td>
                                             <%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDMcat = " & rs("IDMcat"))
-                                                If Not rs.eof Then
-													'Response.write sss
-                                                    response.write rs("Totale") 
+												If Not rs.eof Then
+												    Response.write rs("DATA")
                                                     '& " " & rs("IDKIT")
 												Else
 													Response.write "&nbsp;"
 												End If
 												%>
 												</td>
+                                                <td>
+                                            <%
+												If Not rs.eof Then
+												    Response.write rs("IN_OUT")
+                                                    '& " " & rs("IDKIT")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+                                                <td>
+                                                 <a href="sim_report_statokit_elenco.asp?IDSTATO=<%= rs("BARCODE") %>&ATTIVO=<%= rs("BARCODE") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/elencoreport.png" width="32" height="32" alt="Edit Kit"></a><br>
+                                                </td>
                                                 </tr>
 											<%
 											rs.MoveNext
