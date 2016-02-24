@@ -34,66 +34,25 @@ End If
         <!--
         function controllo()
         {
-		if (document.P2.kit_IDMCat.value == "")
+		if (document.P2.SIM_Teacher.value == "")
 			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
-			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDMCat.focus();
+			alert("Inserire il Teacher.Dato Obbligatorio!");
+			document.P2.SIM_Teacher.style.backgroundColor = 'Yellow';
+			document.P2.SIM_Teacher.focus();
 			return false;
 			}
-		if (document.P2.sim_categoria.value == "")
+        if (document.P2.date_from.value == "")
 			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
-			document.P2.sim_categoria.style.backgroundColor = 'Yellow';
-			document.P2.sim_categoria.focus();
+			alert("Inserire il date_from.Dato Obbligatorio!");
+			document.P2.date_from.style.backgroundColor = 'Yellow';
+			document.P2.date_from.focus();
 			return false;
 			}
-		if (document.P2.kit_IDSCat.value == "")
+          if (document.P2.date_to.value == "")
 			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
-			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDSCat.focus();
-			return false;
-			}
-		if (document.P2.kit_nomekit.value == "")
-			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
-			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
-			document.P2.kit_nomekit.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDPosizione.value == ""))
-			{
-			alert("Inserire la Posizione del Kit.Dato Obbligatorio!");
-			document.P2.kit_IDPosizione.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		if (document.P2.kit_quantita.value == "")
-			{
-			alert("Inserire la Quantità.Dato Obbligatorio!");
-			document.P2.kit_quantita.style.backgroundColor = 'Yellow';
-			document.P2.kit_quantita.focus();
-			return false;
-			}
-		if (document.P2.Kit_Data_Acquisto.value == "")
-			{
-			alert("Inserire Data di acquisto.Dato Obbligatorio!");
-			document.P2.Kit_Data_Acquisto.style.backgroundColor = 'Yellow';
-			document.P2.Kit_Data_Acquisto.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDStato.value == ""))
-			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			return false;
-			}	
-        if ((document.P2.kit_Barcode.value == ""))
-			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
+			alert("Inserire il date_to.Dato Obbligatorio!");
+			document.P2.date_to.style.backgroundColor = 'Yellow';
+			document.P2.date_to.focus();
 			return false;
 			}
 		}
@@ -120,7 +79,7 @@ End If
                                           <div class="control-group">
                                           <label class="control-label" for="focusedInput">Teacher: </label>
                                           <div class="controls">
-                                          <select id="selectError" name="sim_Teacher">
+                                          <select id="selectError" name="SIM_Teacher">
                                               <option value=""></option>
                                               <%
                                               Set rs0 = dbConn.Execute("SELECT * FROM SIM_USER ORDER BY Id_USR")
@@ -138,16 +97,15 @@ End If
                                            <div class="control-group">
                                           <label class="control-label" for="focusedInput">Periodo dal: </label>
                                           <div class="controls">
-                                            <input name="date_from" class="input-xlarge focused" id="focusedInput" placeholder="GG/MM/AAAA" type="text">
+                                            <input name="date_from" class="input-large focused" id="focusedInput" placeholder="GG/MM/AAAA" value="<%= Date() %>" type="text">
                                           </div>
                                         </div>
                                           <div class="control-group">
                                           <label class="control-label" for="focusedInput">al: </label>
                                           <div class="controls">
-                                            <input name="date_to" class="input-xlarge focused" id="focusedInput" placeholder="GG/MM/AAAA" type="text">
+                                            <input name="date_to" class="input-large focused" id="focusedInput" placeholder="GG/MM/AAAA" value="<%= Date()+10 %>"type="text">
                                           </div>
                                           </div>
-                                          
                                         <div class="form-actions">
                                           <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Subcategory">Search</button>&nbsp;
                                           <button type="reset" class="btn">Reset</button>&nbsp;

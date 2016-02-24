@@ -128,10 +128,10 @@ End If
                                             Set rs1 = dbConn.Execute(s1)
 
                                            %>     
-                                          <th>User: <%Response.write rs1("USR")%> 
-                                           <p>New Search <a href="sim_report_userkit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a></p>
+                                          <th>User: <%Response.write rs1("USR")%> <br>
                                            Period from <%response.write(request.form("date_from"))%> to <%response.write(request.form("date_to"))%>
-                                               
+                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a><br>
+                                           &nbsp;&nbsp;<a href="sim_report_userkit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a><font size="0.5">New Search</font>
                                           </th>
                                             <tr> 
 												<th>Barcode</th>

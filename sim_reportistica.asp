@@ -48,7 +48,7 @@ End If
                                 </div>
                                 <div class="span6">
                                      <a href="sim_magicbox_segnalazione_admin.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32" alt="Segnalazioni">XXX</a><br>
-                                     <a href="sim_report_valoremagazzino.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32" alt="Report Valore Magazzino">  YYY </a>
+                                     <a href="sim_report_statokit_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32" alt="Report Valore Magazzino"> Report Status kit </a>
                                 </div>
                             </div>
                         </div>

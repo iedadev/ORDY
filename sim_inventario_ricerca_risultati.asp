@@ -178,16 +178,19 @@ Set rs = dbConn.Execute(sss)
 												End If
 												%>
 												</td> <!--Descrizione-->
-												<td>
-                                                <%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDSCat = " & rs("IDSCat"))
-												If Not rs.eof Then
-													Response.write rs("POS")
-												Else
-													Response.write "&nbsp;"
-												End If
-												%>
-                                                </td> <!--Posizione-->
+												<td><%
+                                                                
+                                                                dim strposition
+                                                                strposition = rs("POS")
+                                                                
+                                                                select case strposition
+                                                                  case 8 
+                                                                  response.write "Basement"
+                                                                  case else
+                                                                  %>
+                                                                  A<%=rs("POS")%>
+                                                                  <%end select%>
+                                                        </td> <!--Posizione-->
                                                 <td>
                                                 <%
 												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDSCat = " & rs("IDSCat"))
@@ -198,16 +201,31 @@ Set rs = dbConn.Execute(sss)
 												End If
 												%>
                                                 </td> <!--QTA-->
-                                                <td>
-                                                <%
-												Set rs4 = dbConn.Execute("SELECT Stato FROM SIM_Stato WHERE IDStato= " & rs("IDStato"))
-                                                If Not rs4.eof Then
-													Response.write rs4("Stato")
-												Else
-													Response.write "&nbsp;"
-												End If
-												%>
-                                                </td> <!--Stato-->
+                                                <td><%
+                                                                dim strStato
+                                                                strStato = rs("IDSTATO")
+
+                                                                select case strStato
+                                                                  case 8%>
+                                                                    <img src="images/stategood.png" width="32" height="32" title="State Good">
+  
+                                                                  <%case 2%>
+                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="State Incomplete">
+                                                                  
+                                                                  <%case 3%>
+                                                                    <img src="images/statemissing.png" width="32" height="32" title="State Missing">
+                                                                  
+                                                                  <%case 4%>
+                                                                    <img src="images/statenew.png" width="32" height="32" title="State New">
+                                                                  
+                                                                  <%case 5%>
+                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="State Substitute">
+                                                                  
+                                                                  <%case 6%>
+                                                                    <img src="images/stateverified.png" width="32" height="32" title="State Verified">
+                                                                  
+                                                                  <%end select
+                                                              %></td> <!--Stato-->
                                                 <td>
                                                 <%
 												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDMcat = " & rs("IDMcat"))

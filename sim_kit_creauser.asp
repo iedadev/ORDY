@@ -30,6 +30,78 @@ Dim sss, i
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script type="text/javascript"> 
+        <!--
+        function controllo()
+        {
+		if (document.P2.kit_IDMCat.value == "")
+			{
+			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
+			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
+			document.P2.kit_IDMCat.focus();
+			return false;
+			}
+		if (document.P2.kit_IDCat.value == "")
+			{
+			alert("Inserire la Categoria.Dato Obbligatorio!");
+			document.P2.kit_IDCat.style.backgroundColor = 'Yellow';
+			document.P2.kit_IDCat.focus();
+			return false;
+			}
+		if (document.P2.kit_IDSCat.value == "")
+			{
+			alert("Inserire Sottocategoria. Dato Obbligatorio!");
+			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
+			document.P2.kit_IDSCat.focus();
+			return false;
+			}
+		if (document.P2.kit_nomekit.value == "")
+			{
+			alert("Inserire in nome del Kit.Dato Obbligatorio!");
+			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
+			document.P2.kit_nomekit.focus();
+			return false;
+			}
+         if (document.P2.kit_descrizione.value == "")
+			{
+			alert("Inserire la descrione del Kit.Dato Obbligatorio!");
+			document.P2.kit_descrizione.style.backgroundColor = 'Yellow';
+			document.P2.kit_descrizione.focus();
+			return false;
+			}
+		if ((document.P2.kit_IDPosizione.value == ""))
+			{
+			alert("Inserire la Posizione del Kit.Dato Obbligatorio!");
+			document.P2.kit_IDPosizione.style.backgroundColor = 'Yellow';
+            document.P2.kit_IDPosizione.focus();
+			return false;
+			}
+		
+		if ((document.P2.kit_IDStato.value == ""))
+			{
+			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
+			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
+			document.P2.kit_IDStato.focus();
+			return false;
+			}
+          
+        if ((document.P2.kit_keyword1.value == ""))
+			{
+			alert("Inserire le keywords del kit.Dato Obbligatorio!");
+			document.P2.kit_keyword1.style.backgroundColor = 'Yellow';
+			document.P2.kit_keyword1.focus();
+			return false;
+			}      	
+        if ((document.P2.kit_Barcode.value == ""))
+			{
+			alert("Inserire il Codice del kit.Dato Obbligatorio!");
+			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
+			document.P2.kit_Barcode.focus();
+			return false;
+			}
+		}
+		//-->
+		</script> <!--funzione di controllo-->
     </head>
     <body>
 	    <!--#include virtual file="include/menu.asp"-->
