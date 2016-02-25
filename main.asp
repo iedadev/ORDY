@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr") = "" Then
     response.redirect "default.asp"
@@ -9,6 +10,8 @@ End If
 'response.end
 
 %>
+
+
 <!DOCTYPE html>
 <html lang="it">
   <head>
@@ -43,14 +46,14 @@ End If
                          <!-- block -->
                         <div align="center" class="block">
                             <div  class="navbar navbar-inner block-header">
-                            	<legend>Benvenuto in SIM (School Inventory Management)</legend>
+                            	<legend><%=response.write (titolo)%></legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12" align="center">
-                                     <a href="sim_inventario_ricerca.asp"> <img src="images/ricercamagicbox.png" width="200" height="100" alt="Ricerca"></a>
+                                     <a href="sim_inventario_ricerca.asp"> <img src="images/ricercamagicbox.png" width="200" height="100" title="<%=response.write (menu1)%>"></a>
                                      <a href="sim_magicbox_barcode_start.asp"><img src="images/magicbox.png" width="200" height="100" alt="MagicBox"></a>
                                      <% If session("ruolo") = "A" Then %>
-                                     <a href="sim_magicbox_segnalazione_admin.asp"><img src="images/segnalazionimagicbox.png" width="200" height="100" title="Segnalazioni""></a>
+                                     <a href="sim_magicbox_segnalazione_admin.asp"><img src="images/segnalazionimagicbox.png" width="200" height="100" title="Segnalazioni"></a>
                                      <%Else%>
                                      <a href="sim_comunication_user.asp"><img src="images/comunication.png" width="200" height="100" title="Segnalazioni"></a>
                                      <% End If %>
