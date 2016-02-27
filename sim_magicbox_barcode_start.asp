@@ -1,7 +1,7 @@
 ﻿<%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr") = "" Then
     response.redirect "default.asp"
@@ -26,13 +26,7 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]>
-        	<script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script>
-        <![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -45,7 +39,7 @@ End If
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                            	<legend>Manage your Magicbox</legend>
+                            	<legend><%=response.write (titolomagicboxstart)%></legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
@@ -53,15 +47,15 @@ End If
                                       <fieldset>
                                           <div class="control-group">
                                           <label class="control-label" for="focusedInput">
-											Barcode: </label>
+											<%=response.write (ricercabarcode)%>: </label>
                                           <div class="controls">
                                           	<input name="barcode" class="input-small focused" id="focusedInput" type="text" style="width:300px;">
                                           </div>
                                         </div>
                                         <div class="form-actions">
                                           <%'response.write request("BARCODE")%>
-                                            <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Avvia la Ricerca">Cerca</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
+                                            <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonecerca)%>"><%=response.write (testobottonecerca)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
@@ -69,9 +63,9 @@ End If
                                 <table class="table table-condensed">
 									<tbody>
                                         <tr>
-											<th>Macrocategoria</th>
-											<th>Categoria</th>
-											<th>Sottocategoria</th>
+											<th><%=response.write (titolotabellamacrocategorie)%></th>
+											<th><%=response.write (titolotabellacategorie)%></th>
+											<th><%=response.write (titolotabellasottocategorie)%></th>
                                            <!-- <th rowspan="4"><img src="images/icone/unnamed.jpg" width="100" height="75"></th> --> <!--fotografia kit-->
 										</tr>
                                         <tr>
@@ -81,9 +75,9 @@ End If
 										</tr>
                                        <td colspan="4">&nbsp;</td>
 										<tr>
-											<th>Nome Kit</th>
-											<th>Barcode</th>
-											<th>Data Acquisto</th>
+											<th><%=response.write (ricercanomekit)%></th>
+											<th><%=response.write (ricercabarcode)%></th>
+											<th><%=response.write (ricercadataacquisto)%></th>
 										</tr>
                                         <tr>
 											<td>&nbsp;</td>
@@ -92,10 +86,10 @@ End If
 										</tr>
                                         <td colspan="4">&nbsp;</td>
                                         <tr>
-											<th>Stato e Posizione</th>
-                                            <th>Quantità</th>
+											<th><%=response.write (ricercastatokit)%> e <%=response.write (ricercaposizioni)%></th>
+                                            <th><%=response.write (ricercaqta)%></th
 											<%If session("ruolo") = "A" Then %>
-                                            <th>Prezzo</th>
+                                            <th><%=response.write (ricercaprezzo)%></th>
                                              <%End If%>
 										</tr>
                                         <tr>
@@ -107,8 +101,8 @@ End If
                                         </tr>
                                         <td colspan="4">&nbsp;</td>
 										<tr>
-											<td colspan="2"><strong>Descrizione:</strong>&nbsp;</td>
-										    <td colspan="2"><strong>Keywords:</strong>&nbsp;</td>
+											<td colspan="2"><strong><%=response.write (ricercadesckit)%>:</strong>&nbsp;</td>
+										    <td colspan="2"><strong><%=response.write (ricercakeyword)%>:</strong>&nbsp;</td>
 										</tr>
 									</tbody>
 								</table>

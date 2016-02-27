@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -33,11 +33,7 @@ Set rs = dbConn.Execute(sss)
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -49,19 +45,19 @@ Set rs = dbConn.Execute(sss)
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                            	<legend>Kit da Validare</legend>
+                            	<legend><%=response.write (titolovalidazionekit)%></legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 										<thead>
 											<tr>
-												<th>Barcode</th>
-                                                <th>Macrocategoria</th>
-												<th>Categoria</th>
-												<th>Sottocategoria</th>
-												<th>Nome</th>
-                                                <th>Descrizione</th>
+												<th><%=response.write (titolotabellabarcode)%></th>
+                                                <th><%=response.write (titolotabellamacrocategorie)%></th>
+												<th><%=response.write (titolotabellacategorie)%></th>
+												<th><%=response.write (titolotabellasottocategorie)%></th>
+												<th><%=response.write (titolotabellanome)%></th>
+                                                <th><%=response.write (titolotabelladescrizione)%></th>
 												<!--<th>Posizione</th>
 												<th>Quantità</th>
 												<th>Keywords</th>-->
@@ -144,7 +140,7 @@ Set rs = dbConn.Execute(sss)
 												%>
 												</td>
                                                 <td>
-                                                   <a href="sim_kit_validare.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&CATEGORIA=<%= rs1("Categoria") %>&SOTTOCATEGORIA=<%= rs2("Sottocategoria") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&KEYWORDS=<%= rs("KEYWORDS") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="Scheda Kit"></a><br>
+                                                   <a href="sim_kit_validare.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&CATEGORIA=<%= rs1("Categoria") %>&SOTTOCATEGORIA=<%= rs2("Sottocategoria") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&KEYWORDS=<%= rs("KEYWORDS") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="<%=response.write (iconascheda)%>"></a><br>
                                                 </td>
                                                 </tr>
 											<%
@@ -157,13 +153,11 @@ Set rs = dbConn.Execute(sss)
                             </div>
                         </div>
                         <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
-                        	&nbsp;&nbsp;<a href="hd_reports_storico_demo_esporta.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a>
+                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i> <%=response.write (testobottoneindietro)%></button>
+                        	&nbsp;&nbsp;<a href="hd_reports_storico_demo_esporta.asp"><button class="btn btn-success tooltip-top" data-original-title="<%=response.write (etichettabottoneesporta)%>"><i class="icon-download icon-white"></i> <%=response.write (testobottoneesporta)%></button></a>
                         </div>
                         <!-- /block -->
                     </div>
-
-
                 </div>
             </div>
             <hr>

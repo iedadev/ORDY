@@ -3,7 +3,7 @@
 		<li>
 			<a href="#">
 			<span class="badge badge-info pull-right">
-			</span>Gestione SIM</a>
+			</span><%=response.write (titolocontrolpanel)%></a>
 		</li>
         <li>
 			<%
@@ -11,9 +11,9 @@
 			Set rs = dbConn.Execute(sss)
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_gestione_macrocategorie.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> Macrocategorie</a>
+            <a href="sim_gestione_macrocategorie.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> <%=response.write (menu1)%></a>
             <% Else %>
-            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> Macrocategorie</a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu1)%></a>
             <% End If %>
         </li>
         <li>
@@ -21,9 +21,9 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM SIM_Categorie")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_gestione_categorie.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span>Categorie</a>
+            <a href="sim_gestione_categorie.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span><%=response.write (menu2)%></a>
             <% Else %>
-            <a href="#><span class="badge badge-success pull-right"><%= rs("Totale") %></span> Categorie</a>
+            <a href="#><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu2)%></a>
             <% End If %>
         </li>
         <li>
@@ -31,9 +31,9 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM SIM_Sottocategorie")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_gestione_sottocategorie.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> Sottocategorie </a>
+            <a href="sim_gestione_sottocategorie.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> <%=response.write (menu3)%> </a>
             <% Else %>
-            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> Sottocategorie </a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu3)%> </a>
             <% End If %>
         </li>
         <li>
@@ -41,9 +41,9 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM Sim_Kit")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_kit.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> Kit</a>
+            <a href="sim_kit.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> <%=response.write (menu4)%></a>
             <% Else %>
-            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> Kit</a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu4)%></a>
             <% End If %>
         </li>
         <li>
@@ -51,9 +51,9 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM SIM_Stato")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_gestione_statokit.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> Status Kit</a>
+            <a href="sim_gestione_statokit.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> <%=response.write (menu5)%></a>
             <% Else %>
-            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> Status Kit</a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu5)%></a>
             <% End If %>
         </li>
         <li>
@@ -61,9 +61,9 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM Sim_Posizione")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_gestione_posizione.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> Position</a>
+            <a href="sim_gestione_posizione.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> <%=response.write (menu6)%></a>
             <% Else %>
-            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> Position</a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu6)%></a>
             <% End If %>
         </li>
         <li>
@@ -71,9 +71,9 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM SIM_USER")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_gestione_user.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> User</a>
+            <a href="sim_gestione_user.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> <%=response.write (menu7)%></a>
             <% Else %>
-            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> User</a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu7)%></a>
             <% End If %>
         </li>
         <li>
@@ -81,9 +81,9 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM SIM_KIT_SEGNALAZIONI WHERE VERIFICATO = 1")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_magicbox_segnalazione_admin.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> Segnalazioni</a>
+            <a href="sim_magicbox_segnalazione_admin.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> <%=response.write (menu8)%></a>
             <% Else %>
-            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> Segnalazioni</a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu8)%></a>
             <% End If %>
         </li>
         <li>
@@ -91,13 +91,13 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM SIM_KIT WHERE verificato = 1")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="sim_kit_validazione.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> Validation New Kit</a>
+            <a href="sim_kit_validazione.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span> <%=response.write (menu9)%></a>
             <% Else %>
-            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> Validation New Kit</a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span> <%=response.write (menu9)%></a>
             <% End If %>
         </li>
         <li>
-			<a href="sim_reportistica.asp">Reportistica</a>
+			<a href="sim_reportistica.asp"><%=response.write (menu10)%></a>
         </li>
     </ul>
 </div>

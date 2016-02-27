@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -38,18 +38,32 @@ Set rs = dbConn.Execute(sss)
         <!--
         function controllo()
         {
-		if (document.P2.Sigla.value == "")
+		if (document.P2.usr.value == "")
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Sigla.style.backgroundColor = 'Orange';
-			document.P2.Sigla.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.usr.style.backgroundColor = 'Orange';
+			document.P2.usr.focus();
 			return false;
 			}
-		if (document.P2.Descrizione.value == "")
+		if (document.P2.pwd.value == "")
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Descrizione.style.backgroundColor = 'Orange';
-			document.P2.Descrizione.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.pwd.style.backgroundColor = 'Orange';
+			document.P2.pwd.focus();
+			return false;
+			}
+        if (document.P2.ruolo.value == "")
+			{
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.ruolo.style.backgroundColor = 'Orange';
+			document.P2.ruolo.focus();
+			return false;
+			}
+         if (document.P2.attivo.value == "")
+			{
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.attivo.style.backgroundColor = 'Orange';
+			document.P2.attivo.focus();
 			return false;
 			}
 		}
@@ -64,43 +78,43 @@ Set rs = dbConn.Execute(sss)
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>User modify</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolomodificauser)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_user_modificafine.asp" class="form-horizontal" onsubmit="return controllo()">
                                      <input type="hidden" name="ID_usr"  value="<%= rs("ID_usr") %>">
                                       <fieldset>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Username: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercauser)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("usr") %>" name="usr" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                            <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Password: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercapwd)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("pwd") %>" name="pwd" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                            <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Role: A (admin) U (User) </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercaruolo)%>: A (admin) U (User) </label>
                                           <div class="controls">
                                             <input value="<%= rs("ruolo") %>" name="ruolo" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Attivo: SI o NO </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercastatouser)%>: <%=response.write (ricercayesno)%> </label>
                                           <div class="controls">
                                             <input value="<%= rs("attivo") %>" name="attivo" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Save modify">Save</button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonesalva)%>"><%=response.write (testobottonesalva)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Back</button>
+		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
                                 </div>
                             </div>
                         </div>

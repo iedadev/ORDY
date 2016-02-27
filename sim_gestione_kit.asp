@@ -1,14 +1,14 @@
 ﻿<%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
 End If
 
 If session("ruolo") <> "A" Then
-    response.redirect "hd_todo.asp"
+    response.redirect "main.asp"
 End If
 
 Dim sss, i
@@ -36,42 +36,42 @@ Dim sss, i
         {
 		if (document.P2.kit_IDMCat.value == "")
 			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
 			document.P2.kit_IDMCat.focus();
 			return false;
 			}
 		if (document.P2.kit_IDCat.value == "")
 			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_IDCat.style.backgroundColor = 'Yellow';
 			document.P2.kit_IDCat.focus();
 			return false;
 			}
 		if (document.P2.kit_IDSCat.value == "")
 			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
 			document.P2.kit_IDSCat.focus();
 			return false;
 			}
 		if (document.P2.kit_nomekit.value == "")
 			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
 			document.P2.kit_nomekit.focus();
 			return false;
 			}
          if (document.P2.kit_descrizione.value == "")
 			{
-			alert("Inserire la descrione del Kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_descrizione.style.backgroundColor = 'Yellow';
 			document.P2.kit_descrizione.focus();
 			return false;
 			}
 		if ((document.P2.kit_IDPosizione.value == ""))
 			{
-			alert("Inserire la Posizione del Kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_IDPosizione.style.backgroundColor = 'Yellow';
             document.P2.kit_IDPosizione.focus();
 			return false;
@@ -79,7 +79,7 @@ Dim sss, i
 		
 		if ((document.P2.kit_IDStato.value == ""))
 			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
 			document.P2.kit_IDStato.focus();
 			return false;
@@ -87,14 +87,14 @@ Dim sss, i
           
         if ((document.P2.kit_keyword1.value == ""))
 			{
-			alert("Inserire le keywords del kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_keyword1.style.backgroundColor = 'Yellow';
 			document.P2.kit_keyword1.focus();
 			return false;
 			}      	
         if ((document.P2.kit_Barcode.value == ""))
 			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
 			document.P2.kit_Barcode.focus();
 			return false;
@@ -115,13 +115,13 @@ Dim sss, i
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Gestione Kit</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolocreazionekit)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_kit_aggiunginuovo.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">MacroCategoria: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercamacrocategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="kit_IDMCat">
                                               <option value=""></option>
@@ -139,7 +139,7 @@ Dim sss, i
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Categoria: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercacategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="kit_IDCat">
                                               <option value=""></option>
@@ -157,7 +157,7 @@ Dim sss, i
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">SottoCategoria: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercasottocategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="kit_IDSCat">
                                               <option value=""></option>
@@ -175,19 +175,19 @@ Dim sss, i
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Nome Kit: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercanomekit)%>: </label>
                                           <div class="controls">
                                             <input name="kit_nomekit" class="input-xlarge focused" id="focusedInput" type="text">
                                             </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Descrizione Kit: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercadesckit)%>: </label>
                                           <div class="controls">
                                           <textarea name="kit_descrizione" style="width: 300px; height: 100px"></textarea>
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Posizione: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercaposizioni)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="kit_IDPosizione">
                                               <option value=""></option>
@@ -205,18 +205,18 @@ Dim sss, i
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Quantità: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercaqta)%>: </label>
                                           <div class="controls">
                                             <input name="kit_quantita" value="1" class="input-xlarge focused" id="focusedInput" type="text">
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Data Acquisto: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercadataacquisto)%>: </label>
                                           <div class="controls">
                                             <input type="text" value="<%= Date() %>" class="input-xlarge" id="date01" placeholder="Data di Acquisto: GG/MM/AAAA" name="Kit_Data_Acquisto"> </div>
                                           </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Stato: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercastatokit)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="kit_IDStato">
                                               <option value=""></option>
@@ -234,26 +234,26 @@ Dim sss, i
                                           </div>
                                           </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Prezzo: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercaprezzo)%>: </label>
                                           <div class="controls">
-                                            <input type="text" value="0" class="input-xlarge" id="focusedInput" name="Kit_prezzo"> 
+                                            <input type="text" value="0" class="input-xlarge" id="focusedInput" name="kit_prezzo"> 
                                           </div>
                                           </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Keyword: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercakeyword)%>: </label>
                                           <div class="controls">
-                                            <input name="kit_keyword1" class="input-xlarge focused" id="focusedInput" type="text" placeholder="Insert you keywords">
+                                            <input name="kit_keyword1" class="input-xlarge focused" id="focusedInput" type="text">
                                             </div>
                                           </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Barcode: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercabarcode)%>: </label>
                                           <div class="controls">
                                             <input name="kit_Barcode" class="input-xlarge focused" id="focusedInput" type="text">
                                           </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Kit">Add Kit</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneaggiungikit)%>"><%=response.write (testobottoneaggiungi)%></button>&nbsp;
+                                          <button type="reset" class="btn" data-original-title="<%=response.write (etichettabottoneannulla)%>"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>

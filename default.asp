@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 
 <%
 Dim sss, IP, nuovapwd, nuovousr, IPserver
@@ -74,7 +75,7 @@ Set rs = nothing
 				<button class="btn btn-large btn-primary" type="submit">Login</button>
     <div align="center">
       <p><font face="Verdana, Arial, Helvetica, sans-serif"><br>
-        Version 2016.1</font> </p>
+        Version 2016.2</font> </p>
     </div>
   </form>
   </div>

@@ -11,7 +11,7 @@
 			'Set rsb = dbConn.Execute("SELECT COUNT(*) as Totale1 FROM Temp_Attivi")
 			'response.write rsb("Totale1") & " / " & rs("Totale")
 			%>
-			</span><b>Ultimate New Props</b></a>
+			</span><b><%=response.write (titoloultimikit)%></b></a>
 		</li>
         <li>
 			<%
@@ -47,7 +47,7 @@
 												%>
 												</td>
                                                 <td>
-                                                   <a href="sim_kit_gestione.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" alt="Edit Kit"></a><br>
+                                                   <a href="sim_kit_gestione.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" alt="<%=response.write (iconascheda)%>"></a><br>
                                                 </td>
                                             <%
 											rs.MoveNext

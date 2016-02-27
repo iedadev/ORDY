@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -41,8 +41,4 @@ Set rs = dbConn.Execute(sss1)
 
 Set rs = Nothing
 Set DbConn = Nothing
-
-'response.redirect "cb_esame_modifica.asp?ID_Storico_CB=" & request("ID_Storico_CB") & "&ID_Studente_CB=" & request("ID_Studente_CB")
-'response.redirect "sim_inventario_magicbox.asp" 
-'response.redirect "sim_magicbox_barcode.asp"
 %>

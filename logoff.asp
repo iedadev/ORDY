@@ -1,5 +1,6 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 
 Dim sss, IP, sss1
@@ -8,7 +9,7 @@ IP = Request.ServerVariables("REMOTE_ADDR")
 session("sss") = ""
 iduser=session("id_usr")
 
-response.write iduser
+'response.write iduser
 
 'sss1 = "DELETE FROM SIM_Temp_MagicBox WHERE IDUser ='" & iduser & "'" 'vecchia versione
 

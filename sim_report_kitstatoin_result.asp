@@ -3,6 +3,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -23,11 +24,7 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
     <body>
@@ -41,22 +38,22 @@ End If
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Report Result Status Kit Non scaricati</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (reportkitnoscaricati)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
                                           <th>
                                            <!--Period from <%'response.write(request.form("date_from"))%> to <%'response.write(request.form("date_to"))%>-->
-                                            Date: <%=Date()%>
+                                            <%=response.write (titolotabelladata)%>: <%=Date()%>
                                            &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a><br>
                                           <!-- &nbsp;&nbsp;<a href="sim_report_statokit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a><font size="0.5">New Search</font>-->
                                           </th>
                                             <tr> 
-												<th>Barcode</th>
-                                                <th>User</th>
-                                                <th>Stato In</th>
-                                                <th>Data In</th>
+												<th><%=response.write (ricercabarcode)%></th>
+                                                <th><%=response.write (ricercauser)%></th>
+                                                <th><%=response.write (reportstatoin)%></th>
+                                                <th><%=response.write (repordatain)%></th>
                                                 <th>&nbsp;</th>
 											</tr>
 										</thead>
@@ -90,7 +87,7 @@ End If
                                             sss = sss & " WHERE IN_OUT = 'IN'" 
                                             session("sss") = sss
                                                            
-                                            response.write sss
+                                            'response.write sss
                                             
                                             'response.end
 
@@ -147,7 +144,7 @@ End If
 												%>
 												</td>
                                                 <td>
-                                                 <a href="sim_report_statokit_elenco.asp?IDSTATO=<%= rs("BARCODE") %>&ATTIVO=<%= rs("BARCODE") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/elencoreport.png" width="32" height="32" alt="Edit Kit"></a><br>
+                                                 <a href="sim_report_statokit_elenco.asp?IDSTATO=<%= rs("BARCODE") %>&ATTIVO=<%= rs("BARCODE") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/elencoreport.png" width="32" height="32" alt="<%=response.write (titoloelencokit)%>"></a><br>
                                                 </td>
                                                 </tr>
 											<%

@@ -4,6 +4,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -24,11 +25,7 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript"> 
         <!--
@@ -36,28 +33,28 @@ End If
         {
 		if (document.P2.kit_IDMCat.value == "")
 			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
 			document.P2.kit_IDMCat.focus();
 			return false;
 			}
 		if (document.P2.sim_categoria.value == "")
 			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.sim_categoria.style.backgroundColor = 'Yellow';
 			document.P2.sim_categoria.focus();
 			return false;
 			}
 		if (document.P2.kit_IDSCat.value == "")
 			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
 			document.P2.kit_IDSCat.focus();
 			return false;
 			}
 		if (document.P2.kit_nomekit.value == "")
 			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
 			document.P2.kit_nomekit.focus();
 			return false;
@@ -70,28 +67,28 @@ End If
 			}
 		if (document.P2.kit_quantita.value == "")
 			{
-			alert("Inserire la Quantità.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_quantita.style.backgroundColor = 'Yellow';
 			document.P2.kit_quantita.focus();
 			return false;
 			}
 		if (document.P2.Kit_Data_Acquisto.value == "")
 			{
-			alert("Inserire Data di acquisto.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.Kit_Data_Acquisto.style.backgroundColor = 'Yellow';
 			document.P2.Kit_Data_Acquisto.focus();
 			return false;
 			}
 		if ((document.P2.kit_IDStato.value == ""))
 			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
 			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
 			return false;
 			}	
         if ((document.P2.kit_Barcode.value == ""))
 			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
 			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
 			return false;
@@ -112,26 +109,26 @@ End If
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Report Status Kit</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (reportstatuskit)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_report_statokit_result.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Periodo dal: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (reportdal)%>: </label>
                                           <div class="controls">
                                             <input name="date_from" class="input-large focused" id="focusedInput" placeholder="GG/MM/AAAA" value="<%= Date() %>" type="text">
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">al: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (reportal)%>: </label>
                                           <div class="controls">
                                             <input name="date_to" class="input-large focused" id="focusedInput" placeholder="GG/MM/AAAA" value="<%= Date()+10 %>"type="text">
                                           </div>
                                           </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Subcategory">Search</button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonecerca)%>"><%=response.write (testobottonecerca)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>

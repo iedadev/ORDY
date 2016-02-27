@@ -25,8 +25,8 @@ sss = "SELECT COUNT(*) as Totale FROM Sim_Kit WHERE ATTIVO=1 AND IDCat = " & req
 Set rs = dbConn.Execute(sss)
 If rs("Totale") > 0 Then
 
-Response.write sss
-Response.end
+'Response.write sss
+'Response.end
 response.redirect "sim_gestione_categorie.asp?Totale=99"
 
 

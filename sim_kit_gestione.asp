@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -26,11 +26,7 @@ End If
 		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 		<link href="assets/styles.css" rel="stylesheet" media="screen">
 		<link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-		    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		
 		<script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	</head>
 	<body>
@@ -71,14 +67,14 @@ End If
                             <div id="myAlert" class="modal hide">
 					                  				<div class="modal-header">
 					                  					<button data-dismiss="modal" class="close" type="button">&times;</button>
-					                  						<h3>Attenzione</h3>
+					                  						<h3><%=response.write (titoloalert)%></h3>
 					                  				</div>
 					                  				<div class="modal-body">
-					                  					<p>Vuoi veramente eliminare questo Kit?</p>
+					                  					<p><%=response.write (titolomessaggioalertelimina)%></p>
 					                  				</div>
 					                  				<div class="modal-footer">
-					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %>">Conferma</a>
-					                  					<a data-dismiss="modal" class="btn" href="#">Annulla</a>
+					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %> title="<%=response.write (etichettabottoneconferma)%>"><%=response.write (testobottoneconferma)%></a>
+					                  					<a data-dismiss="modal" class="btn" href="#"><%=response.write (testobottoneannulla)%></a>
 					                  				</div>
 					      </div>
                             <%End If%>

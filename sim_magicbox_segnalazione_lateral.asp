@@ -2,13 +2,13 @@
 <div class="span5 id="sidebar"><br>
 			                <div class="span12">
                             <div class="navbar navbar-inner block-header">
-                            	<legend>Elenco Movimenti Kit:&nbsp;&nbsp; <%= rs("BARCODE") %></legend>
+                            	<legend><%=response.write (titolomodificasegnalazionelateralmb)%>:&nbsp;&nbsp; <%= rs("BARCODE") %></legend>
                             </div>
                                  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 										<thead>
 											<tr>
-												<th>User</th>
-												<th>Data Out</th>
+												<th><%=response.write (titolotabellauser)%></th>
+												<th><%=response.write (titolotabelladataout)%></th>
                                              </tr>
 										</thead>
 										<tbody>
@@ -26,7 +26,7 @@
                                                ' sss2 = "SELECT ID_USR, USR FROM SIM_USER AS A, SIM_StoricoInventario AS B WHERE B.ID_USER = A.ID_USR" 
                                                ' Set rs2 = dbConn.Execute(sss2)
 
-                                                if Rs.eof then response.write "Nessuna segnalazione per questo Kit"
+                                                if Rs.eof then response.write (messaggioalertsegnalazione)
                                                 
 												'Response.Write sss
                                                 'Response.Write rs("POS")

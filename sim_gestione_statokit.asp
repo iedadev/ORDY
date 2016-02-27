@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 
 <%
 If session("usr")= "" Then
@@ -34,66 +35,11 @@ Dim sss, i
         <!--
         function controllo()
         {
-		if (document.P2.sim_IDMCat.value == "")
+		if (document.P2.sim_statokit.value == "")
 			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
-			document.P2.sim_IDMCat.style.backgroundColor = 'Yellow';
-			document.P2.sim_IDMCat.focus();
-			return false;
-			}
-		if (document.P2.sim_IDCat.value == "")
-			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
-			document.P2.sim_IDCat.style.backgroundColor = 'Yellow';
-			document.P2.sim_IDCat.focus();
-			return false;
-			}
-		if (document.P2.sim_IDSCat.value == "")
-			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
-			document.P2.sim_IDSCat.style.backgroundColor = 'Yellow';
-			document.P2.sim_IDSCat.focus();
-			return false;
-			}
-		if (document.P2.Sim_nomekit.value == "")
-			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
-			document.P2.Sim_nomekit.style.backgroundColor = 'Yellow';
-			document.P2.Sim_nomekit.focus();
-			return false;
-			}
-		if ((document.P2.Sim_IDPosizione.value == ""))
-			{
-			alert("Inserire la Posizione del Kit.Dato Obbligatorio!");
-			document.P2.Sim_IDPosizione.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		if (document.P2.Sim_quantita.value == "")
-			{
-			alert("Inserire la Quantità.Dato Obbligatorio!");
-			document.P2.Sim_quantita.style.backgroundColor = 'Yellow';
-			document.P2.Sim_quantita.focus();
-			return false;
-			}
-		if (document.P2.Sim_Data_Acquisto.value == "")
-			{
-			alert("Inserire Data di acquisto.Dato Obbligatorio!");
-			document.P2.Sim_Data_Acquisto.style.backgroundColor = 'Yellow';
-			document.P2.Sim_Data_Acquisto.focus();
-			return false;
-			}
-		if ((document.P2.sim_IDStato.value == ""))
-			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
-			document.P2.Sim_IDStato.style.backgroundColor = 'Yellow';
-			document.P2.Sim_IDStato.style.backgroundColor = 'Yellow';
-			return false;
-			}	
-        if ((document.P2.Sim_Barcode.value == ""))
-			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
-			document.P2.Sim_Barcode.style.backgroundColor = 'Yellow';
-			document.P2.Sim_Barcode.style.backgroundColor = 'Yellow';
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.sim_statokit.style.backgroundColor = 'Yellow';
+			document.P2.sim_statokit.focus();
 			return false;
 			}
 		}
@@ -112,20 +58,20 @@ Dim sss, i
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Management Kit State</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolostatokit)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_statokit_aggiunginuovo.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Status Kit: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercastatokit)%>: </label>
                                           <div class="controls">
                                             <input name="sim_statokit" class="input-xlarge focused" id="focusedInput" type="text">
                                             </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Status Kit">Add</button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneaggiungiskit)%>"><%=response.write (testobottoneaggiungi)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
@@ -138,11 +84,11 @@ Dim sss, i
                                             <% If request("Totale") <> 0 Then%>	
                                             
                                             <div align="center" style="border:2px solid red">
-                                            &nbsp;&nbsp;&nbsp;Non è possibile cancellare questo Status Kit perchè vi sono Kit che ne fanno parte
+                                            &nbsp;&nbsp;&nbsp;<%=response.write (messaggioalertskit)%>
                                             </div>
                                             <%end if%>
 											<tr>
-												<th>Status Kit</th>
+												<th><%=response.write (titolotabellaskit)%></th>
 												<th>&nbsp;</th>
 											</tr>
 										</thead>
@@ -177,9 +123,9 @@ Dim sss, i
 												%>
 												</td>
                                                 <td>
-                                                   <a href="sim_statokit_modifica.asp?IDStato=<%= rs("IDStato") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorymodify.png" width="32" height="32" title="Modify Status Kit"></a>
+                                                   <a href="sim_statokit_modifica.asp?IDStato=<%= rs("IDStato") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorymodify.png" width="32" height="32" title="<%=response.write (iconamodificaskit)%>"></a>
                                                    &nbsp;
-                                                   <a href="sim_statokit_elimina.asp?IDStato=<%= rs("IDStato") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorydelete.png" width="32" height="32" title="Delete Status Kit"></a>
+                                                   <a href="sim_statokit_elimina.asp?IDStato=<%= rs("IDStato") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorydelete.png" width="32" height="32" title="<%=response.write (iconacancellaskit)%>"></a>
                                             </td>     
 											</tr>
 											<%

@@ -22,17 +22,6 @@ IP = Request.ServerVariables("REMOTE_ADDR")
 ' Scrive Log - Inizio
 
 sss = "INSERT INTO SIM_Categorie (IDMCat,Categoria,DataCreated) VALUES ('" & request("sim_IDMCat") & "','" & request("sim_categoria") & "',Now())"
-
-'sss = sss & " DataCreated) VALUES ("
-'sss = sss & "[Note], Attivo, Datains, Esportato) VALUES ("
-'sss = sss & "'" & ModificaApici(trim(request("Origine"))) & "', "
-'sss = sss & request("sim_macrocategoria") & 
-'sss = sss & "Now()")"
-
-'Response.write sss
-'Response.write request("kit_Barcode")
-'response.end
-
 Set rs = dbConn.Execute(sss)
 
 sss = "SELECT MAX(IDCat) as nuovo FROM SIM_Categorie"

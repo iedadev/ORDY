@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 
 <%
 If session("usr")= "" Then
@@ -34,71 +35,23 @@ Dim sss, i
         <!--
         function controllo()
         {
-		if (document.P2.Sim_IDMCat.value == "")
+		if (document.P2.user.value == "")
 			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
-			document.P2.Sim_IDMCat.style.backgroundColor = 'Yellow';
-			document.P2.Sim_IDMCat.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.user.style.backgroundColor = 'Yellow';
+			document.P2.user.focus();
 			return false;
 			}
-		if (document.P2.Sim_IDCat.value == "")
+		if (document.P2.pwd.value == "")
 			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
-			document.P2.Sim_IDCat.style.backgroundColor = 'Yellow';
-			document.P2.Sim_IDCat.focus();
-			return false;
-			}
-		if (document.P2.Sim_IDSCat.value == "")
-			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
-			document.P2.Sim_IDSCat.style.backgroundColor = 'Yellow';
-			document.P2.Sim_IDSCat.focus();
-			return false;
-			}
-		if (document.P2.Sim_nomekit.value == "")
-			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
-			document.P2.Sim_nomekit.style.backgroundColor = 'Yellow';
-			document.P2.Sim_nomekit.focus();
-			return false;
-			}
-		if ((document.P2.Sim_user.value == ""))
-			{
-			alert("Inserire il nome Utente. Dato Obbligatorio!");
-			document.P2.Sim_user.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		if (document.P2.sim_pwd.value == "")
-			{
-			alert("Inserire la Password. Dato Obbligatorio!");
-			document.P2.sim_pwd.style.backgroundColor = 'Yellow';
-			document.P2.sim_pwd.focus();
-			return false;
-			}
-		if (document.P2.Sim_Data_Acquisto.value == "")
-			{
-			alert("Inserire Data di acquisto.Dato Obbligatorio!");
-			document.P2.Sim_Data_Acquisto.style.backgroundColor = 'Yellow';
-			document.P2.Sim_Data_Acquisto.focus();
-			return false;
-			}
-		if ((document.P2.Sim_IDStato.value == ""))
-			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
-			document.P2.Sim_IDStato.style.backgroundColor = 'Yellow';
-			document.P2.Sim_IDStato.style.backgroundColor = 'Yellow';
-			return false;
-			}	
-        if ((document.P2.Sim_Barcode.value == ""))
-			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
-			document.P2.Sim_Barcode.style.backgroundColor = 'Yellow';
-			document.P2.Sim_Barcode.style.backgroundColor = 'Yellow';
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.pwd.style.backgroundColor = 'Yellow';
+			document.P2.pwd.focus();
 			return false;
 			}
 		}
 		//-->
-		</script> <!--funzione di controllo-->
+		</script>
     </head>
     <body>
 	    <!--#include virtual file="include/menu.asp"-->
@@ -112,25 +65,25 @@ Dim sss, i
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Management User</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolouser)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_user_aggiunginuovo.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">UserName: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercauser)%>: </label>
                                           <div class="controls">
                                             <input name="user" class="input-xlarge focused" id="focusedInput" type="text">
                                             </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Password: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercapwd)%>: </label>
                                           <div class="controls">
                                             <input name="pwd" class="input-xlarge focused" id="focusedInput" type="text">
                                             </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Role: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercaruolo)%>: </label>
                                           <div class="controls">
                                             <select id="selectError" name="role">
                                           	<option value="A">Admin</option>
@@ -139,8 +92,8 @@ Dim sss, i
                                             </div>
                                         </div>
                                           <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add User">Add</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneaggiungiuser)%>"><%=response.write (testobottoneaggiungi)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
@@ -151,9 +104,9 @@ Dim sss, i
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>User</th>
-                                                <th>Password</th>
-                                                <th>Role</th>
+												<th><%=response.write (titolotabellauser)%></th>
+                                                <th><%=response.write (titolotabellapwd)%></th>
+                                                <th><%=response.write (titolotabellaruolo)%></th>
 												<th>&nbsp;</th>
 											</tr>
 										</thead>
@@ -199,7 +152,7 @@ Dim sss, i
 												End If
 												%>
 												</td>
-                                                                                                    <td>
+                                                <td>
                                             <%
 												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDMcat = " & rs("IDMcat"))
                                                 If Not rs.eof Then
@@ -212,9 +165,9 @@ Dim sss, i
 												%>
 												</td>
                                                 <td>
-                                                   <a href="sim_user_modifica.asp?ID_usr=<%= rs("ID_usr") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/usermodify.png" width="32" height="32" title="Modify User"></a>
+                                                   <a href="sim_user_modifica.asp?ID_usr=<%= rs("ID_usr") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/usermodify.png" width="32" height="32" title="<%=response.write (iconamodificauser)%>"></a>
                                                    &nbsp;
-                                                   <a href="sim_user_elimina.asp?ID_usr=<%= rs("ID_usr") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/userdelete.png" width="32" height="32" title="Delete User"></a>
+                                                   <a href="sim_user_elimina.asp?ID_usr=<%= rs("ID_usr") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/userdelete.png" width="32" height="32" title="<%=response.write (iconacancellauser)%>"></a>
                                             </td>     
 											</tr>
 											<%
@@ -232,7 +185,7 @@ Dim sss, i
             </div>
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->
-		 </div>vvvv
+		 </div>
         <!--/.fluid-container-->
         <link href="vendors/datepicker.css" rel="stylesheet" media="screen">
         <link href="vendors/uniform.default.css" rel="stylesheet" media="screen">

@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -26,28 +27,17 @@ Set rs = dbConn.Execute(sss)
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript">
         <!--
         function controllo()
         {
-		if (document.P2.Sigla.value == "")
+		if (document.P2.stato.value == "")
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Sigla.style.backgroundColor = 'Orange';
-			document.P2.Sigla.focus();
-			return false;
-			}
-		if (document.P2.Descrizione.value == "")
-			{
-			alert("Dato Obbligatorio!");
-			document.P2.Descrizione.style.backgroundColor = 'Orange';
-			document.P2.Descrizione.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.stato.style.backgroundColor = 'Orange';
+			document.P2.stato.focus();
 			return false;
 			}
 		}
@@ -62,25 +52,25 @@ Set rs = dbConn.Execute(sss)
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Status Kit modify</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolomodificaskit)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_statokit_modificafine.asp" class="form-horizontal" onsubmit="return controllo()">
                                      <input type="hidden" name="IDStato"  value="<%= rs("IDStato") %>">
                                       <fieldset>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Status Kit: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercastatokit)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("Stato") %>" name="stato" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Save modify">Save</button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonesalva)%>"><%=response.write (testobottonesalva)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Back</button>
+		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr") = "" Then
     response.redirect "default.asp"
@@ -117,20 +117,20 @@ Set rs = dbConn.Execute(sss)
                         <div class="block">
 
                             <div class="navbar navbar-inner block-header">
-                            	<legend>Risultati della Ricerca</legend>
+                            	<legend><%=response.write (titolorisultatoricerca)%></legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>Barcode</th>
-												<th>Nome</th>
-                                                <th>Descrizione</th>
-												<th>Posizione</th>
-												<th>Quantità</th>
-												<th>Stato</th>
-                                                <th>Keywords</th>
+												<th><%=response.write (ricercabarcode)%></th>
+												<th><%=response.write (ricercanomekit)%></th>
+                                                <th><%=response.write (ricercadesckit)%></th>
+												<th><%=response.write (ricercaposizioni)%></th>
+												<th><%=response.write (ricercaqta)%></th>
+												<th><%=response.write (ricercastatokit)%></th>
+                                                <th><%=response.write (ricercakeyword)%></th>
 												<th>&nbsp;</th>
 											</tr>
 										</thead>
@@ -207,22 +207,22 @@ Set rs = dbConn.Execute(sss)
 
                                                                 select case strStato
                                                                   case 8%>
-                                                                    <img src="images/stategood.png" width="32" height="32" title="State Good">
+                                                                    <img src="images/stategood.png" width="32" height="32" title="<%=response.write (iconastatobuono)%>">
   
                                                                   <%case 2%>
-                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="State Incomplete">
+                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="<%=response.write (iconastatoincompleto)%>">
                                                                   
                                                                   <%case 3%>
-                                                                    <img src="images/statemissing.png" width="32" height="32" title="State Missing">
+                                                                    <img src="images/statemissing.png" width="32" height="32" title="<%=response.write (iconastatoperso)%>">
                                                                   
                                                                   <%case 4%>
-                                                                    <img src="images/statenew.png" width="32" height="32" title="State New">
+                                                                    <img src="images/statenew.png" width="32" height="32" title="<%=response.write (iconastatonuovo)%>">
                                                                   
                                                                   <%case 5%>
-                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="State Substitute">
+                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="<%=response.write (iconastatosostituito)%>">
                                                                   
                                                                   <%case 6%>
-                                                                    <img src="images/stateverified.png" width="32" height="32" title="State Verified">
+                                                                    <img src="images/stateverified.png" width="32" height="32" title="<%=response.write (iconastatoverificato)%>">
                                                                   
                                                                   <%end select
                                                               %></td> <!--Stato-->
@@ -238,10 +238,10 @@ Set rs = dbConn.Execute(sss)
 												%>
 												</td> <!--Keywords-->
                                                 <td>
-                                                   <a href="sim_schedakit.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="Scheda Kit"></a><br>
+                                                   <a href="sim_schedakit.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="<%=response.write (iconascheda)%>"></a><br>
                                                 </td> 
                                                 <td>
-                                                    <a href="sim_temp_magicbox.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/addmagicbox.png" width="32" height="32" title="Add to Magic Kit"></a><br>
+                                                    <a href="sim_temp_magicbox.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/addmagicbox.png" width="32" height="32" title="<%=response.write (iconaaggiungimb)%>"></a><br>
                                                 </td>
 											</tr>
 											<%
@@ -254,7 +254,7 @@ Set rs = dbConn.Execute(sss)
                            </div>
                         </div>
                         <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
+                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i> <%=response.write (testobottoneindietro)%></button>
                         </div>
                         <!-- /block -->
                      </div>

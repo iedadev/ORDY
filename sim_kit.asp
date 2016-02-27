@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr") = "" Then
     response.redirect "default.asp"
@@ -18,13 +18,7 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]>
-        	<script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script>
-        <![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -40,12 +34,12 @@ End If
                          <!-- block -->
                         <div class="block">
                             <div  class="navbar navbar-inner block-header">
-                            	<legend>Management Kit</legend>
+                            	<legend><%=response.write (titolokit)%></legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12" align="center">
-                                     <a href="sim_kit_elenco.asp"> <img src="images/elencokit.png" width="200" height="100" alt="Ricerca"></a>
-                                     <a href="sim_gestione_kit.asp"><img src="images/createnewkit.png" width="200" height="100" alt="Segnala il tuo Kit"></a>
+                                     <a href="sim_kit_elenco.asp"> <img src="images/elencokit.png" width="200" height="100" title="<%=response.write (tooltipimg6)%>"></a>
+                                     <a href="sim_gestione_kit.asp"><img src="images/createnewkit.png" width="200" height="100" title="<%=response.write (tooltipimg5)%>"></a>
                                 </div>
                             </div>
                         </div>

@@ -1,9 +1,14 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
-If session("usr") = "" Then
+If session("usr")= "" Then
     response.redirect "default.asp"
+End If
+
+If session("ruolo") <> "A" Then
+    response.redirect "main.asp"
 End If
 
 %>
@@ -17,13 +22,7 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]>
-        	<script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script>
-        <![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -39,16 +38,16 @@ End If
                          <!-- block -->
                         <div class="block">
                             <div  class="navbar navbar-inner block-header">
-                            	<legend>Reporting</legend>
+                            	<legend><%=response.write (titoloreportistica)%></legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span6">
-                                     <a href="sim_report_userkit.asp"><img src="images/reportuserkit.png" width="32" height="32" alt="Report User Storico Kit">Report User Storico Kit</a><br>
-                                     <a href="sim_report_valoremagazzino.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32" alt="Report Status Kit">  Report Valore Magazzino</a>
+                                     <a href="sim_report_userkit.asp"><img src="images/reportuserkit.png" width="32" height="32">&nbsp;<%=response.write (titoloreport1)%></a><br>
+                                     <a href="sim_report_valoremagazzino.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport2)%></a>
                                 </div>
                                 <div class="span6">
-                                     <a href="sim_report_kitstatoin_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32" alt="Report Status Kit No scaricati"> Report Status Kit No scaricati</a><br>
-                                     <a href="sim_report_statokit_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32" alt="Report Valore Magazzino"> Report Status kit </a>
+                                     <a href="sim_report_kitstatoin_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport3)%> </a><br>
+                                     <a href="sim_report_statokit_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport4)%></a>
                                 </div>
                             </div>
                         </div>

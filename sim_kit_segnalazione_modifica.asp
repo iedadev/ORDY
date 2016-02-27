@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -36,76 +36,78 @@ response.write sss
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script type="text/javascript">
+      <script type="text/javascript"> 
         <!--
         function controllo()
         {
-		if ((document.P2.Studente_Cognome.value == "") && (document.P2.Attivo.value == "SI"))
+		if (document.P2.kit_IDMCat.value == "")
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Studente_Cognome.style.backgroundColor = 'Orange';
-			document.P2.Studente_Cognome.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
+			document.P2.kit_IDMCat.focus();
 			return false;
 			}
-		if ((document.P2.Studente_Nome.value == "") && (document.P2.Attivo.value == "SI"))
+		if (document.P2.kit_IDCat.value == "")
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Studente_Nome.style.backgroundColor = 'Orange';
-			document.P2.Studente_Nome.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_IDCat.style.backgroundColor = 'Yellow';
+			document.P2.kit_IDCat.focus();
 			return false;
 			}
-		if ((document.P2.Studente_Data_Nascita.value == "") && (document.P2.Attivo.value == "SI"))
+		if (document.P2.kit_IDSCat.value == "")
 			{
-			alert("Dato Obbligatorio! Inserire nel formato GG/MM/AAAA");
-			document.P2.Studente_Data_Nascita.style.backgroundColor = 'Orange';
-			document.P2.Studente_Data_Nascita.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
+			document.P2.kit_IDSCat.focus();
 			return false;
 			}
-		if ((document.P2.Genitore_Ragionesociale.value == "") && (document.P2.Attivo.value == "SI"))
+		if (document.P2.kit_nomekit.value == "")
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Genitore_Ragionesociale.style.backgroundColor = 'Orange';
-			document.P2.Genitore_Ragionesociale.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
+			document.P2.kit_nomekit.focus();
 			return false;
 			}
-		if ((document.P2.Genitore_CF.value == "") && (document.P2.Genitore_PIVA.value == "") && (document.P2.Attivo.value == "SI"))
+         if (document.P2.kit_descrizione.value == "")
 			{
-			alert("Inserire almeno il Codice Fiscale o la Partita IVA");
-			document.P2.Genitore_CF.style.backgroundColor = 'Orange';
-			document.P2.Genitore_PIVA.style.backgroundColor = 'Orange';
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_descrizione.style.backgroundColor = 'Yellow';
+			document.P2.kit_descrizione.focus();
 			return false;
 			}
-		if ((document.P2.Genitore_Indirizzo.value == "")  && (document.P2.Attivo.value == "SI"))
+		if ((document.P2.kit_IDPosizione.value == ""))
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Genitore_Indirizzo.style.backgroundColor = 'Orange';
-			document.P2.Genitore_Indirizzo.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_IDPosizione.style.backgroundColor = 'Yellow';
+            document.P2.kit_IDPosizione.focus();
 			return false;
 			}
-		if ((document.P2.Genitore_Citta.value == "") && (document.P2.Attivo.value == "SI"))
+		
+		if ((document.P2.kit_IDStato.value == ""))
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Genitore_Citta.style.backgroundColor = 'Orange';
-			document.P2.Genitore_Citta.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
+			document.P2.kit_IDStato.focus();
 			return false;
 			}
-		if ((document.P2.Genitore_Telefono.value == "") && (document.P2.Genitore_Cellulare.value == "") && (document.P2.Attivo.value == "SI"))
+          
+        if ((document.P2.kit_keyword1.value == ""))
 			{
-			alert("Inserire almeno un recapito telefonico");
-			document.P2.Genitore_Telefono.style.backgroundColor = 'Orange';
-			document.P2.Genitore_Cellulare.style.backgroundColor = 'Orange';
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_keyword1.style.backgroundColor = 'Yellow';
+			document.P2.kit_keyword1.focus();
 			return false;
-			}
-		if ((document.P2.Genitore_Email.value == "") && (document.P2.Attivo.value == "SI"))
+			}      	
+        if ((document.P2.kit_Barcode.value == ""))
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Genitore_Email.style.backgroundColor = 'Orange';
-			document.P2.Genitore_Email.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
+			document.P2.kit_Barcode.focus();
 			return false;
 			}
 		}
 		//-->
-		</script>
+		</script> <!--funzione di controllo-->
     </head>
     <body>
 	    <!--#include virtual file="include/menu.asp"-->
@@ -115,14 +117,14 @@ response.write sss
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Modifica Kit Segnalato: <%= rs("BARCODE") & " - name Kit: " & rs("NomeKit") %></legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolomodificakitsegnalato)%>: <%= rs("BARCODE") & " - name Kit: " & rs("NomeKit") %></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_kit_segnalazione_modificafine.asp" class="form-horizontal" onsubmit="return controllo()">
                                      <input type="hidden" name="IDkit" value="<%= request("IDKit") %>">
                                       <fieldset>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Macrocategoria: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercamacrocategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="IDMcat">
                                               <%
@@ -138,7 +140,7 @@ response.write sss
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Category: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercacategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="IDCat">
                                               <%
@@ -154,7 +156,7 @@ response.write sss
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">SubCategory</label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (titolotabellasottocategorie)%>:</label>
                                           <div class="controls">
                                           <select id="selectError" name="IDScat">
                                               <%
@@ -170,25 +172,25 @@ response.write sss
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Name Kit: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercanomekit)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("nomekit") %>" name="nomekit" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput" >Barcode: </label>
+                                          <label class="control-label" for="focusedInput" ><%=response.write (ricercabarcode)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("barcode") %>" name="barcode" readonly="readonly" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput" >Date Creation: </label>
+                                          <label class="control-label" for="focusedInput" ><%=response.write (ricercadatacreazione)%>: </label>
                                           <div class="controls">
                                             <input value="<%= Date()%>" name="datain" readonly="readonly" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">State:</label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercastatokit)%>:</label>
                                           <div class="controls">
                                           <select id="selectError" name="Stato">
                                               <%
@@ -204,7 +206,7 @@ response.write sss
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Position:</label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercaposizioni)%>:</label>
                                           <div class="controls">
                                           <select id="selectError" name="posizione">
                                               <%
@@ -220,36 +222,36 @@ response.write sss
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Qta: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercaqta)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("qta") %>" name="qta" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Prz: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercaprezzo)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("prz") %>" name="prz" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="textarea">Description:</label>
+                                          <label class="control-label" for="textarea"><%=response.write (ricercadesckit)%>:</label>
                                           <div class="controls">
                                             <textarea class="input-xlarge textarea" name="descrizione" style="width: 850px; height: 100px"><%= rs("DESCKIT") %></textarea>
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Keywords: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercakeyword)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("keywords") %>" name="keywords" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Validate New Kit">Validate Segnalation</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonevalidazione)%>"><%=response.write (testobottonevalidazione)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
+		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
                                 </div>
                             </div>
                         </div>

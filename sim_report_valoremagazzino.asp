@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -48,11 +49,7 @@ Set rsd = dbConn.Execute(sss3)
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -67,7 +64,7 @@ Set rsd = dbConn.Execute(sss3)
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Valore Merce Magazzino  </legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (reportvaloremagazzino)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_report_valoremagazzino_aggiungi.asp?VALOREMAGAZZINO=<%= rsm("TotaleMagazzino") %>&NRARTICOLI=<%= rsk("TotaleKit") %>" class="form-horizontal">
@@ -77,9 +74,9 @@ Set rsd = dbConn.Execute(sss3)
                                               <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										        <thead>
                                                 <tr>
-												<th>Data Estrazione</th>
-												<th>Totale Euro</th>
-                                                <th>Nr Articoli</th>
+												<th><%=response.write (reportvaloremagazzinodataestr)%></th>
+												<th><%=response.write (reportvaloremagazzinototale)%></th>
+                                                <th><%=response.write (reportvaloremagazzinonrarticoli)%></th>
 											    </tr>
 										</thead>
                                         <tbody>
@@ -90,9 +87,9 @@ Set rsd = dbConn.Execute(sss3)
 
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Position">Add</button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
-                                          <button type="print" class="btn">Esporta</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (reportvaloremagazzinoaddicona)%>"><%=response.write (reportvaloremagazzinoadd)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
+                                          <button type="print" class="btn"><%=response.write (testobottoneesporta)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
@@ -103,9 +100,9 @@ Set rsd = dbConn.Execute(sss3)
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
                                                 <tr>
-												<th>Data Estrazione</th>
-												<th>Totale Euro</th>
-                                                <th>Nr Articoli</th>
+												<th><%=response.write (reportvaloremagazzinodataestr)%></th>
+												<th><%=response.write (reportvaloremagazzinototale)%></th>
+                                                <th><%=response.write (reportvaloremagazzinonrarticoli)%></th>
 											</tr>
 										</thead>
 										<tbody>

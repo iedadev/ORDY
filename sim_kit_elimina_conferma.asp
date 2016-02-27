@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -48,20 +48,20 @@ response.write sss
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-							<legend>Eliminazione Scheda Kit: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
+							<legend><%=response.write (titoloeliminakit)%>: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
 						</div>
-                            &nbsp;&nbsp;&nbsp;<a href="#myAlert" data-toggle="modal"><button class="btn btn-mini btn-danger tooltip-top" data-original-title="Elimina Scheda Kit"><i class="icon-remove icon-white"></i> Elimina Scheda Kit</button></a>
+                            &nbsp;&nbsp;&nbsp;<a href="#myAlert" data-toggle="modal"><button class="btn btn-mini btn-danger tooltip-top" data-original-title="<%=response.write (ricercaeliminakit)%>"><i class="icon-remove icon-white"></i> <%=response.write (ricercaeliminakit)%></button></a>
                             <div id="myAlert" class="modal hide">
 					                  				<div class="modal-header">
 					                  					<button data-dismiss="modal" class="close" type="button">&times;</button>
-					                  						<h3>Attenzione</h3>
+					                  						<h3><%=response.write (titoloalert)%></h3>
 					                  				</div>
 					                  				<div class="modal-body">
-					                  					<p>Vuoi veramente eliminare questo Kit?</p>
+					                  					<p><%=response.write (messaggioalertelimina)%></p>
 					                  				</div>
 					                  				<div class="modal-footer">
-					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %>">Conferma</a>
-					                  					<a data-dismiss="modal" class="btn" href="#">Annulla</a>
+					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %>"><%=response.write (testobottoneconferma)%></a>
+					                  					<a data-dismiss="modal" class="btn" href="#"><%=response.write (testobottoneannulla)%></a>
 					                  				</div>
 					      </div>
 						<br>
@@ -70,9 +70,9 @@ response.write sss
   									<table class="table table-condensed">
 						              <tbody>
 						                <tr>
-											<th>Macrocategoria</th>
-											<th>Categoria</th>
-											<th>Sottocategoria</th>
+											<th><%=response.write (titolotabellamacrocategorie)%></th>
+											<th><%=response.write (titolotabellacategorie)%></th>
+											<th><%=response.write (titolotabellasottocategorie)%></th>
                                            <!-- <th rowspan="4"><img src="images/icone/unnamed.jpg" width="100" height="75"></th> --> <!--fotografia kit-->
 										</tr>
                                         <tr>
@@ -82,9 +82,9 @@ response.write sss
 										</tr>
                                        <td colspan="4">&nbsp;</td>
 										<tr>
-											<th>Nome Kit</th>
-											<th>Barcode</th>
-											<th>Data Acquisto</th>
+											<th><%=response.write (titolotabellanomekit)%></th>
+											<th><%=response.write (titolotabellabarcode)%><</th>
+											<th><%=response.write (titolotabelladataacquisto)%><</th>
 										</tr>
                                         <tr>
 											<td><%= rs("NomeKit") %>&nbsp;</td>
@@ -93,9 +93,9 @@ response.write sss
 										</tr>
                                         <td colspan="4">&nbsp;</td>
                                         <tr>
-											<th>Stato e Posizione</th>
-                                            <th>Quantità</th>
-											<th>Prezzo</th>
+											<th><%=response.write (titolotabellastato)%> e <%=response.write (titolotabellapos)%></th>
+                                            <th><%=response.write (titolotabellaskit)%></th>
+											<th><%=response.write (titolotabellaprezzo)%></th>
 										</tr>
                                         <tr>
                                             <td><%= rs2("Stato") %>&nbsp;-&nbsp;<%= rs1("Posizione") %></td>
@@ -104,8 +104,8 @@ response.write sss
                                         </tr>
                                         <td colspan="4">&nbsp;</td>
 										<tr>
-											<td colspan="2"><strong>Descrizione:</strong>&nbsp;<%= rs("Desckit") %></td>
-										    <td colspan="2"><strong>Keywords:</strong>&nbsp;<%= rs("Keywords") %> </td>
+											<td colspan="2"><strong><%=response.write (titolotabelladesckit)%>:</strong>&nbsp;<%= rs("Desckit") %></td>
+										    <td colspan="2"><strong><%=response.write (titolotabellakeyword)%>:</strong>&nbsp;<%= rs("Keywords") %> </td>
 										</tr>
 									</tbody>
 								</table>

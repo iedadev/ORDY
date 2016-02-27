@@ -4,6 +4,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -24,11 +25,7 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
     <body>
@@ -42,23 +39,23 @@ End If
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Report Result Status Kit</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (reportstatuskit)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
                                           <th>
-                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a>
-                                           &nbsp;&nbsp;<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
+                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="<%=response.write (etichettabottoneesporta)%>"><i class="icon-download icon-white"></i> <%=response.write (testobottoneesporta)%></button></a>
+                                           &nbsp;&nbsp;<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
                                           </th>
                                             <tr> 
-												<th>Barcode</th>
-                                                <th>Nome KIt</th>
-                                                <th>Descr Kit</th>
+												<th><%=response.write (ricercabarcode)%></th>
+                                                <th><%=response.write (ricercanomekit)%></th>
+                                                <th><%=response.write (ricercadesckit)%></th>
                                                 <!--<th>Position</th>
                                                 <th>Qta</th>-->
-                                                <th>Status</th>
-                                                <th>Prz</th>
+                                                <th><%=response.write (ricercastatokit)%></th>
+                                                <th><%=response.write (ricercaprezzo)%></th>
                                                 <th>&nbsp;</th>
 											</tr>
 										</thead>
@@ -141,22 +138,22 @@ End If
                                                                 'Response.write rs("IDSTATO")
                                                     select case strStato
                                                                   case 8%>
-                                                                    <img src="images/stategood.png" width="32" height="32" title="State Good"> - Good
+                                                                    <img src="images/stategood.png" width="32" height="32" title="<%=response.write (iconastatobuono)%>"> - Good
   
                                                                   <%case 2%>
-                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="State Incomplete"> - Incomplete
+                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="<%=response.write (iconastatoincompleto)%>"> - Incomplete
                                                                   
                                                                   <%case 3%>
-                                                                    <img src="images/statemissing.png" width="32" height="32" title="State Missing"> - Missing
+                                                                    <img src="images/statemissing.png" width="32" height="32" title="<%=response.write (iconastatoperso)%>"> - Missing
                                                                   
                                                                   <%case 4%>
-                                                                    <img src="images/statenew.png" width="32" height="32" title="State New"> - New
+                                                                    <img src="images/statenew.png" width="32" height="32" title="<%=response.write (iconastatonuovo)%>"> - New
                                                                   
                                                                   <%case 5%>
-                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="State Substitute"> - Substitute
+                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="<%=response.write (iconastatosostituito)%>"> - Substitute
                                                                   
                                                                   <%case 6%>
-                                                                    <img src="images/stateverified.png" width="32" height="32" title="State Verified"> - Verified
+                                                                    <img src="images/stateverified.png" width="32" height="32" title="<%=response.write (iconastatoverificato)%>"> - Verified
                                                                   
                                                                   <%end select%>
                                                 <%Else
@@ -174,7 +171,7 @@ End If
 												%>
 												</td>
                                                 <td>
-                                                 <a href="sim_kit_gestione.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&KEYWORDS=<%= rs("KEYWORDS") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="Scheda Kit"></a><br>
+                                                 <a href="sim_kit_gestione.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&KEYWORDS=<%= rs("KEYWORDS") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="<%=response.write (titoloschedakit)%>"></a><br>
                                                </td>
                                                 </tr>
 											<%

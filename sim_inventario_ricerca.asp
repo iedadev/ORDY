@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr") = "" Then
     response.redirect "default.asp"
@@ -23,13 +23,7 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]>
-        	<script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script>
-        <![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -42,14 +36,14 @@ End If
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                            	<legend>Ricerca Materiale Magicbox</legend>
+                            	<legend><%=response.write (titoloricercamaterialemb)%></legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                     <form method="post" Action="sim_inventario_ricerca_risultati.asp" class="form-horizontal">
                                       <fieldset>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Macrocategory: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercamacrocategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="IDMcat">
                                           <option value=""></option>
@@ -68,7 +62,7 @@ End If
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Category: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercacategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="IDCat">
                                               <option value=""></option>
@@ -87,7 +81,7 @@ End If
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Subcategory: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercasottocategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="IDScat">
                                               <option value=""></option>
@@ -107,28 +101,28 @@ End If
                                         </div>
                                          <div class="control-group">
                                           <label class="control-label" for="focusedInput">
-											Keyword: </label>
+											<%=response.write (ricercakeyword)%>: </label>
                                           <div class="controls">
                                           	<input name="keywords1" class="input-small focused" id="focusedInput" type="text" style="width:200px;">
                                           </div>
                                         </div>
                                          <div class="control-group">
                                           <label class="control-label" for="focusedInput">
-											Keyword: </label>
+											<%=response.write (ricercakeyword)%>: </label>
                                           <div class="controls">
                                           	<input name="keywords2" class="input-small focused" id="focusedInput" type="text" style="width:200px;">
                                           </div>
                                         </div>
                                          <div class="control-group">
                                           <label class="control-label" for="focusedInput">
-											Keyword: </label>
+											<%=response.write (ricercakeyword)%>: </label>
                                           <div class="controls">
                                           	<input name="keywords3" class="input-small focused" id="focusedInput" type="text" style="width:200px;">
                                           </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Avvia la Ricerca">Search</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonecerca)%>"><%=response.write (testobottonecerca)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>

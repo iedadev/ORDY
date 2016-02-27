@@ -1,6 +1,7 @@
 ﻿<%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -23,76 +24,24 @@ Dim sss, i
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+       
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript"> 
         <!--
         function controllo()
         {
-		if (document.P2.kit_IDMCat.value == "")
+		if (document.P2.sim_IDCat.value == "")
 			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
-			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDMCat.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.sim_IDCat.style.backgroundColor = 'Yellow';
+			document.P2.sim_IDCat.focus();
 			return false;
 			}
-		if (document.P2.sim_categoria.value == "")
+		if (document.P2.sim_sottocategoria.value == "")
 			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
-			document.P2.sim_categoria.style.backgroundColor = 'Yellow';
-			document.P2.sim_categoria.focus();
-			return false;
-			}
-		if (document.P2.kit_IDSCat.value == "")
-			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
-			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDSCat.focus();
-			return false;
-			}
-		if (document.P2.kit_nomekit.value == "")
-			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
-			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
-			document.P2.kit_nomekit.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDPosizione.value == ""))
-			{
-			alert("Inserire la Posizione del Kit.Dato Obbligatorio!");
-			document.P2.kit_IDPosizione.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		if (document.P2.kit_quantita.value == "")
-			{
-			alert("Inserire la Quantità.Dato Obbligatorio!");
-			document.P2.kit_quantita.style.backgroundColor = 'Yellow';
-			document.P2.kit_quantita.focus();
-			return false;
-			}
-		if (document.P2.Kit_Data_Acquisto.value == "")
-			{
-			alert("Inserire Data di acquisto.Dato Obbligatorio!");
-			document.P2.Kit_Data_Acquisto.style.backgroundColor = 'Yellow';
-			document.P2.Kit_Data_Acquisto.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDStato.value == ""))
-			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			return false;
-			}	
-        if ((document.P2.kit_Barcode.value == ""))
-			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.sim_sottocategoria.style.backgroundColor = 'Yellow';
+			document.P2.sim_sottocategoria.focus();
 			return false;
 			}
 		}
@@ -110,13 +59,13 @@ Dim sss, i
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Management Subcategory</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolosottocategorie)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_sottocategorie_aggiunginuovo.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Category: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercacategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="sim_IDCat">
                                               <option value=""></option>
@@ -134,14 +83,14 @@ Dim sss, i
                                           </div>
                                         </div>
                                            <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Subcategory: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercasottocategorie)%>: </label>
                                           <div class="controls">
                                             <input name="sim_sottocategoria" class="input-xlarge focused" id="focusedInput" type="text">
                                             </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Subcategory">Add </button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneaggiungiscat)%>"><%=response.write (testobottoneaggiungi)%> </button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
@@ -155,12 +104,12 @@ Dim sss, i
                                             <% If request("Totale") <> 0 Then%>	
                                             
                                             <div align="center" style="border:2px solid red">
-                                            &nbsp;&nbsp;&nbsp;Non è possibile cancellare questa Sottocategoria perchè vi sono Kit che ne fanno parte
+                                            &nbsp;&nbsp;&nbsp;<%=response.write (messaggioalertsottocategorie)%>
                                             </div>
                                             
                                             <%end if%>
 											<tr>
-												<th>Subcategory</th>
+												<th><%=response.write (titolotabellasottocategorie)%></th>
                                                 <th>&nbsp;</th>
 											</tr>
 										</thead>
@@ -194,9 +143,9 @@ Dim sss, i
 											%>
 												</td>
                                                 <td>
-                                                   <a href="sim_sottocategorie_modifica.asp?IDCat=<%= rs("IDCat") %>&IDScat=<%= rs("IDScat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorymodify.png" width="32" height="32" title="Modify Subcategory"></a>
+                                                   <a href="sim_sottocategorie_modifica.asp?IDCat=<%= rs("IDCat") %>&IDScat=<%= rs("IDScat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorymodify.png" width="32" height="32" title="<%=response.write (iconamodificasottocategorie)%>"></a>
                                                    &nbsp;
-                                                   <a href="sim_sottocategorie_elimina.asp?IDCat=<%= rs("IDCat") %>&IDScat=<%= rs("IDScat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorydelete.png" width="32" height="32" title="Delete Subcategory"></a>
+                                                   <a href="sim_sottocategorie_elimina.asp?IDCat=<%= rs("IDCat") %>&IDScat=<%= rs("IDScat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorydelete.png" width="32" height="32" title="<%=response.write (iconacancellasottocategorie)%>"></a>
                                                  </td>     
 											</tr>
 											<%

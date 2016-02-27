@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -35,11 +35,7 @@ response.write sss
 		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 		<link href="assets/styles.css" rel="stylesheet" media="screen">
 		<link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-		    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		
 		<script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	</head>
 	<body>
@@ -51,24 +47,24 @@ response.write sss
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-							<legend>Gestione Kit: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
+							<legend><%=response.write (titolokit)%>: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
 						</div>
                         <br>
                             <%If session("ruolo") = "A" Then %>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim_schedakit_validata.asp?IDKIT=<%= rs("IDKit") %>&IDMCAT=<%=rs("IDMcat")%>&IDCAT=<%=rs("IDCAT")%>&IDSCAT=<%=rs("IDSCAT")%>&BARCODE=<%=rs("BARCODE")%>&NOMEKIT=<%=rs("NOMEKIT")%>&DESCKIT=<%=rs("DESCKIT")%>&POS=<%=rs("POS")%>&QTA=<%=rs("QTA")%>&DATAIN=<%=rs("DATAIN")%>&IDSTATO=<%=rs("IDSTATO")%>&PRZ=<%=rs("PRZ")%>&KEYWORDS=<%=rs("KEYWORDS")%> "><button class="btn btn-mini btn-success tooltip-top" data-original-title="Nuovo Kit Validato"><i class="icon-plus icon-white"></i> Validate </button></a>
-						    &nbsp;&nbsp;<a href="sim_schedakit_validare_modifica.asp?IDKIT=<%= rs("IDKit") %>"><button class="btn btn-mini btn-info tooltip-top" data-original-title="Modifica Nuovo Kit"><i class="icon-pencil icon-white"></i> Modify</button></a>
-						    &nbsp;&nbsp;&nbsp;<a href="#myAlert" data-toggle="modal"><button class="btn btn-mini btn-danger tooltip-top" data-original-title="Nuovo Kit non validato"><i class="icon-remove icon-white"></i> Delete</button></a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim_schedakit_validata.asp?IDKIT=<%= rs("IDKit") %>&IDMCAT=<%=rs("IDMcat")%>&IDCAT=<%=rs("IDCAT")%>&IDSCAT=<%=rs("IDSCAT")%>&BARCODE=<%=rs("BARCODE")%>&NOMEKIT=<%=rs("NOMEKIT")%>&DESCKIT=<%=rs("DESCKIT")%>&POS=<%=rs("POS")%>&QTA=<%=rs("QTA")%>&DATAIN=<%=rs("DATAIN")%>&IDSTATO=<%=rs("IDSTATO")%>&PRZ=<%=rs("PRZ")%>&KEYWORDS=<%=rs("KEYWORDS")%> "><button class="btn btn-mini btn-success tooltip-top" data-original-title="<%=response.write (etichettabottonevalidazione)%>"><i class="icon-plus icon-white"></i> <%=response.write (testobottonevalidazione)%> </button></a>
+						    &nbsp;&nbsp;<a href="sim_schedakit_validare_modifica.asp?IDKIT=<%= rs("IDKit") %>"><button class="btn btn-mini btn-info tooltip-top" data-original-title="<%=response.write (simschedakitbarcodemodifica.asp)%>"><i class="icon-pencil icon-white"></i> <%=response.write (simschedakitbarcodemodifica.asp)%></button></a>
+						    &nbsp;&nbsp;&nbsp;<a href="#myAlert" data-toggle="modal"><button class="btn btn-mini btn-danger tooltip-top" data-original-title="<%=response.write (titoloeliminakit)%>"><i class="icon-remove icon-white"></i> <%=response.write (titoloeliminakit)%></button></a>
                             <div id="myAlert" class="modal hide">
 					                  				<div class="modal-header">
 					                  					<button data-dismiss="modal" class="close" type="button">&times;</button>
-					                  						<h3>Attenzione</h3>
+					                  						<h3><%=response.write (titoloalert)%></h3>
 					                  				</div>
 					                  				<div class="modal-body">
-					                  					<p>Vuoi veramente eliminare questo Kit?</p>
+					                  					<p><%=response.write (messaggioalertelimina)%></p>
 					                  				</div>
 					                  				<div class="modal-footer">
-					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %>">Conferma</a>
-					                  					<a data-dismiss="modal" class="btn" href="#">Annulla</a>
+					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %>"><%=response.write (testobottoneconferma)%></a>
+					                  					<a data-dismiss="modal" class="btn" href="#"><%=response.write (testobottoneannulla)%></a>
 					                  				</div>
 					      </div>
                             <%End If%>

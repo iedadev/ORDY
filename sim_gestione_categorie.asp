@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -9,9 +10,6 @@ End If
 If session("ruolo") <> "A" Then
     response.redirect "main.asp"
 End If
-
-'Set dbConn = CreateObject("ADODB.Connection")
-'dbConn.Open Application("Connection1_ConnectionString")
 
 Dim sss, i
 
@@ -26,11 +24,7 @@ Dim sss, i
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript"> 
         <!--
@@ -38,69 +32,21 @@ Dim sss, i
         {
 		if (document.P2.sim_IDMCat.value == "")
 			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.sim_IDMCat.style.backgroundColor = 'Yellow';
 			document.P2.sim_IDMCat.focus();
 			return false;
 			}
 		if (document.P2.sim_categoria.value == "")
 			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
+			alert("<%=response.write (datoobbligatorio)%>");
 			document.P2.sim_categoria.style.backgroundColor = 'Yellow';
 			document.P2.sim_categoria.focus();
 			return false;
 			}
-		if (document.P2.Sim_IDSCat.value == "")
-			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
-			document.P2.Sim_IDSCat.style.backgroundColor = 'Yellow';
-			document.P2.Sim_IDSCat.focus();
-			return false;
-			}
-		if (document.P2.Sim_nomekit.value == "")
-			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
-			document.P2.Sim_nomekit.style.backgroundColor = 'Yellow';
-			document.P2.Sim_nomekit.focus();
-			return false;
-			}
-		if ((document.P2.Sim_IDPosizione.value == ""))
-			{
-			alert("Inserire la Posizione del Kit.Dato Obbligatorio!");
-			document.P2.Sim_IDPosizione.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		if (document.P2.Sim_quantita.value == "")
-			{
-			alert("Inserire la Quantità.Dato Obbligatorio!");
-			document.P2.Sim_quantita.style.backgroundColor = 'Yellow';
-			document.P2.Sim_quantita.focus();
-			return false;
-			}
-		if (document.P2.Sim_Data_Acquisto.value == "")
-			{
-			alert("Inserire Data di acquisto.Dato Obbligatorio!");
-			document.P2.Sim_Data_Acquisto.style.backgroundColor = 'Yellow';
-			document.P2.Sim_Data_Acquisto.focus();
-			return false;
-			}
-		if ((document.P2.Sim_IDStato.value == ""))
-			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
-			document.P2.Sim_IDStato.style.backgroundColor = 'Yellow';
-			document.P2.Sim_IDStato.style.backgroundColor = 'Yellow';
-			return false;
-			}	
-        if ((document.P2.Sim_Barcode.value == ""))
-			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
-			document.P2.Sim_Barcode.style.backgroundColor = 'Yellow';
-			document.P2.Sim_Barcode.style.backgroundColor = 'Yellow';
-			return false;
-			}
 		}
 		//-->
-		</script> <!--funzione di controllo--><!--funzione di controllo-->
+		</script>
     </head>
     <body>
 	    <!--#include virtual file="include/menu.asp"-->
@@ -114,13 +60,13 @@ Dim sss, i
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Management Category</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolocategorie)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_categorie_aggiunginuovo.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Macrocategory: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercamacrocategorie)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="sim_IDMCat">
                                               <option value=""></option>
@@ -138,14 +84,14 @@ Dim sss, i
                                           </div>
                                         </div>
                                            <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Category: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercacategorie)%>: </label>
                                           <div class="controls">
                                             <input name="sim_categoria" class="input-xlarge focused" id="focusedInput" type="text">
                                             </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Category">Add </button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneaggiungicat)%>"><%=response.write (testobottoneaggiungi)%> </button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
@@ -159,12 +105,12 @@ Dim sss, i
                                              <% If request("Totale") <> 0 Then%>	
                                             
                                             <div align="center" style="border:2px solid red">
-                                            &nbsp;&nbsp;&nbsp;Non è possibile cancellare questa Categoria perchè vi sono Kit che ne fanno parte
+                                            &nbsp;&nbsp;&nbsp;<%=response.write (messaggioalertcategorie)%>
                                             </div>
                                             <%end if%>
 											
                                           <tr>
-												<th>Category</th>
+												<th><%=response.write (titolotabellacategorie)%></th>
                                                 <th>&nbsp;</th>
 											</tr>
 										</thead>
@@ -198,9 +144,9 @@ Dim sss, i
 											%>
 												</td>
                                                 <td>
-                                                   <a href="sim_categorie_modifica.asp?IDMCAT=<%= rs("IDMCat") %>&IDCat=<%= rs("IDCat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorymodify.png" width="32" height="32" title="Modify Category"></a>
+                                                   <a href="sim_categorie_modifica.asp?IDMCAT=<%= rs("IDMCat") %>&IDCat=<%= rs("IDCat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorymodify.png" width="32" height="32" title="<%=response.write (iconamodificacategorie)%>"></a>
                                                    &nbsp;
-                                                   <a href="sim_categorie_elimina.asp?IDMCAT=<%= rs("IDMCat") %>&IDCat=<%= rs("IDCat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorydelete.png" width="32" height="32" title="Delete Category"></a>
+                                                   <a href="sim_categorie_elimina.asp?IDMCAT=<%= rs("IDMCat") %>&IDCat=<%= rs("IDCat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorydelete.png" width="32" height="32" title="<%=response.write (iconacancellacategorie)%>"></a>
                                                  </td>     
 											</tr>
 											<%

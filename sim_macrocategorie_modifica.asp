@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -37,21 +37,14 @@ Set rs = dbConn.Execute(sss)
         <!--
         function controllo()
         {
-		if (document.P2.Sigla.value == "")
+		if (document.P2.IDMcat.value == "")
 			{
-			alert("Dato Obbligatorio!");
-			document.P2.Sigla.style.backgroundColor = 'Orange';
-			document.P2.Sigla.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.IDMcat.style.backgroundColor = 'Orange';
+			document.P2.IDMcat.focus();
 			return false;
 			}
-		if (document.P2.Descrizione.value == "")
-			{
-			alert("Dato Obbligatorio!");
-			document.P2.Descrizione.style.backgroundColor = 'Orange';
-			document.P2.Descrizione.focus();
-			return false;
-			}
-		}
+	    }
 		//-->
 		</script>
     </head>
@@ -63,25 +56,25 @@ Set rs = dbConn.Execute(sss)
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Macrocategory modify</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolomodificamacrocategorie)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_macrocategorie_modificafine.asp" class="form-horizontal" onsubmit="return controllo()">
                                      <input type="hidden" name="IDMcat"  value="<%= rs("IDMcat") %>">
                                       <fieldset>
                                         <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Macrocategory: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (ricercamacrocategorie)%>: </label>
                                           <div class="controls">
                                             <input value="<%= rs("macrocategoria") %>" name="macrocategoria" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Save modify">Save</button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonesalva)%>"><%=response.write (testobottonesalva)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Back</button>
+		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
                                 </div>
                             </div>
                         </div>

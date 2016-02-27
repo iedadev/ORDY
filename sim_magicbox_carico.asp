@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -60,7 +60,7 @@ response.write sss2
 
 End If
 
-response.write "aaa"
+'response.write "aaa"
 'response.end 
 
 Set rs = dbConn.Execute(sss)

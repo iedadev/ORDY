@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -35,11 +35,7 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 		<link href="assets/styles.css" rel="stylesheet" media="screen">
 		<link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-		    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		
 		<script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	</head>
 	<body>
@@ -51,7 +47,7 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-							<legend>Scheda Kit: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
+							<legend><%=response.write (titoloschedakit)%>: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
 						</div>
                         <br>
                             <%If session("ruolo") = "A" Then %>
@@ -61,14 +57,14 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
                             <div id="myAlert" class="modal hide">
 					                  				<div class="modal-header">
 					                  					<button data-dismiss="modal" class="close" type="button">&times;</button>
-					                  						<h3>Attenzione</h3>
+					                  						<h3><%=response.write (titoloalert)%></h3>
 					                  				</div>
 					                  				<div class="modal-body">
-					                  					<p>Vuoi veramente eliminare questo Kit?</p>
+					                  					<p><%=response.write (messaggioalertelimina)%></p>
 					                  				</div>
 					                  				<div class="modal-footer">
-					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %>">Conferma</a>
-					                  					<a data-dismiss="modal" class="btn" href="#">Annulla</a>
+					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %>"><%=response.write (testobottoneconferma)%></a>
+					                  					<a data-dismiss="modal" class="btn" href="#"><%=response.write (testobottoneannulla)%></a>
 					                  				</div>
 					      </div>
                             <%End If%>
@@ -77,9 +73,9 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 								<table class="table table-condensed">
 									<tbody>
                                         <tr>
-											<th>Macrocategoria</th>
-											<th>Categoria</th>
-											<th>Sottocategoria</th>
+											<th><%=response.write (titolotabellamacrocategorie)%></th>
+											<th><%=response.write (titolotabellacategorie)%></th>
+											<th><%=response.write (titolotabellasottocategorie)%></th>
                                            <!-- <th rowspan="4"><img src="images/icone/unnamed.jpg" width="100" height="75"></th> --> <!--fotografia kit-->
 										</tr>
                                         <tr>
@@ -89,9 +85,9 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 										</tr>
                                        <td colspan="4">&nbsp;</td>
 										<tr>
-											<th>Nome Kit</th>
-											<th>Barcode</th>
-											<th>Data Acquisto</th>
+											<th><%=response.write (ricercanomekit)%></th>
+											<th><%=response.write (titolotabellabarcode)%></th>
+											<th><%=response.write (ricercadataacquisto)%></th>
 										</tr>
                                         <tr>
 											<td><%= rs("NomeKit") %>&nbsp;</td>
@@ -100,10 +96,10 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 										</tr>
                                         <td colspan="4">&nbsp;</td>
                                         <tr>
-											<th>Stato e Posizione</th>
-                                            <th>Quantità</th>
+											<th><%=response.write (titolotabellaskit)%> e <%=response.write (titolotabellapos)%></th>
+                                            <th><%=response.write (ricercaqta)%></th>
 											 <%If session("ruolo") = "A" Then %>
-                                            <th>Prezzo</th>
+                                            <th><%=response.write (ricercaprezzo)%></th>
                                             <%End If%>
 										</tr>
                                         <tr>
@@ -116,8 +112,8 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
                                         </tr>
                                         <td colspan="4">&nbsp;</td>
 										<tr>
-											<td colspan="2"><strong>Descrizione:</strong>&nbsp;<%= rs("Desckit") %></td>
-										    <td colspan="2"><strong>Keywords:</strong>&nbsp;<%= rs("Keywords") %> </td>
+											<td colspan="2"><strong><%=response.write (titolotabelladescrizione)%>:</strong>&nbsp;<%= rs("Desckit") %></td>
+										    <td colspan="2"><strong><%=response.write (ricercakeyword)%>:</strong>&nbsp;<%= rs("Keywords") %> </td>
 										</tr>
 									</tbody>
 								</table>
@@ -128,7 +124,7 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 				</div>
 			</div>
             <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
+                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
                         </div>
             <hr>
 			<!--#include virtual file="include/piede.asp"-->

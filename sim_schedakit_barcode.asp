@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -36,11 +36,7 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 		<link href="assets/styles.css" rel="stylesheet" media="screen">
 		<link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-		    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		
 		<script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	</head>
 	<body>
@@ -52,20 +48,20 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-							<legend>Scheda Kit: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
+							<legend><%=response.write (titoloschedakit)%>: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
 						</div>
 						<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim_kit_aggiungi.asp"><button class="btn btn-mini btn-success tooltip-top" data-original-title="Crea una nuova scheda Kit"><i class="icon-plus icon-white"></i> Nuova Scheda Kit</button></a>
-						&nbsp;&nbsp;<a href="studente_modifica.asp?ID_Studente=<%= rs("Barcode") %>"><button class="btn btn-mini btn-info tooltip-top" data-original-title="Modifica Scheda Kit"><i class="icon-pencil icon-white"></i> Modifica Scheda Kit</button></a>
-						&nbsp;&nbsp;<a href="sim_kit_elimina_conferma.asp?IDKit=<%= rs("IDKit") %>"><button class="btn btn-danger btn-mini tooltip-top" data-original-title="Elimina Scheda Kit"><i class="icon-plus icon-white"></i> Elimina Scheda Kit</button></a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim_kit_aggiungi.asp"><button class="btn btn-mini btn-success tooltip-top" data-original-title="<%=response.write (simschedakitbarcodenuovo.asp)%>"><i class="icon-plus icon-white"></i> <%=response.write (simschedakitbarcodenuovo.asp)%></button></a>
+						&nbsp;&nbsp;<a href="studente_modifica.asp?ID_Studente=<%= rs("Barcode") %>"><button class="btn btn-mini btn-info tooltip-top" data-original-title="<%=response.write (simschedakitbarcodemodifica.asp)%>"><i class="icon-pencil icon-white"></i><%=response.write (simschedakitbarcodemodifica.asp)%></button></a>
+						&nbsp;&nbsp;<a href="sim_kit_elimina_conferma.asp?IDKit=<%= rs("IDKit") %>"><button class="btn btn-danger btn-mini tooltip-top" data-original-title="<%=response.write (titoloeliminakit)%>"><i class="icon-plus icon-white"></i> <%=response.write (titoloeliminakit)%></button></a>
 						<div class="block-content collapse in">
 							<div class="span12">
 								<table class="table table-condensed">
 									<tbody>
                                         <tr>
-											<th>Macrocategoria</th>
-											<th>Categoria</th>
-											<th>Sottocategoria</th>
+											<th><%=response.write (titolotabellamacrocategorie)%></th>
+											<th><%=response.write (titolotabellacategorie)%></th>
+											<th><%=response.write (titolotabellasottocategorie)%></th>
                                            <!-- <th rowspan="4"><img src="images/icone/unnamed.jpg" width="100" height="75"></th> --> <!--fotografia kit-->
 										</tr>
                                         <tr>
@@ -75,9 +71,9 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 										</tr>
                                        <td colspan="4">&nbsp;</td>
 										<tr>
-											<th>Nome Kit</th>
-											<th>Barcode</th>
-											<th>Data Acquisto</th>
+											th><%=response.write (ricercanomekit)%></th>
+											<th><%=response.write (ricercabarcode)%></th>
+											<th><%=response.write (ricercadataacquisto)%></th>
 										</tr>
                                         <tr>
 											<td><%= rs("NomeKit") %>&nbsp;</td>
@@ -86,9 +82,10 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 										</tr>
                                         <td colspan="4">&nbsp;</td>
                                         <tr>
-											<th>Stato e Posizione</th>
-                                            <th>Quantità</th>
-											<th>Prezzo</th>
+											<th><%=response.write (ricercastatokit)%> e <%=response.write (ricercaposizioni)%></th>
+                                            <th><%=response.write (ricercaqta)%></th>
+                                            <th><%=response.write (ricercaqta)%></th>
+											<th><%=response.write (ricercaprezzo)%></th>
 										</tr>
                                         <tr>
                                             <td><%= rs2("Stato") %>&nbsp;-&nbsp;<%= rs1("Posizione") %></td>
@@ -97,8 +94,8 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
                                         </tr>
                                         <td colspan="4">&nbsp;</td>
 										<tr>
-											<td colspan="2"><strong>Descrizione:</strong>&nbsp;<%= rs("Desckit") %></td>
-										    <td colspan="2"><strong>Keywords:</strong>&nbsp;<%= rs("Keywords") & "," & rs("Key2") & "," & rs("Key3") & "," & rs("Key4") & "," & rs("Key5") & "," & rs("Key6") & ")" %> </td>
+											<td colspan="2"><strong><%=response.write (ricercadesckit)%>:</strong>&nbsp;<%= rs("Desckit") %></td>
+										    <td colspan="2"><strong><%=response.write (ricercakeyword)%>:</strong>&nbsp;<%= rs("Keywords") & "," & rs("Key2") & "," & rs("Key3") & "," & rs("Key4") & "," & rs("Key5") & "," & rs("Key6") & ")" %> </td>
 										</tr>
 									</tbody>
 								</table>

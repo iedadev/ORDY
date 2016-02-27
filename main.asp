@@ -1,7 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
-<!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
+<!--#include virtual file="config.asp"-->
 <%
 If session("usr") = "" Then
     response.redirect "default.asp"
@@ -10,7 +10,6 @@ End If
 'response.end
 
 %>
-
 
 <!DOCTYPE html>
 <html lang="it">
@@ -22,13 +21,6 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]>
-        	<script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script>
-        <![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -50,14 +42,14 @@ End If
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12" align="center">
-                                     <a href="sim_inventario_ricerca.asp"> <img src="images/ricercamagicbox.png" width="200" height="100" title="<%=response.write (menu1)%>"></a>
-                                     <a href="sim_magicbox_barcode_start.asp"><img src="images/magicbox.png" width="200" height="100" alt="MagicBox"></a>
+                                     <a href="sim_inventario_ricerca.asp"> <img src="images/ricercamagicbox.png" width="200" height="100" title="<%=response.write (tooltipimg1)%>"></a>
+                                     <a href="sim_magicbox_barcode_start.asp"><img src="images/magicbox.png" width="200" height="100" title="<%=response.write (tooltipimg2)%>"></a>
                                      <% If session("ruolo") = "A" Then %>
-                                     <a href="sim_magicbox_segnalazione_admin.asp"><img src="images/segnalazionimagicbox.png" width="200" height="100" title="Segnalazioni"></a>
+                                     <a href="sim_magicbox_segnalazione_admin.asp"><img src="images/segnalazionimagicbox.png" width="200" height="100" title="<%=response.write (tooltipimg3)%>"></a>
                                      <%Else%>
-                                     <a href="sim_comunication_user.asp"><img src="images/comunication.png" width="200" height="100" title="Segnalazioni"></a>
+                                     <a href="sim_comunication_user.asp"><img src="images/comunication.png" width="200" height="100" title="<%=response.write (tooltipimg4)%>"></a>
                                      <% End If %>
-                                     <a href="sim_kit_creauser.asp"><img src="images/nuovokitmagicbox.png" width="200" height="100" alt="Segnala il tuo Kit"></a>
+                                     <a href="sim_kit_creauser.asp"><img src="images/nuovokitmagicbox.png" width="200" height="100" title="<%=response.write (tooltipimg5)%>"></a>
                                 </div>
                             </div>
                         </div>

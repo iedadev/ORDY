@@ -4,6 +4,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -112,7 +113,7 @@ End If
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Report Result User Kit</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (reportresultuserkit)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
@@ -130,13 +131,13 @@ End If
                                            %>     
                                           <th>User: <%Response.write rs1("USR")%> <br>
                                            Period from <%response.write(request.form("date_from"))%> to <%response.write(request.form("date_to"))%>
-                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a><br>
-                                           &nbsp;&nbsp;<a href="sim_report_userkit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a><font size="0.5">New Search</font>
+                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="<%=response.write (etichettabottoneesporta)%>"><i class="icon-download icon-white"></i> <%=response.write (testobottoneesporta)%></button></a><br>
+                                           &nbsp;&nbsp;<a href="sim_report_userkit.asp"><img src="images/search.png" width="32" height="32" title="<%=response.write (reportnewsearch)%>"></a><font size="0.5"><%=response.write (reportnewsearch)%></font>
                                           </th>
                                             <tr> 
-												<th>Barcode</th>
-												<th>Kit</th>
-                                                <th>Nr Kit</th>
+												<th><%=response.write (titolotabellabarcode)%></th>
+												<th><%=response.write (reportkit)%></th>
+                                                <th><%=response.write (reportnrkit)%></th>
 											</tr>
 										</thead>
 										<tbody>

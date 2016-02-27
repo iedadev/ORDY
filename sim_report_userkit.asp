@@ -4,6 +4,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr")= "" Then
     response.redirect "default.asp"
@@ -71,13 +72,13 @@ End If
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Report User Kit</legend></div>
+                            <div class="navbar navbar-inner block-header"><legend><%=response.write (reportuserkit)%></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_report_userkit_result.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Teacher: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (reportuserkituser)%>: </label>
                                           <div class="controls">
                                           <select id="selectError" name="SIM_Teacher">
                                               <option value=""></option>
@@ -95,20 +96,20 @@ End If
                                           </div>
                                         </div>
                                            <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Periodo dal: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (reportdal)%>: </label>
                                           <div class="controls">
                                             <input name="date_from" class="input-large focused" id="focusedInput" placeholder="GG/MM/AAAA" value="<%= Date() %>" type="text">
                                           </div>
                                         </div>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">al: </label>
+                                          <label class="control-label" for="focusedInput"><%=response.write (reportal)%>: </label>
                                           <div class="controls">
                                             <input name="date_to" class="input-large focused" id="focusedInput" placeholder="GG/MM/AAAA" value="<%= Date()+10 %>"type="text">
                                           </div>
                                           </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Add Subcategory">Search</button>&nbsp;
-                                          <button type="reset" class="btn">Reset</button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonecerca)%>"><%=response.write (testobottonecerca)%></button>&nbsp;
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
