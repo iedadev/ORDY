@@ -2,7 +2,8 @@
 <div class="span6 id="sidebar"><br>
 			                <div class="span12">
                             <div class="navbar navbar-inner block-header">
-                            	<legend><%=response.write (titolomagicboxstart)%></legend>
+                            	<legend><%=response.write (titolowishliststart)%> 
+                                    <h6>MagicBox Completata&nbsp;&nbsp;<a href="#myAlert" data-toggle="modal"><img src="images/completemagicbox.png" align="center" width="32" height="32" title="<%=response.write (titolombcompletata)%>"></a></legend></h6>
                             </div>
                                  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 										<thead>
@@ -10,10 +11,8 @@
 												<th><%=response.write (titolotabellanome)%></th>
 												<th><%=response.write (titolotabelladescrizione)%></th>
 												<th><%=response.write (titolotabellapos)%></th>
-                                                <th><%=response.write (ricercaqta)%></th>
-												<th><%=response.write (titolotabellaskit)%></th>
+                                                <th><%=response.write (titolotabellaskit)%></th>
                                                 <th><%=response.write (tabellainout)%></th>
-												<th>&nbsp;</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -22,10 +21,17 @@
 												iduser=session("id_usr")
                                                 'Response.Write(Session("id_usr"))
 
-                                                sss = "SELECT IDKIT,IDUser,BARCODE,CATEGORIA,SOTTOCATEGORIA,NOMEKIT,DESCKIT,POS,QTA,STATO,IN_OUT FROM SIM_Temp_MagicBox WHERE IDUser=" & iduser
+                                                sss = "SELECT IDKIT,IDUser,BARCODE,CATEGORIA,SOTTOCATEGORIA,NOMEKIT,DESCKIT,POS,QTA,STATO,IN_OUT FROM SIM_Temp_MagicBox WHERE IN_OUT IS NOT NULL AND IDUser=" & iduser
                                                 Set rs = dbConn.Execute(sss)
 
-                                                if Rs.eof then response.write (messaggioalertmagicbox)
+                                                'response.write sss
+                                                if Rs.eof then 
+                                                %><br>
+                                                <div class="alert alert-info span10">
+                                                  <strong>Info!</strong> <%response.write (messaggioalertmagicbox)%>
+                                                </div>
+                                                <%
+                                                 End if
                                                 
 												'Response.Write sss
                                                 'Response.Write rs("POS")
@@ -48,19 +54,15 @@
 														<td><%= rs("DESCKIT") %></td>
                                                         <td><%
                                                                 
-                                                                dim strposition
-                                                                strposition = rs("POS")
-                                                                
-                                                                select case strposition
-                                                                  case 8 
-                                                                  response.write "Basement"
-                                                                  case else
-                                                                  %>
-                                                                  A<%=rs("POS")%>
-                                                                  <%end select%>
+                                                            Set rs1 = dbConn.Execute("SELECT * FROM SIM_Posizione WHERE IDPOs = " & rs("POS"))
+                                                            If Not rs1.eof Then
+													            Response.write rs1("POSIZIONE")
+												            Else
+													            Response.write "&nbsp;"
+												            End If%>
+                                                        
                                                         </td>
-														<td><%= rs("QTA") %></td>
-												        <td><%
+														<td><%
                                                                 dim strStato
                                                                 strStato = rs("STATO")
 
@@ -95,19 +97,10 @@
   
                                                                   <%case "OUT"%>
                                                                     <img src="images/magicboxOUT.png" width="32" height="32" title="<%=response.write (kitoutyourmagicbox)%>">
-                                                                  <%end select
-                                                              %>
+                                                                  
+                                                                  <%end select%>
                                                         </td>
-                                                        <td><%
-                                                                if (rs("IN_OUT") = "IN" OR rs("IN_OUT") = "OUT")Then 
-                                                                'response.write "AAA"%>
-                                                                <%else%>
-                                                                <a href="sim_temp_magicbox_elimina.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&INOUT=<%= rs("IN_OUT") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/deletemagicbox.png" width="32" height="32" title="<%=response.write (ricercaeliminakitmb)%>"></a><br>
-                                                                <% 'sss = "DELETE FROM SIM_Temp_MagicBox WHERE BARCODE='"& request("BARCODE") & "'AND IDKIT="& request("IDKIT") & " AND IDUSER =" &iduser
-                                                                end if
-                                                             %>                                                        
-                                                        </td>
-													</tr>
+                                                    </tr>
 													<%
 													rs.MoveNext
 													Wend
@@ -115,8 +108,7 @@
 
 										</tbody>
 									</table>
-                                    <a href="#myAlert" data-toggle="modal"><img src="images/completemagicbox.png" align="center" width="32" height="32" title="<%=response.write (titolombcompletata)%>"></a>
-                                    <div id="myAlert" class="modal hide">
+                                   <div id="myAlert" class="modal hide">
 					                  				<div class="modal-header">
 					                  					<button data-dismiss="modal" class="close" type="button">&times;</button>
 					                  						<h3><%=response.write (titoloalert)%></h3>

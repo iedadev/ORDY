@@ -29,6 +29,7 @@ sss = sss & ", IDCat = " & request("IDCat")
 sss = sss & ", IDScat = " & request("IDScat")
 sss = sss & ", IDStato = " & request("Stato")
 sss = sss & ", Pos = " & request("posizione")
+sss = sss & ", Qta = " & request("qta")
 sss = sss & ", Prz = " & request("Prz")
 sss = sss & ", Datain = '" & request("Datain") & "'"
 sss = sss & ", Keywords = '" & ModificaApici(Trim(request("Keywords"))) & "'"

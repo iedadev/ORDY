@@ -40,20 +40,42 @@ End If
                             <div  class="navbar navbar-inner block-header">
                             	<legend><%=response.write (titoloreportistica)%></legend>
                             </div>
-                            <div class="block-content collapse in">
-                                <div class="span6">
-                                     <a href="sim_report_userkit.asp"><img src="images/reportuserkit.png" width="32" height="32">&nbsp;<%=response.write (titoloreport1)%></a><br>
-                                     <a href="sim_report_valoremagazzino.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport2)%></a>
+                             <div class="table-responsive">          
+                                  <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>Kit</th>
+                                        <th>Magazzino</th>
+                                        <th>Segnalazioni</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td><a href="sim_report_userkit.asp"><img src="images/reportuserkit.png" width="32" height="32">&nbsp;<%=response.write (titoloreport1)%></a></td>
+                                        <td><a href="sim_report_valoremagazzino.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport2)%></a></td>
+                                        <td>Report elenco segnalazioni</td>
+                                      </tr>
+                                      <tr>
+                                        <td><a href="sim_report_kitstatoin_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport3)%> </a></td>
+                                        <td>&nbsp;</td>
+                                        <td>Report elenco richieste</td>
+                                      </tr>
+                                      <tr>
+                                        <td><a href="sim_report_statokit_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport4)%></a></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                      </tr>
+                                      <tr>
+                                        <td><a href="sim_report_kitposizione.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport5)%> </a></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
                                 </div>
-                                <div class="span6">
-                                     <a href="sim_report_kitstatoin_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport3)%> </a><br>
-                                     <a href="sim_report_statokit_result.asp"><img src="images/reportvaloremagazzino.png" width="32" height="32">&nbsp;<%=response.write (titoloreport4)%></a>
-                                </div>
-                            </div>
-                        </div>
+                           </div>
                         <!-- /block -->
                     </div>
-
                      <div class="row-fluid">
                         <!-- block -->
                         <!-- /block -->

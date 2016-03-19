@@ -21,9 +21,20 @@ Dim sss, IP, NuovoID
 IP = Request.ServerVariables("REMOTE_ADDR")
 ' Scrive Log - Inizio
 
+sss = "SELECT COUNT(*) as Totale FROM Sim_Temp_Magicbox WHERE IDUser = " & request("ID_usr")
+Set rs = dbConn.Execute(sss)
+'Response.write sss
+'response.end
+
+If rs("Totale") > 0 Then
+response.redirect "sim_gestione_user.asp?Totale=99"
+
+Else
+
 sss = "DELETE FROM SIM_USER WHERE ID_usr = " & request("ID_usr")
 Set rs = dbConn.Execute(sss)
 
+End if
 'sss = "DELETE FROM HD_Corsi WHERE ID_Studente = " & request("ID_Studente")
 'Set rs = dbConn.Execute(sss)
 

@@ -1,4 +1,4 @@
-<%@ LANGUAGE="VBSCRIPT" %>
+﻿<%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
@@ -11,7 +11,17 @@ End If
 '   response.redirect "hd_todo.asp"
 'End If
 
-Dim sss, i
+If request("CTRBAR") <>"" Then
+   'response.write "IL barcode è duplicato"
+%>
+
+   <body onload="window.alert('Attenzione, il Kit selezionato è già nella tua lista.')">
+    
+<%End if%>   
+
+
+<%
+Dim sss, i, sss1
 
 i = 1
 										
@@ -98,11 +108,7 @@ Set rs = dbConn.Execute(sss)
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -117,7 +123,9 @@ Set rs = dbConn.Execute(sss)
                         <div class="block">
 
                             <div class="navbar navbar-inner block-header">
-                            	<legend><%=response.write (titolorisultatoricerca)%></legend>
+                            	<legend><%=response.write (titolorisultatoricerca)%>
+                                    <h6>Vai alla MagicBox&nbsp;&nbsp;<a href="sim_magicbox_barcode_start.asp"><img src="images/stateverified2.png" align="center" width="32" height="32" title="<%=response.write (tooltipimg2)%>"></a>
+                                </legend></h6>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
@@ -131,7 +139,8 @@ Set rs = dbConn.Execute(sss)
 												<th><%=response.write (ricercaqta)%></th>
 												<th><%=response.write (ricercastatokit)%></th>
                                                 <th><%=response.write (ricercakeyword)%></th>
-												<th>&nbsp;</th>
+												<th><%=response.write (titolo83)%></th>
+                                                <th>&nbsp;</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -180,16 +189,22 @@ Set rs = dbConn.Execute(sss)
 												</td> <!--Descrizione-->
 												<td><%
                                                                 
-                                                                dim strposition
-                                                                strposition = rs("POS")
+                                                            Set rs1 = dbConn.Execute("SELECT * FROM SIM_Posizione WHERE IDPOS = " & rs("POS"))
+                                                            If Not rs1.eof Then
+													            Response.write rs1("POSIZIONE")
+												            Else
+													            Response.write "&nbsp;"
+												            End If
+
+
+                                                                'dim strposition
+                                                                'strposition = rs("POS")
                                                                 
-                                                                select case strposition
-                                                                  case 8 
-                                                                  response.write "Basement"
-                                                                  case else
-                                                                  %>
-                                                                  A<%=rs("POS")%>
-                                                                  <%end select%>
+                                                                'select case strposition
+                                                                  'case 8 
+                                                                  'response.write "Basement"
+                                                                  'case else
+                                                                %>
                                                         </td> <!--Posizione-->
                                                 <td>
                                                 <%
@@ -238,11 +253,28 @@ Set rs = dbConn.Execute(sss)
 												%>
 												</td> <!--Keywords-->
                                                 <td>
+                                                <%
+                                                
+                                                sss2="SELECT A.IDKIT, B.USR FROM SIM_Temp_MagicBox as A INNER JOIN SIM_User as B ON B.ID_USR = A.IDUSER WHERE A.IDKIT = " & rs("IDKIT") & " AND IN_OUT ='IN'"
+                                                'WHERE B.ID_USR = " & rs("IDUSER") & " AND 
+                                                'Response.write sss2
+                                                'response.end
+                                                Set rs1 = dbConn.Execute(sss2)
+                                                If Not rs1.eof Then
+                                                    %> <%response.write rs1("USR") %>(<img src="images/magicboxIN.png" width="16" height="16">)
+                                               <%   'response.write rs1("IDKIT")
+												Else
+													Response.write "&nbsp;"
+												End If
+                                                %>
+                                                </td>
+                                                <td>
                                                    <a href="sim_schedakit.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="<%=response.write (iconascheda)%>"></a><br>
                                                 </td> 
                                                 <td>
                                                     <a href="sim_temp_magicbox.asp?USER=<%= session("usr") %>&IDKIT=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&NOMEKIT=<%= rs("NOMEKIT") %>&DESCKIT=<%= rs("DESCKIT") %>&POS=<%= rs("POS") %>&QTA=<%= rs("QTA") %>&STATO=<%= rs("IDSTATO") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/addmagicbox.png" width="32" height="32" title="<%=response.write (iconaaggiungimb)%>"></a><br>
                                                 </td>
+                                                    
 											</tr>
 											<%
 											rs.MoveNext
@@ -254,8 +286,8 @@ Set rs = dbConn.Execute(sss)
                            </div>
                         </div>
                         <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i> <%=response.write (testobottoneindietro)%></button>
-                        </div>
+                        	<a href="sim_inventario_ricerca.asp"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
+                          </div>
                         <!-- /block -->
                      </div>
                 </div>

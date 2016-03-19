@@ -1,6 +1,10 @@
 ﻿<% 
    dim dbconn
    Set dbconn = Server.CreateObject("ADODB.Connection")  
-   'dbconn.Open "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" & server.MapPath("../mdb-database/SIM.mdb")
-   dbconn.Open "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" & server.MapPath("/mdb-database/SIM.mdb")
+
+   'connessione in rete
+   'dbconn.Open "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" & server.MapPath("../mdb-database/SIM_demo.mdb")
+   
+   'connessione in locale
+   dbconn.Open "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" & server.MapPath("/mdb-database/SIM_demo.mdb")
 %>

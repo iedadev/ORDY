@@ -55,8 +55,8 @@ End If
 						</div>
                         <br>
                             <%If session("ruolo") = "A" Then %>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim_gestione_kit.asp"><button class="btn btn-mini btn-success tooltip-top" data-original-title="<%=response.write (titolocreazionekit)%>"><i class="icon-plus icon-white"></i><%=response.write (titolocreazionekit)%></button></a>
-						    &nbsp;&nbsp;&nbsp;<a href="#myAlert" data-toggle="modal"><button class="btn btn-mini btn-danger tooltip-top" data-original-title="<%=response.write (titoloeliminakit)%>"><i class="icon-remove icon-white"></i><%=response.write (titoloeliminakit)%></button></a>
+                            &nbsp;&nbsp;<a href="sim_gestione_kit.asp"><img src="images/kitvalidate.png" width="32" height="32" title="<%=response.write (titolocreazionekit)%>"></a>
+						    <a href="#myAlert" data-toggle="modal"><img src="images/kitnotvalidate.png" width="32" height="32" title="<%=response.write (titoloeliminakit)%>"></a>
                             <div id="myAlert" class="modal hide">
 					                  				<div class="modal-header">
 					                  					<button data-dismiss="modal" class="close" type="button">&times;</button>
@@ -71,7 +71,8 @@ End If
 					                  				</div>
 					      </div>
                             <%End If%>
-                            <div class="block-content collapse in">
+                            <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
+						    <div class="block-content collapse in">
 							<div class="span12">
 								<table class="table table-condensed">
 									<tbody>
@@ -127,8 +128,8 @@ End If
 				</div>
 			</div>
             <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
-                        </div>
+                <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
+            </div>
             <hr>
 			<!--#include virtual file="include/piede.asp"-->
 		</div>

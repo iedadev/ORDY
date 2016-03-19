@@ -24,8 +24,9 @@ End If
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-      <!--#include virtual file="include/menu.asp"-->
-        <div class="container-fluid">
+              <!--#include virtual file="include/menu.asp"--> 
+
+         <div class="container-fluid">
             <div class="row-fluid">
             <% If session("ruolo") = "A" Then %>
 	            <!--#include virtual file="include/controlpanel.asp"-->
@@ -38,35 +39,42 @@ End If
                          <!-- block -->
                         <div align="center" class="block">
                             <div  class="navbar navbar-inner block-header">
-                            	<legend><%=response.write (titolo)%></legend>
+                            	<legend>ORDY - Gestionale Magazzino</legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12" align="center">
-                                     <a href="sim_inventario_ricerca.asp"> <img src="images/ricercamagicbox.png" width="200" height="100" title="<%=response.write (tooltipimg1)%>"></a>
-                                     <a href="sim_magicbox_barcode_start.asp"><img src="images/magicbox.png" width="200" height="100" title="<%=response.write (tooltipimg2)%>"></a>
-                                     <% If session("ruolo") = "A" Then %>
-                                     <a href="sim_magicbox_segnalazione_admin.asp"><img src="images/segnalazionimagicbox.png" width="200" height="100" title="<%=response.write (tooltipimg3)%>"></a>
-                                     <%Else%>
-                                     <a href="sim_comunication_user.asp"><img src="images/comunication.png" width="200" height="100" title="<%=response.write (tooltipimg4)%>"></a>
-                                     <% End If %>
-                                     <a href="sim_kit_creauser.asp"><img src="images/nuovokitmagicbox.png" width="200" height="100" title="<%=response.write (tooltipimg5)%>"></a>
+
+                                    <table align="center" border="0">
+                                        <td align="center"><a href="ord_anagrafiche.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Anagrafiche"></a></td>
+                                        <td align="center"><a href="ord_magazzino.asp"><img src="images/magicbox2.png" width="200" height="200" title="Gestione Magazzino"></a></td>
+                                         <% If session("ruolo") = "A" Then %>
+                                        <td align="center"><a href="sim_comunicazione.asp"><img src="images/segnalazionimagicbox2.png" width="200" height="200" title="Gestione Comunicazioni"></a></td>
+                                         <%Else%>
+                                         <td align="center"><img src="images/comunication2.png" width="200" height="200" title="Gestione Comunicazioni"></td>
+                                         <% End If %>
+                                        <td align="center"><a href="sim_kit_creauser.asp"><img src="images/createnewkit2.png" width="200" height="200" title="Gestione Movimenti"></a></td>
+                                      </tr>
+                                      <tr align="center">
+                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Anagrafiche</font></td>
+                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Magazzino</font></td>
+                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Comunicazioni</font></td>
+                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Movimenti</font></td>
+                                      </tr>
+                                       <tr align="center">
+                                        <td><b><font face="Georgia, Times New Roman, Times, serif">&nbsp;</font></td>
+                                        <td><b><font face="Georgia, Times New Roman, Times, serif">&nbsp;</font></td>
+                                       </tr>
+                                      </table>
                                 </div>
                             </div>
                         </div>
-                       <!-- <div align="left" class="block">
-                            <div  class="navbar navbar-inner block-header">
-                            	<legend>Comunication</legend>
-                            </div>
-                            <div class="block-content collapse in">
-                                <div class="span12" align="left">
-                                     Inserire le ultime comunicazioni agli utenti
-                                </div>-->
                             </div>
                         <!-- /block -->
                     </div>
 
                      <div class="row-fluid">
                         <!-- block -->
+
                         <!-- /block -->
                     </div>
                     

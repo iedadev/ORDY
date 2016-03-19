@@ -78,11 +78,10 @@ Dim sss, i
 										<thead>
 
                                              <% If request("Totale") <> 0 Then%>	
-                                            
-                                            <div align="center" style="border:2px solid red">
-                                            &nbsp;&nbsp;&nbsp;<%=response.write (messaggioalertpos)%>
-                                            </div>
-                                            <%end if%>
+                                             <div class="alert alert-danger">
+                                              <strong><%=response.write (titoloalert)%>!</strong><br><%=response.write (messaggioalertpos)%>.
+                                            </div> 
+                                             <%end if%>
 											<tr>
 												<th><%=response.write (titolotabellapos)%></th>
 												<th>&nbsp;</th>

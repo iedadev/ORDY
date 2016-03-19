@@ -15,7 +15,7 @@ If request("ARRIVO") = "Login" then
 	'dbConn.Open Application("Connection1_ConnectionString")
     
 
-   	Set rs = dbConn.Execute("SELECT * FROM SIM_USER WHERE pwd = '" & request("pwd") & "' and usr='" & request("usr") & "' AND Attivo = 'SI';")
+   	Set rs = dbConn.Execute("SELECT * FROM ORD_USER WHERE pwd = '" & request("pwd") & "' and usr='" & request("usr") & "' AND Attivo = 'SI';")
 	If rs.EOF Then
 		Response.Redirect "default.asp?origine=P1&msg=UserName o Password non corrette!"
 	Else
@@ -25,9 +25,9 @@ If request("ARRIVO") = "Login" then
 		session("ruolo") = rs("ruolo")
 		
 		' Scrive Log - Inizio
-			sss = "INSERT INTO SIM_Logs (IPRemoto, Utente, Operazione, DataOperazione) VALUES ('" & IP & "', '" & session("usr") & "', 'Logon', Now())"
+			sss = "INSERT INTO ORD_Logs (IPRemoto, Utente, Operazione, DataOperazione) VALUES ('" & IP & "', '" & session("usr") & "', 'Logon', Now())"
 			Set rs = dbConn.Execute(sss)
-			sss = "INSERT INTO SIM_Logs (IPRemoto, Utente, Operazione, DataOperazione) VALUES ('" & IPserver & "', '" & session("usr") & "', 'Logon Server', Now())"
+			sss = "INSERT INTO ORD_Logs (IPRemoto, Utente, Operazione, DataOperazione) VALUES ('" & IPserver & "', '" & session("usr") & "', 'Logon Server', Now())"
 			Set rs = dbConn.Execute(sss)
 		' Scrive Log - Fine
 
@@ -63,7 +63,7 @@ Set rs = nothing
 <div class="container">
         <p align="center"><img src="images/portada.png" alt="SIM" ></p>
 		<form class="form-signin" name="accesso" action="default.asp?ARRIVO=Login" method="post">
-			<h2 class="form-signin-heading" align="center">Helen Doron<br>Milano Fiera</h2>
+			<h2 class="form-signin-heading" align="center">ORDY<br>Milano Fiera</h2>
 			<input name="usr" type="text" class="input-block-level" placeholder="Username">
 			<input name="pwd" type="password" class="input-block-level" placeholder="Password">
 			<% If Len(Trim(request("msg"))) > 0 Then %>
@@ -72,10 +72,17 @@ Set rs = nothing
 					<label class="control-label" for="inputError"><%= request("msg") %></label>
 				</div>
 			<% End If %>
-				<button class="btn btn-large btn-primary" type="submit">Login</button>
+			<div align="center">
+               <button class="btn btn-large btn-primary" type="submit">Login</button>
+            </div>
     <div align="center">
       <p><font face="Verdana, Arial, Helvetica, sans-serif"><br>
-        Version 2016.2</font> </p>
+        Version 2016.1</font></p>
+      <font face="Verdana, Arial, Helvetica, sans-serif" size="2"><br>
+        <a href="mailto:iedadev@gmail.com?subject=SIM:Richiesta Username/Password">Dimenticata Username/Password?</a></font> 
+        
+        
+           
     </div>
   </form>
   </div>

@@ -106,7 +106,7 @@ End If
                             <%Else%>
                                 <!--#include virtual file="sim_lastprops.asp"-->       
                             <% End If %>
-                <div class="span9" id="content">
+                <div class="span6" id="content">
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
@@ -121,7 +121,7 @@ End If
 
                             <div class="navbar navbar-inner block-header"><legend><%=response.write (titolomodificakit)%>: <%= rs("BARCODE") & " -  " & rs("NomeKit") %></legend></div>
                             <div class="block-content collapse in">
-                                <div class="span9">
+                                <div class="span6">
                                      <form name="P2" method="post" Action="sim_kit_validare_modificafine.asp" class="form-horizontal" onsubmit="return controllo()">
                                      <input type="hidden" name="IDkit" value="<%= request("IDKit") %>">
                                       <fieldset>
@@ -182,13 +182,13 @@ End If
                                         <div class="control-group">
                                           <label class="control-label" for="focusedInput" ><%=response.write (ricercabarcode)%>: </label>
                                           <div class="controls">
-                                            <input value="<%= rs("barcode") %>" name="barcode" readonly="readonly" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
+                                            <input value="<%= rs("barcode") %>" name="barcode" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
                                           <label class="control-label" for="focusedInput" ><%=response.write (ricercadatacreazione)%>: </label>
                                           <div class="controls">
-                                            <input value="<%= Date()%>" name="datain" readonly="readonly" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
+                                            <input value="<%= Date()%>" name="datain" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
@@ -238,7 +238,7 @@ End If
                                         <div class="control-group">
                                           <label class="control-label" for="textarea"><%=response.write (ricercadesckit)%>:</label>
                                           <div class="controls">
-                                            <textarea class="input-xlarge textarea" name="descrizione" style="width: 850px; height: 100px"><%= rs("DESCKIT") %></textarea>
+                                            <textarea class="input-xlarge textarea" name="descrizione" style="width: 400px; height: 100px"><%= rs("DESCKIT") %></textarea>
                                           </div>
                                         </div>
                                         <div class="control-group">
@@ -253,7 +253,7 @@ End If
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
+		                        	<a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
                                 </div>
                             </div>
                         </div>

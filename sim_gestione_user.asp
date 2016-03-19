@@ -25,11 +25,7 @@ Dim sss, i
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+       
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript"> 
         <!--
@@ -103,7 +99,15 @@ Dim sss, i
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
-											<tr>
+										<% If request("Totale") <> 0 Then%>	
+                                             <div class="alert alert-danger">
+                                              <strong><%=response.write (titoloalert)%>!</strong><br><%=response.write (messaggioalertuser)%>.
+                                            </div> 
+                                             <%end if%>	
+                                          
+                                          
+                                          
+                                          <tr>
 												<th><%=response.write (titolotabellauser)%></th>
                                                 <th><%=response.write (titolotabellapwd)%></th>
                                                 <th><%=response.write (titolotabellaruolo)%></th>

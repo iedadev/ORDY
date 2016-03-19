@@ -128,8 +128,8 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 				</div>
 			</div>
             <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
-                        </div>
+               <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
+            </div>
             <hr>
 			<!--#include virtual file="include/piede.asp"-->
 		</div>

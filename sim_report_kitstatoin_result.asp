@@ -40,14 +40,26 @@ End If
                         <div class="block">
                             <div class="navbar navbar-inner block-header"><legend><%=response.write (reportkitnoscaricati)%></legend></div>
                             <div class="block-content collapse in">
+                             
+                             <% SEGNAL = request("SEGNAL")
+
+                                if SEGNAL=2 then%>
+       
+                                                         <div class="container">
+                                  <div class="alert alert-info">
+                                    <strong>Info!</strong> La mail di segnalazione è stata invata correttamente.
+                                </div>
+
+                             </div>
+                             <%end if%>   
+                               
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
                                           <th>
-                                           <!--Period from <%'response.write(request.form("date_from"))%> to <%'response.write(request.form("date_to"))%>-->
+                                          <!--Period from <%'response.write(request.form("date_from"))%> to <%'response.write(request.form("date_to"))%>-->
                                             <%=response.write (titolotabelladata)%>: <%=Date()%>
-                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a><br>
-                                          <!-- &nbsp;&nbsp;<a href="sim_report_statokit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a><font size="0.5">New Search</font>-->
+                                          <a href="sim_report_kitstatoin_xls.asp"><img src="images/excel.png" width="32" height="32" title="<%=response.write (etichettabottoneesportaxls)%>"></a>
                                           </th>
                                             <tr> 
 												<th><%=response.write (ricercabarcode)%></th>
@@ -59,38 +71,23 @@ End If
 										</thead>
 										<tbody>
 											
-                                            <!-- calcolo ultimo mese -->
-
-                                          <!--  Dim dataInizio 
-                                            dataInizio = Now()
-                                            Dim dataFine 
-                                            dataFine=DateAdd("m", 1 , Now()) 
-                                            Response.write(dataInizio & dataFine) 
-
-                                            response.end
-                                           -->
-               
                                             <%
                                                 
 
-                                            Dim sss, i                                          
+                                            Dim sss, i, ss22                                          
 
                                             i = 1
                                             
-                                            'sss = "SELECT BARCODE, ID_USER, DATA_IN, STATO_IN, DATA_OUT, STATO_OUT"
-                                            'sss = sss & " FROM SIM_StoricoInventario1" 
-                                            'sss = sss & " WHERE BARCODE IN (SELECT BARCODE FROM SIM_StoricoInventario2)"
-                                            'sss = sss & " AND ID_USER IN (SELECT ID_USER FROM SIM_StoricoInventario2)"
-
                                             sss = "SELECT BARCODE, IDUSER, DATA, IN_OUT"
                                             sss = sss & " FROM SIM_Temp_MagicBox" 
-                                            sss = sss & " WHERE IN_OUT = 'IN'" 
+                                            sss = sss & " WHERE IN_OUT = 'IN' ORDER BY IDUSER DESC" 
+                                            
                                             session("sss") = sss
                                                            
                                             'response.write sss
                                             
                                             'response.end
-
+                                            
                                             Set rs = dbConn.Execute(sss)
                                            
                                             While Not rs.EOF
@@ -115,12 +112,27 @@ End If
 												</td>
                                                 <td>
                                             <%
-												If Not rs.eof Then
-												    Response.write rs("IDUSER")
-                                                    '& " " & rs("IDKIT")
+												
+                                                sss2 = "SELECT USR FROM SIM_Temp_MagicBox AS K, SIM_USER AS U "
+                                                sss2 = sss2 & " WHERE K.IDUSER = U.ID_USR AND K.IDUSER = " & rs("IDUSER")
+                                            
+                                                'response.write sss2
+
+                                                Set rs1 = dbConn.Execute(sss2)
+
+												If Not rs1.eof Then
+													Response.write rs1("USR")
 												Else
 													Response.write "&nbsp;"
 												End If
+                                                
+                                                
+                                                'If Not rs.eof Then
+												 '   Response.write rs("IDUSER")
+                                                    '& " " & rs("IDKIT")
+												'Else
+												'	Response.write "&nbsp;"
+												'End If
 												%>
 												</td>
                                                 <td>
@@ -135,16 +147,20 @@ End If
 												</td>
                                                 <td>
                                             <%
-												If Not rs.eof Then
-												    Response.write rs("IN_OUT")
-                                                    '& " " & rs("IDKIT")
-												Else
-													Response.write "&nbsp;"
-												End If
-												%>
+												dim strNome
+                                                      strNome = rs("IN_OUT")
+
+                                                      select case strNome
+                                                      case "IN"%>
+                                                      <img src="images/magicboxIN.png" width="32" height="32" title="<%=response.write (kitinyourmagicbox)%>">
+                                                       
+                                                      <%case "OUT"%>
+                                                      <img src="images/magicboxOUT.png" width="32" height="32" title="<%=response.write (kitoutyourmagicbox)%>">
+                                                                  
+                                                      <%end select%>
 												</td>
                                                 <td>
-                                                 <a href="sim_report_statokit_elenco.asp?IDSTATO=<%= rs("BARCODE") %>&ATTIVO=<%= rs("BARCODE") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/elencoreport.png" width="32" height="32" alt="<%=response.write (titoloelencokit)%>"></a><br>
+                                                 <a href="sim_comunicazione_invio.asp?SEGNAL=1&OGGETTO=<%= rs("BARCODE") %>&STATOIN=<%= rs("DATA") %>&USER=<%=  rs("IDUSER") %>"><img src="images/email_page.png" width="32" height="32" title="<%=response.write (titolo83)%>"></a>
                                                 </td>
                                                 </tr>
 											<%

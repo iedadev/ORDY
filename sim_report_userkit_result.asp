@@ -31,75 +31,6 @@ End If
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script type="text/javascript"> 
-        <!--
-        function controllo()
-        {
-		if (document.P2.kit_IDMCat.value == "")
-			{
-			alert("Inserire la Macrocategoria.Dato Obbligatorio!");
-			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDMCat.focus();
-			return false;
-			}
-		if (document.P2.sim_categoria.value == "")
-			{
-			alert("Inserire la Categoria.Dato Obbligatorio!");
-			document.P2.sim_categoria.style.backgroundColor = 'Yellow';
-			document.P2.sim_categoria.focus();
-			return false;
-			}
-		if (document.P2.kit_IDSCat.value == "")
-			{
-			alert("Inserire Sottocategoria. Dato Obbligatorio!");
-			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDSCat.focus();
-			return false;
-			}
-		if (document.P2.kit_nomekit.value == "")
-			{
-			alert("Inserire in nome del Kit.Dato Obbligatorio!");
-			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
-			document.P2.kit_nomekit.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDPosizione.value == ""))
-			{
-			alert("Inserire la Posizione del Kit.Dato Obbligatorio!");
-			document.P2.kit_IDPosizione.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		if (document.P2.kit_quantita.value == "")
-			{
-			alert("Inserire la Quantità.Dato Obbligatorio!");
-			document.P2.kit_quantita.style.backgroundColor = 'Yellow';
-			document.P2.kit_quantita.focus();
-			return false;
-			}
-		if (document.P2.Kit_Data_Acquisto.value == "")
-			{
-			alert("Inserire Data di acquisto.Dato Obbligatorio!");
-			document.P2.Kit_Data_Acquisto.style.backgroundColor = 'Yellow';
-			document.P2.Kit_Data_Acquisto.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDStato.value == ""))
-			{
-			alert("Inserire lo Stato del kit.Dato Obbligatorio!");
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			return false;
-			}	
-        if ((document.P2.kit_Barcode.value == ""))
-			{
-			alert("Inserire il Codice del kit.Dato Obbligatorio!");
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		}
-		//-->
-		</script> <!--funzione di controllo-->
     
   </head>
     <body>
@@ -120,10 +51,11 @@ End If
 										<thead>
                                            <%
                                             
-                                            Dim s  
+                                            Dim s1 
                                             s1 = "SELECT USR"
                                             s1 = s1 & " FROM SIM_User" 
-                                            s1 = s1 & " WHERE ID_USR = " & request("SIM_Teacher")
+                                            s1 = s1 & " WHERE ID_USR = " & request("user")
+
 
                                             'response.write s1
                                             Set rs1 = dbConn.Execute(s1)
@@ -131,8 +63,22 @@ End If
                                            %>     
                                           <th>User: <%Response.write rs1("USR")%> <br>
                                            Period from <%response.write(request.form("date_from"))%> to <%response.write(request.form("date_to"))%>
-                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="<%=response.write (etichettabottoneesporta)%>"><i class="icon-download icon-white"></i> <%=response.write (testobottoneesporta)%></button></a><br>
-                                           &nbsp;&nbsp;<a href="sim_report_userkit.asp"><img src="images/search.png" width="32" height="32" title="<%=response.write (reportnewsearch)%>"></a><font size="0.5"><%=response.write (reportnewsearch)%></font>
+
+                                               <%
+                                                  dim datefrom, dateto, user, user2
+
+                                                  datefrom = request.form("date_from")
+                                                  dateto = request.form("date_to")
+                                                  usr = request.form("user")
+
+                                                  'response.write datefrom
+                                                  'response.write dateto
+                                                  'response.write usr
+                                                  'Response.write rs1("USR")
+
+                                               %>
+                                               <a href="sim_report_userkit_xls.asp?user=<%=Response.write (usr)%>&datefrom=<%=response.write (datefrom)%>&dateto=<%=response.write (dateto)%>"><img src="images/excel.png" width="32" height="32" title="<%=response.write (etichettabottoneesportaxls)%>"></a>
+                                               <a href="sim_report_userkit.asp"><img src="images/search.png" width="32" height="32" title="<%=response.write (reportnewsearch)%>"></a><font size="0.5"><%=response.write (reportnewsearch)%></font>
                                           </th>
                                             <tr> 
 												<th><%=response.write (titolotabellabarcode)%></th>
@@ -163,7 +109,7 @@ End If
                                             sss = "SELECT COUNT(A.BARCODE) AS Totale, A.BARCODE, B.NOMEKIT"
                                             sss = sss & " FROM SIM_StoricoInventario AS A INNER JOIN SIM_KIT AS B ON A.BARCODE = B.BARCODE" 
                                             sss = sss & " WHERE A.DATA_IN BETWEEN #" & request("date_from") & "# AND #" & request("date_to") & "#"
-                                            sss = sss & " AND ID_USER = " & request("SIM_Teacher")
+                                            sss = sss & " AND ID_USER = " & request("user")
                                             sss = sss & " GROUP BY A.BARCODE, B.NOMEKIT"
 
                                             session("sss") = sss

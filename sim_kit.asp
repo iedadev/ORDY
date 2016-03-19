@@ -38,8 +38,24 @@ End If
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12" align="center">
-                                     <a href="sim_kit_elenco.asp"> <img src="images/elencokit.png" width="200" height="100" title="<%=response.write (tooltipimg6)%>"></a>
-                                     <a href="sim_gestione_kit.asp"><img src="images/createnewkit.png" width="200" height="100" title="<%=response.write (tooltipimg5)%>"></a>
+                                     <table align="center" border="0">
+                                      <tr></tr>
+                                        <td><a href="sim_kit_elenco.asp"><img src="images/elencokit2.png" width="200" height="200" title="<%=response.write (tooltipimg6)%>"></a></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td><a href="sim_kit_creauser.asp"><img src="images/createnewkit2.png" width="200" height="200" title="<%=response.write (tooltipimg5)%>"></a></td>
+                                      </tr>
+                                      <tr align="center">
+                                        <td><b><font face="Georgia, Times New Roman, Times, serif"><%=response.write (tooltipimg6)%></font></td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td><b><font face="Georgia, Times New Roman, Times, serif"><%=response.write (tooltipimg5)%></font></td>
+                                      </tr>
+                                      </table>
                                 </div>
                             </div>
                         </div>

@@ -25,33 +25,29 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript"> 
         <!--
         function controllo()
         {
-		if (document.P2.SIM_Teacher.value == "")
+		if (document.P2.user.value == "")
 			{
-			alert("Inserire il Teacher.Dato Obbligatorio!");
-			document.P2.SIM_Teacher.style.backgroundColor = 'Yellow';
-			document.P2.SIM_Teacher.focus();
+			alert("<%=response.write (datoobbligatorio)%>");
+			document.P2.user.style.backgroundColor = 'Yellow';
+			document.P2.user.focus();
 			return false;
 			}
         if (document.P2.date_from.value == "")
 			{
-			alert("Inserire il date_from.Dato Obbligatorio!");
+			alert ("<%=response.write (datoobbligatorio)%>");
 			document.P2.date_from.style.backgroundColor = 'Yellow';
 			document.P2.date_from.focus();
 			return false;
 			}
           if (document.P2.date_to.value == "")
 			{
-			alert("Inserire il date_to.Dato Obbligatorio!");
+			alert ("<%=response.write (datoobbligatorio)%>");
 			document.P2.date_to.style.backgroundColor = 'Yellow';
 			document.P2.date_to.focus();
 			return false;
@@ -80,7 +76,7 @@ End If
                                           <div class="control-group">
                                           <label class="control-label" for="focusedInput"><%=response.write (reportuserkituser)%>: </label>
                                           <div class="controls">
-                                          <select id="selectError" name="SIM_Teacher">
+                                          <select id="selectError" name="user">
                                               <option value=""></option>
                                               <%
                                               Set rs0 = dbConn.Execute("SELECT * FROM SIM_USER ORDER BY Id_USR")
@@ -98,7 +94,7 @@ End If
                                            <div class="control-group">
                                           <label class="control-label" for="focusedInput"><%=response.write (reportdal)%>: </label>
                                           <div class="controls">
-                                            <input name="date_from" class="input-large focused" id="focusedInput" placeholder="GG/MM/AAAA" value="<%= Date() %>" type="text">
+                                            <input name="date_from" class="input-large focused" id="focusedInput" placeholder="GG/MM/AAAA" value="<%= Date()-10 %>" type="text">
                                           </div>
                                         </div>
                                           <div class="control-group">

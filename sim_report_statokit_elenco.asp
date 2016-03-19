@@ -45,8 +45,9 @@ End If
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
                                           <th>
-                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="<%=response.write (etichettabottoneesporta)%>"><i class="icon-download icon-white"></i> <%=response.write (testobottoneesporta)%></button></a>
-                                           &nbsp;&nbsp;<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
+                                                <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
+                                                <a href="xxxxls.asp"><img src="images/excel.png" width="32" height="32" title="<%=response.write (etichettabottoneesportaxls)%>"></a>
+                                                <a href="xxxpdf.asp"><img src="images/pdf.png" width="32" height="32" title="<%=response.write (etichettabottoneesportapdf)%>"></a>
                                           </th>
                                             <tr> 
 												<th><%=response.write (ricercabarcode)%></th>
@@ -138,22 +139,22 @@ End If
                                                                 'Response.write rs("IDSTATO")
                                                     select case strStato
                                                                   case 8%>
-                                                                    <img src="images/stategood.png" width="32" height="32" title="<%=response.write (iconastatobuono)%>"> - Good
+                                                                    <img src="images/stategood.png" width="32" height="32" title="<%=response.write (iconastatobuono)%>">
   
                                                                   <%case 2%>
-                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="<%=response.write (iconastatoincompleto)%>"> - Incomplete
+                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="<%=response.write (iconastatoincompleto)%>">
                                                                   
                                                                   <%case 3%>
-                                                                    <img src="images/statemissing.png" width="32" height="32" title="<%=response.write (iconastatoperso)%>"> - Missing
+                                                                    <img src="images/statemissing.png" width="32" height="32" title="<%=response.write (iconastatoperso)%>">
                                                                   
                                                                   <%case 4%>
-                                                                    <img src="images/statenew.png" width="32" height="32" title="<%=response.write (iconastatonuovo)%>"> - New
+                                                                    <img src="images/statenew.png" width="32" height="32" title="<%=response.write (iconastatonuovo)%>">
                                                                   
                                                                   <%case 5%>
-                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="<%=response.write (iconastatosostituito)%>"> - Substitute
+                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="<%=response.write (iconastatosostituito)%>">
                                                                   
                                                                   <%case 6%>
-                                                                    <img src="images/stateverified.png" width="32" height="32" title="<%=response.write (iconastatoverificato)%>"> - Verified
+                                                                    <img src="images/stateverified.png" width="32" height="32" title="<%=response.write (iconastatoverificato)%>">
                                                                   
                                                                   <%end select%>
                                                 <%Else

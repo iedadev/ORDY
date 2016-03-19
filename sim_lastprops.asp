@@ -16,7 +16,7 @@
         <li>
 			<%
 			
-            sss = "SELECT TOP 5 (NOMEKIT),* FROM SIM_KIT WHERE VERIFICATO=0 ORDER BY DATAIN DESC"
+            sss = "SELECT TOP 5 (NOMEKIT),* FROM SIM_KIT WHERE VERIFICATO=0 ORDER BY IDKIT DESC"
 			
             'response.write sss
             'response.end

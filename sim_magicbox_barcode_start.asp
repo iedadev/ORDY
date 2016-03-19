@@ -87,7 +87,7 @@ End If
                                         <td colspan="4">&nbsp;</td>
                                         <tr>
 											<th><%=response.write (ricercastatokit)%> e <%=response.write (ricercaposizioni)%></th>
-                                            <th><%=response.write (ricercaqta)%></th
+                                            <th><%=response.write (ricercaqta)%></th>
 											<%If session("ruolo") = "A" Then %>
                                             <th><%=response.write (ricercaprezzo)%></th>
                                              <%End If%>
@@ -116,7 +116,7 @@ End If
                         <!-- /block -->
                     </div>
                 </div>
-                <!--#include virtual file="sim_magicbox_lateral.asp"-->
+                <!--#include virtual file="sim_wishlist_lateral.asp"--><!--#include virtual file="sim_magicbox_lateral.asp"-->
             </div>
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->

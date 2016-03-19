@@ -45,9 +45,20 @@ sss2 = sss2 & "'" & request("BARCODE") & "', "
 sss2 = sss2 & "'" & request("NOTE") & "', "
 sss2 = sss2 & "Date())" 
 
+sss3 = "INSERT INTO SIM_Comunicazioni (DATA,OGGETTO, TESTO, MITTENTE, DESTINATARIO, STATOLETTURA) VALUES ("
+sss3 = sss3 & "Date()" & ", "
+sss3 = sss3 & "3" & ", "
+sss3 = sss3 & "'" & "Segnalazione per barcode " & request("BARCODE") & "', "
+sss3 = sss3 & request("IDUSR") & ", "
+sss3 = sss3 & "35" & ", "
+sss3 = sss3 & "0" & ")"
+
 'response.write sss2
+'response.write sss3
 'response.end
+
 Set rs6 = dbConn.Execute(sss2)
+Set rs7 = dbConn.Execute(sss3)
 
 End if
 'response.write "AAA"
@@ -216,10 +227,48 @@ End if
 								</table>
                             </div>
                             <div class="form-actions" align="center">
-                            <a href="sim_magicbox_carico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>&Categoria=<%= rs4("Categoria") %>&Sottocategoria=<%= rs5("Sottocategoria") %>&Nomekit=<%= rs("nomekit") %>&desckit=<%= rs("desckit") %>&stato=<%= rs2("idstato") %>&qta=<%= rs("qta") %>&pos=<%= rs1("idpos") %>"><img src="images/upkit.png" align="right" width="32" height="32" title="<%=response.write (iconaupkitamb)%>"></a>&nbsp;&nbsp;
-                            &nbsp;&nbsp;<a href="sim_magicbox_scarico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>"><img src ="images/downkit.png" align="right" width="32" height="32" title="<%=response.write (iconadownkitamb)%>"></a>
                             
-                            <%If request("SEGNALAZIONE")= 0 Then%>   
+                            <%s9="SELECT COUNT(A.IDKIT) as Totale, B.USR FROM SIM_Temp_MagicBox as A INNER JOIN SIM_User as B ON B.ID_USR = A.IDUSER WHERE A.IDKIT = " & rs("IDKIT") & " AND IN_OUT ='IN' GROUP BY B.USR "
+                                                'Response.write s9
+                                                'response.write session("usr")
+                                                
+
+                                                dim user, toto
+                                                user= session("usr")
+                                                
+                                                'response.write user
+
+                                                'response.end
+                                                
+                                                
+                                                Set rs9 = dbConn.Execute(s9)    
+                            
+                            
+                               If Not RS9.EOF Then
+                                   If (rs9("Totale") = 1 AND rs9("USR")= user) Then%>
+
+                                         <a href="sim_magicbox_scarico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>"><img src ="images/downkit.png" align="right" width="32" height="32" title="<%=response.write (iconadownkitamb)%>"></a>
+                                 
+                                 <% Elseif (rs9("Totale") = 1 AND rs9("USR")<> user) then %>
+
+                                        <div class="alert alert-warning">
+                                          <strong>Warning!</strong> Il Kit non è disponibile in quanto in uso da:
+                                        </div>
+                                  
+                                  <%     
+                                        Response.write rs9("USR")
+                                        'Response.write rs9("Totale")
+                                 
+                                    end if
+                               Else 
+                                   'response.write "ASASAS"%>
+                                   <a href="sim_magicbox_carico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>&Categoria=<%= rs4("Categoria") %>&Sottocategoria=<%= rs5("Sottocategoria") %>&Nomekit=<%= rs("nomekit") %>&desckit=<%= rs("desckit") %>&stato=<%= rs2("idstato") %>&qta=<%= rs("qta") %>&pos=<%= rs1("idpos") %>"><img src="images/upkit.png" align="right" width="32" height="32" title="<%=response.write (iconaupkitamb)%>"></a>&nbsp;&nbsp;
+                                   <a href="sim_magicbox_scarico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>"><img src ="images/downkit.png" align="right" width="32" height="32" title="<%=response.write (iconadownkitamb)%>"></a>
+                                 <%
+                                   End if                                                                              
+                                 %>
+
+                           <%If request("SEGNALAZIONE")= 0 Then%>   
                             &nbsp;&nbsp;<a href="sim_magicbox_segnalazione.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&IDUSR=<%= session("usr") %>"><img src="images/segnalationkit.png" align="right" width="32" height="32" title="<%=response.write (iconasegnalaanomaliamb)%>"></a>
                             <%End If%>
                             </div>
@@ -231,7 +280,7 @@ End if
                         <!-- block -->
                         <!-- /block -->
                     </div>
-                </div><!--#include virtual file="sim_magicbox_lateral.asp"-->
+                </div><!--#include virtual file="sim_wishlist_lateral.asp"--><!--#include virtual file="sim_magicbox_lateral.asp"-->
             </div>
             
             <hr>

@@ -23,7 +23,7 @@ IP = Request.ServerVariables("REMOTE_ADDR")
 
 sss = "UPDATE SIM_KIT SET ATTIVO = 0, DATAOUT = '" & Date() & "' WHERE IDKit = " & request("IDKit")
 Set rs = dbConn.Execute(sss)
-'response.write sss
+response.write sss
 'response.end
 
 

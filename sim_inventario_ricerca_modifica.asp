@@ -185,7 +185,7 @@ Set rs = dbConn.Execute("SELECT * FROM HD_StoricoLezioni WHERE ID_StoricoLezioni
                                         <div class="control-group">
                                           <label class="control-label" for="textarea2">Note:</label>
                                           <div class="controls">
-                                            <textarea class="input-xlarge textarea" name="Note_Lezione" style="width: 850px; height: 100px"><%= rs("Note_Lezione") %></textarea>
+                                            <textarea class="input-xlarge textarea" name="Note_Lezione" style="width: 400px; height: 100px"><%= rs("Note_Lezione") %></textarea>
                                           </div>
                                         </div>
                                         <div class="form-actions">
@@ -194,7 +194,7 @@ Set rs = dbConn.Execute("SELECT * FROM HD_StoricoLezioni WHERE ID_StoricoLezioni
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
+		                        	<a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
                                 </div>
                             </div>
                         </div>

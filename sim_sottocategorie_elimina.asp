@@ -29,10 +29,7 @@ Set rs = dbConn.Execute(sss)
 If rs("Totale") > 0 Then
 response.redirect "sim_gestione_sottocategorie.asp?Totale=99"
 
-
-%>
-
-<% Else 
+Else 
 
 sss = "DELETE FROM SIM_sottocategorie WHERE IDScat = " & request("IDscat")
 

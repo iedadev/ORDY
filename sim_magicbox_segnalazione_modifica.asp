@@ -180,13 +180,13 @@ Set rs = dbConn.Execute(sss)
                                         <div class="control-group">
                                           <label class="control-label" for="focusedInput" ><%=response.write (ricercabarcode)%>: </label>
                                           <div class="controls">
-                                            <input value="<%= rs("barcode") %>" name="barcode" readonly="readonly" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
+                                            <input value="<%= rs("barcode") %>" name="barcode" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
                                           <label class="control-label" for="focusedInput" ><%=response.write (ricercadatacreazione)%>: </label>
                                           <div class="controls">
-                                            <input value="<%= Date()%>" name="datain" readonly="readonly" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
+                                            <input value="<%= Date()%>" name="datain" class="input-xlarge focused" id="focusedInput" type="text" >&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="control-group">
@@ -236,7 +236,7 @@ Set rs = dbConn.Execute(sss)
                                         <div class="control-group">
                                           <label class="control-label" for="textarea"><%=response.write (ricercadesckit)%>:</label>
                                           <div class="controls">
-                                            <textarea class="input-xlarge textarea" name="descrizione" style="width: 850px; height: 100px"><%= rs("DESCKIT") %></textarea>
+                                            <textarea class="input-xlarge textarea" name="descrizione" style="width: 450px; height: 100px"><%= rs("DESCKIT") %></textarea>
                                           </div>
                                         </div>
                                         <div class="control-group">
@@ -246,12 +246,12 @@ Set rs = dbConn.Execute(sss)
                                           </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonevalidazione)%>"><%=response.write (testobottonevalidazione)%></button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneconferma)%>"><%=response.write (testobottoneconferma)%></button>&nbsp;
                                           <button type="reset" class="btn" data-original-title="<%=response.write (etichettabottoneannulla)%>"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
+		                        	<a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
                                 </div>
                             </div>
                         </div>

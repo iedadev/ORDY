@@ -11,10 +11,10 @@ If session("ruolo") <> "A" Then
     response.redirect "main.asp"
 End If
 
-Dim sss, i
+Dim sss1, i
 
-sss =  "SELECT * FROM SIM_Macrocategorie WHERE IDMcat = " & request("IDMcat")
-Set rs = dbConn.Execute(sss)
+sss1 =  "SELECT * FROM SIM_Macrocategorie WHERE IDMcat = " & request("IDMcat")
+Set rs1 = dbConn.Execute(sss1)
 
 %>
 <!DOCTYPE html>
@@ -27,11 +27,7 @@ Set rs = dbConn.Execute(sss)
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript">
         <!--
@@ -52,20 +48,23 @@ Set rs = dbConn.Execute(sss)
 	    <!--#include virtual file="include/menu.asp"-->
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span12" id="content">
+                <% If session("ruolo") = "A" Then %>
+	                <!--#include virtual file="include/controlpanel.asp"-->    
+                <% End If %>
+                <div class="span6" id="content">
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header"><legend><%=response.write (titolomodificamacrocategorie)%></legend></div>
                             <div class="block-content collapse in">
-                                <div class="span12">
+                                <div class="span6">
                                      <form name="P2" method="post" Action="sim_macrocategorie_modificafine.asp" class="form-horizontal" onsubmit="return controllo()">
-                                     <input type="hidden" name="IDMcat"  value="<%= rs("IDMcat") %>">
+                                     <input type="hidden" name="IDMcat"  value="<%= rs1("IDMcat") %>">
                                       <fieldset>
                                         <div class="control-group">
                                           <label class="control-label" for="focusedInput"><%=response.write (ricercamacrocategorie)%>: </label>
                                           <div class="controls">
-                                            <input value="<%= rs("macrocategoria") %>" name="macrocategoria" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
+                                            <input value="<%= rs1("macrocategoria") %>" name="macrocategoria" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="form-actions">
@@ -74,7 +73,7 @@ Set rs = dbConn.Execute(sss)
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
+		                        	<a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
                                 </div>
                             </div>
                         </div>
@@ -168,5 +167,5 @@ Set rs = dbConn.Execute(sss)
 </html>
 <%
 Set dbconn = nothing
-Set rs = nothing
+Set rs1 = nothing
 %>

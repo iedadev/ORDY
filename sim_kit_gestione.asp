@@ -39,7 +39,7 @@ End If
                                 <!--#include virtual file="sim_lastprops.asp"-->       
                             <% End If %>
 				
-                <div class="span9" id="content">
+                <div class="span6" id="content">
 					<div class="row-fluid">
 						<!-- block -->
 						<div class="block">
@@ -62,24 +62,24 @@ End If
                         <br>
 
                             <%If session("ruolo") = "A" Then %>
-                            &nbsp;&nbsp;<a href="sim_kit_validare_modifica.asp?IDKIT=<%= rs("IDKit") %>"><img src="images/kitmodify.png" width="32" height="32" title="Modify Kit"></a>
-						    &nbsp;&nbsp;&nbsp;<a href="#myAlert" data-toggle="modal"><img src="images/kitdelete.png" width="32" height="32" title="Delete Kit"></a>
+                            &nbsp;&nbsp;<a href="sim_kit_validare_modifica.asp?IDKIT=<%= rs("IDKit") %>"><img src="images/kitmodify.png" width="32" height="32" title="<%=response.write (simschedakitbarcodemodifica)%>"></a>
+						    &nbsp;<a href="#myAlert" data-toggle="modal"><img src="images/kitdelete.png" width="32" height="32" title="<%=response.write (titoloeliminakit)%>"></a>
                             <div id="myAlert" class="modal hide">
 					                  				<div class="modal-header">
 					                  					<button data-dismiss="modal" class="close" type="button">&times;</button>
 					                  						<h3><%=response.write (titoloalert)%></h3>
 					                  				</div>
 					                  				<div class="modal-body">
-					                  					<p><%=response.write (titolomessaggioalertelimina)%></p>
+					                  					<p><%=response.write (messaggioalertelimina)%></p>
 					                  				</div>
 					                  				<div class="modal-footer">
-					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %> title="<%=response.write (etichettabottoneconferma)%>"><%=response.write (testobottoneconferma)%></a>
-					                  					<a data-dismiss="modal" class="btn" href="#"><%=response.write (testobottoneannulla)%></a>
+					                  					<a class="btn btn-primary" href="sim_kit_elimina_ok.asp?IDKit=<%= rs("IDKit") %>"><%=response.write (testobottoneconferma)%></a>
+                                                        <a data-dismiss="modal" class="btn" href="#"><%=response.write (testobottoneannulla)%></a>
 					                  				</div>
 					      </div>
                             <%End If%>
                             <div class="block-content collapse in">
-							<div class="span9">
+							<div class="span12">
 								<table class="table table-condensed">
 									<tbody>
                                         <tr>
@@ -134,7 +134,7 @@ End If
 				</div>
 			</div>
             <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
+               <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
             </div>
             <hr>
 			<!--#include virtual file="include/piede.asp"-->

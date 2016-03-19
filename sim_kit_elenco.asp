@@ -46,9 +46,10 @@ Set rs = dbConn.Execute(sss)
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                             	<legend><%=response.write (titoloelencokit)%> &nbsp;&nbsp;
-                        	    <button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i> <%=response.write (testobottoneindietro)%></button>
-                        	        &nbsp;&nbsp;<a href="hd_reports_storico_demo_esporta.asp"><button class="btn btn-success tooltip-top" data-original-title="<%=response.write (etichettabottoneesporta)%>"><i class="icon-download icon-white"></i> <%=response.write (testobottoneesporta)%></button></a>
-                                 </legend></div>
+                        	        <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
+                                    <a href="hd_reports_XXX_xls.asp"><img src="images/excel.png" width="32" height="32" title="<%=response.write (etichettabottoneesportaxls)%>"></a>
+                                    </legend>
+                            </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
@@ -154,14 +155,8 @@ Set rs = dbConn.Execute(sss)
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="Torna alla Ricerca"><i class="icon-backward icon-white"></i> Indietro</button>
-                        	&nbsp;&nbsp;<a href="hd_reports_storico_demo_esporta.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a>
-                        </div>
                         <!-- /block -->
                     </div>
-
-
                 </div>
             </div>
             <hr>

@@ -35,7 +35,7 @@ End If
              <% If session("ruolo") = "A" Then %>
 	            <!--#include virtual file="include/controlpanel.asp"-->    
             <% End If %>
-                <div class="span7" id="content">
+                <div class="span4" id="content">
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
@@ -47,8 +47,7 @@ End If
                                           <th>
                                            <!--Period from <%'response.write(request.form("date_from"))%> to <%'response.write(request.form("date_to"))%>-->
                                             Date: <%=Date()%>
-                                           &nbsp;&nbsp;<a href="XXX.asp"><button class="btn btn-success tooltip-top" data-original-title="Esporta la lista in formato Excel"><i class="icon-download icon-white"></i> Esporta</button></a><br>
-                                          <!-- &nbsp;&nbsp;<a href="sim_report_statokit.asp"><img src="images/search.png" width="32" height="32" title="New Search"></a><font size="0.5">New Search</font>-->
+                                           <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
                                           </th>
                                             <tr> 
 												<th><%=response.write (ricercastatokit)%></th>
@@ -59,27 +58,13 @@ End If
 										</thead>
 										<tbody>
 											
-                                            <!-- calcolo ultimo mese -->
-
-                                          <!--  Dim dataInizio 
-                                            dataInizio = Now()
-                                            Dim dataFine 
-                                            dataFine=DateAdd("m", 1 , Now()) 
-                                            Response.write(dataInizio & dataFine) 
-
-                                            response.end
-                                           -->
-               
                                             <%
-                                                
-
-                                            Dim sss, i                                          
+                                           Dim sss, i                                          
 
                                             i = 1
                                             
                                             sss = "SELECT COUNT(IDSTATO) AS Totale,IDSTATO, ATTIVO"
-                                            sss = sss & " FROM SIM_Kit" 
-                                            'sss = sss & " WHERE DATAIN BETWEEN #" & request("date_from") & "# AND #" & request("date_to") & "#"
+                                            sss = sss & " FROM SIM_Kit WHERE ATTIVO = 1 " 
                                             sss = sss & " GROUP BY IDSTATO, ATTIVO"
 
                                             session("sss") = sss
@@ -108,22 +93,22 @@ End If
                                                                 'Response.write rs("IDSTATO")
                                                     select case strStato
                                                                   case 8%>
-                                                                    <img src="images/stategood.png" width="32" height="32" title="<%=response.write (iconastatobuono)%>"> - Good
+                                                                    <img src="images/stategood.png" width="32" height="32" title="<%=response.write (iconastatobuono)%>">
   
                                                                   <%case 2%>
-                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="<%=response.write (iconastatoincompleto)%>"> - Incomplete
+                                                                    <img src="images/stateincomplete.png" width="32" height="32" title="<%=response.write (iconastatoincompleto)%>">
                                                                   
                                                                   <%case 3%>
-                                                                    <img src="images/statemissing.png" width="32" height="32" title="<%=response.write (iconastatoperso)%>"> - Missing
+                                                                    <img src="images/statemissing.png" width="32" height="32" title="<%=response.write (iconastatoperso)%>"> 
                                                                   
                                                                   <%case 4%>
-                                                                    <img src="images/statenew.png" width="32" height="32" title="<%=response.write (iconastatonuovo)%>"> - New
+                                                                    <img src="images/statenew.png" width="32" height="32" title="<%=response.write (iconastatonuovo)%>"> 
                                                                   
                                                                   <%case 5%>
-                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="<%=response.write (iconastatosostituito)%>"> - Substitute
+                                                                    <img src="images/statesubstitute.png" width="32" height="32" title="<%=response.write (iconastatosostituito)%>">
                                                                   
                                                                   <%case 6%>
-                                                                    <img src="images/stateverified.png" width="32" height="32" title="<%=response.write (iconastatoverificato)%>"> - Verified
+                                                                    <img src="images/stateverified.png" width="32" height="32" title="<%=response.write (iconastatoverificato)%>">
                                                                   
                                                                   <%end select%>
                                                 <%Else

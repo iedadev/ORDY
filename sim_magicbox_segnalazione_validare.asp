@@ -13,14 +13,14 @@ End If
 
 Dim sss, i
 
-sss =  "SELECT * FROM SIM_Kit WHERE IDKit = " & request("IDKit")
+sss6 =  "SELECT * FROM SIM_Kit WHERE IDKit = " & request("IDKit")
 
-Set rs = dbConn.Execute(sss)
-Set rs1 = dbConn.Execute("SELECT Posizione FROM SIM_Posizione WHERE IDPOS= " & rs("POS"))
-Set rs2 = dbConn.Execute("SELECT Stato FROM SIM_Stato WHERE IDStato= " & rs("IDStato"))
-Set rs3 = dbConn.Execute("SELECT Macrocategoria FROM SIM_Macrocategorie WHERE IDMcat = " & rs("IDMcat"))
-Set rs4 = dbConn.Execute("SELECT Categoria FROM SIM_Categorie WHERE IDCat = " & rs("IDCat"))
-Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE IDScat = " & rs("IDScat"))
+Set rs6 = dbConn.Execute(sss6)
+Set rs1 = dbConn.Execute("SELECT Posizione FROM SIM_Posizione WHERE IDPOS= " & rs6("POS"))
+Set rs2 = dbConn.Execute("SELECT Stato FROM SIM_Stato WHERE IDStato= " & rs6("IDStato"))
+Set rs3 = dbConn.Execute("SELECT Macrocategoria FROM SIM_Macrocategorie WHERE IDMcat = " & rs6("IDMcat"))
+Set rs4 = dbConn.Execute("SELECT Categoria FROM SIM_Categorie WHERE IDCat = " & rs6("IDCat"))
+Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE IDScat = " & rs6("IDScat"))
 'response.write sss
 
 %>
@@ -42,16 +42,19 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 		<!--#include virtual file="include/menu.asp"-->
 		<div class="container-fluid">
 			<div class="row-fluid">
-				<div class="span12" id="content">
+                 <% If session("ruolo") = "A" Then %>
+	                <!--#include virtual file="include/controlpanel.asp"-->    
+                <% End If %>
+				<div class="span6" id="content">
 					<div class="row-fluid">
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-							<legend><%=response.write (titoloschedakit)%>: <%= rs("Nomekit") & " (Barcode: " & rs("Barcode") & ")" %></legend>
+							<legend><%=response.write (titoloschedakit)%>: <%= rs6("Nomekit") & " (Barcode: " & rs6("Barcode") & ")" %></legend>
 						</div>
                         <br>
                             <%If session("ruolo") = "A" Then %>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim_magicbox_segnalazione_verificata.asp?IDKIT=<%= rs("IDKit") %>&IDMCAT=<%=rs("IDMcat")%>&IDCAT=<%=rs("IDCAT")%>&IDSCAT=<%=rs("IDSCAT")%>&BARCODE=<%=rs("BARCODE")%>&NOMEKIT=<%=rs("NOMEKIT")%>&DESCKIT=<%=rs("DESCKIT")%>&POS=<%=rs("POS")%>&QTA=<%=rs("QTA")%>&DATAIN=<%=rs("DATAIN")%>&IDSTATO=<%=rs("IDSTATO")%>&PRZ=<%=rs("PRZ")%>&KEYWORDS=<%=rs("KEYWORDS")%> "><button class="btn btn-mini btn-success tooltip-top" data-original-title="Segnalazione Verificata"><i class="icon-plus icon-white"></i> Segnalazione Verificata</button></a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim_magicbox_segnalazione_verificata.asp?IDKIT=<%= rs6("IDKit") %>&IDMCAT=<%=rs6("IDMcat")%>&IDCAT=<%=rs6("IDCAT")%>&IDSCAT=<%=rs6("IDSCAT")%>&BARCODE=<%=rs6("BARCODE")%>&NOMEKIT=<%=rs6("NOMEKIT")%>&DESCKIT=<%=rs6("DESCKIT")%>&POS=<%=rs6("POS")%>&QTA=<%=rs6("QTA")%>&DATAIN=<%=rs6("DATAIN")%>&IDSTATO=<%=rs6("IDSTATO")%>&PRZ=<%=rs6("PRZ")%>&KEYWORDS=<%=rs6("KEYWORDS")%>"><img src="images/kitvalidate.png" width="32" height="32" title="<%=response.write (etichettabottonevalidazione)%>"></a>
 						    <%End If%>
                             <div class="block-content collapse in">
 							<div class="span12">
@@ -75,9 +78,9 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 											<th><%=response.write (ricercadataacquisto)%></th>
 										</tr>
                                         <tr>
-											<td><%= rs("NomeKit") %>&nbsp;</td>
-											<td><%= rs("Barcode") %>&nbsp;</td>
-											<td><%= rs("Datain") %>&nbsp;</td>
+											<td><%= rs6("NomeKit") %>&nbsp;</td>
+											<td><%= rs6("Barcode") %>&nbsp;</td>
+											<td><%= rs6("Datain") %>&nbsp;</td>
 										</tr>
                                         <td colspan="4">&nbsp;</td>
                                         <tr>
@@ -89,16 +92,16 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 										</tr>
                                         <tr>
                                             <td><%= rs2("Stato") %>&nbsp;-&nbsp;<%= rs1("Posizione") %></td>
-											<td><%= rs("Qta") %>&nbsp;</td>
+											<td><%= rs6("Qta") %>&nbsp;</td>
                                             
                                              <%If session("ruolo") = "A" Then %>
-                                              <td><%= rs("Prz") %>&nbsp;</td>
+                                              <td><%= rs6("Prz") %>&nbsp;</td>
                                              <%End If%>
                                         </tr>
                                         <td colspan="4">&nbsp;</td>
 										<tr>
-											<td colspan="2"><strong><%=response.write (ricercadesckit)%>:</strong>&nbsp;<%= rs("Desckit") %></td>
-										    <td colspan="2"><strong><%=response.write (ricercakeyword)%>:</strong>&nbsp;<%= rs("Keywords") %> </td>
+											<td colspan="2"><strong><%=response.write (ricercadesckit)%>:</strong>&nbsp;<%= rs6("Desckit") %></td>
+										    <td colspan="2"><strong><%=response.write (ricercakeyword)%>:</strong>&nbsp;<%= rs6("Keywords") %> </td>
 										</tr>
 									</tbody>
 								</table>
@@ -109,7 +112,7 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 				</div>
 			</div>
             <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
+                        	<a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
                         </div>
             <hr>
 			<!--#include virtual file="include/piede.asp"-->

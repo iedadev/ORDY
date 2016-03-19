@@ -1,17 +1,15 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
-
+<!--#include virtual file="language.asp"-->
 <%
-'If session("usr")= "" Then
- '   response.redirect "default.asp"
-'End If
+If session("usr")= "" Then
+    response.redirect "default.asp"
+End If
 
-'If session("ruolo") <> "A" Then
-'    response.redirect "main.asp"
-'End If
-
-Dim sss, i
+If session("ruolo") <> "A" Then
+    response.redirect "main.asp"
+End If
 
 %>
 <!DOCTYPE html>
@@ -23,75 +21,98 @@ Dim sss, i
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
-        <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-	    <!--#include virtual file="include/menu.asp"-->
+      <!--#include virtual file="include/menu.asp"-->
         <div class="container-fluid">
-                        <div class="row-fluid">
+            <div class="row-fluid">
             <% If session("ruolo") = "A" Then %>
 	            <!--#include virtual file="include/controlpanel.asp"-->    
             <% End If %>
                 <div class="span6" id="content">
                       <!-- morris stacked chart -->
                     <div class="row-fluid">
-                        <!-- block -->
+                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Credits</legend></div>
-                            <div class="block-content collapse in">
-                                <div class="span6">
-                                    <b>Analisi e Sviluppo </b> <br>
-                                    Davide Andrea Ieluzzi <br>
-                                    </div>
-                                <div class="span6">
-                                    <b>Riferimenti </b> 
-                                    <br>Email: iedadev@gmail.com 
-                                    <br>Skype ieda72 <br>
-                                </div>
-                                <div class="span12">
-                                <b>Versioning</b><br>
-                                    <b>2016.2</b><br>
-                                    Correzione bug e migliorie varie<br>
-                                    Aggiunta Area Amminsitrativa Reportistica <br>
-                                    Aggiunta Gestione Segnalazioni Utente<br> <br>
-                                </div>
-                                <div class="span12">
-                                <b>Credits immagini</b><br>
-                                    Icons made by <a href="http://www.flaticon.com/authors/picol" title="Picol">Picol</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>    is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a><br>
-                                    Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a><br>
-                                </div>
+                            <div  class="navbar navbar-inner block-header">
+                            	<legend><%=response.write (titolo98)%></legend>
                             </div>
-                         </div>
+                             <div class="container">
+                                 <dl>
+                                    <dt>WEB DESIGN AND PROGRAMMING</dt>
+                                    <dd>- logo motherwords</dd>
+                                    <dt>WEB DEVELOPER</dt>
+                                    <dd>-<a class="brand" a href="mailto:someone@example.com?Subject=Richiesta%20Informazioni%20Progetto SIM" target="_top"> Ieluzzi Davide Andrea <i class="icon-envelope"></i></a></dd>
+                                    <dt>P.IVA</dt>
+                                    <dd>- 04593400965</dd>
+                                    <dt>IMAGES & LICENSE</dt>
+                                    
+                                    <dd>- Icons made by <a href="http://www.flaticon.com/authors/picol" title="Picol">Picol</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></dd>
+                                    <dd>- Cercare licenza Bootstrap</dd>
+                                    </dl>     
+                                </div>
+                              </div>
+                           </div>
+                        <!-- /block -->
+                    </div>
+                     <div class="row-fluid">
+                        <!-- block -->
+                        <!-- /block -->
                     </div>
                 </div>
             </div>
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->
-		 </div>
+		            </div>
         <!--/.fluid-container-->
         <link href="vendors/datepicker.css" rel="stylesheet" media="screen">
         <link href="vendors/uniform.default.css" rel="stylesheet" media="screen">
         <link href="vendors/chosen.min.css" rel="stylesheet" media="screen">
+
         <link href="vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
+
         <script src="vendors/jquery-1.9.1.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="vendors/jquery.uniform.min.js"></script>
         <script src="vendors/chosen.jquery.min.js"></script>
         <script src="vendors/bootstrap-datepicker.js"></script>
+
         <script src="vendors/wysiwyg/wysihtml5-0.3.0.js"></script>
         <script src="vendors/wysiwyg/bootstrap-wysihtml5.js"></script>
+
         <script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+
+
         <script src="assets/scripts.js"></script>
-        <script src="assets/DT_bootstrap.js"></script>
         <script>
         $(function() {
-            
+            $(".datepicker").datepicker();
+            $(".uniform_on").uniform();
+            $(".chzn-select").chosen();
+            $('.textarea').wysihtml5();
+
+            $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index+1;
+                var $percent = ($current/$total) * 100;
+                $('#rootwizard').find('.bar').css({width:$percent+'%'});
+                // If it's the last tab then hide the last button and show the finish instead
+                if($current >= $total) {
+                    $('#rootwizard').find('.pager .next').hide();
+                    $('#rootwizard').find('.pager .finish').show();
+                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                } else {
+                    $('#rootwizard').find('.pager .next').show();
+                    $('#rootwizard').find('.pager .finish').hide();
+                }
+            }});
+            $('#rootwizard .finish').click(function() {
+                alert('Finished!, Starting over!');
+                $('#rootwizard').find("a[href*='tab1']").trigger('click');
+            });
         });
         </script>
         <script>
@@ -125,44 +146,12 @@ Dim sss, i
 			});
         });
         </script>
-<script>
-        $(function() {
-            $(".datepicker").datepicker();
-            $(".uniform_on").uniform();
-            $(".chzn-select").chosen();
-            $('.textarea').wysihtml5();
-
-            $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index+1;
-                var $percent = ($current/$total) * 100;
-                $('#rootwizard').find('.bar').css({width:$percent+'%'});
-                // If it's the last tab then hide the last button and show the finish instead
-                if($current >= $total) {
-                    $('#rootwizard').find('.pager .next').hide();
-                    $('#rootwizard').find('.pager .finish').show();
-                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
-                } else {
-                    $('#rootwizard').find('.pager .next').show();
-                    $('#rootwizard').find('.pager .finish').hide();
-                }
-            }});
-            $('#rootwizard .finish').click(function() {
-                alert('Finished!, Starting over!');
-                $('#rootwizard').find("a[href*='tab1']").trigger('click');
-            });
-        });
-        </script>
-
     </body>
+
 </html>
 <%
-Set dbconn = nothing
-Set rs = nothing
-Set rs1 = nothing
-Set rs2 = nothing
-Set rs3 = nothing
-Set rs4 = nothing
-Set rs5 = nothing
-Set rs6 = nothing
+Set rs = Nothing
+Set dbConn = Nothing
 %>
+
+

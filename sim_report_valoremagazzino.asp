@@ -88,9 +88,9 @@ Set rsd = dbConn.Execute(sss3)
                                         </div>
                                         <div class="form-actions">
                                           <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (reportvaloremagazzinoaddicona)%>"><%=response.write (reportvaloremagazzinoadd)%></button>&nbsp;
-                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
-                                          <button type="print" class="btn"><%=response.write (testobottoneesporta)%></button>&nbsp;
-                                        </div>
+                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>
+                                          <a href="sim_report_valoremagazzino_xls.asp"><img src="images/excel.png" width="32" height="32" title="<%=response.write (etichettabottoneesportaxls)%>"></a>
+                                          </div>
                                       </fieldset>
                                     </form>
                                 </div>
@@ -98,7 +98,7 @@ Set rsd = dbConn.Execute(sss3)
                             <div class="block-content collapse in">
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
-										<thead>
+                                          <thead>
                                                 <tr>
 												<th><%=response.write (reportvaloremagazzinodataestr)%></th>
 												<th><%=response.write (reportvaloremagazzinototale)%></th>

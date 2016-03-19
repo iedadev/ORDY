@@ -136,7 +136,7 @@ End If
                         <!-- block -->
                         <!-- /block -->
                     </div>
-                </div><!--#include virtual file="sim_magicbox_lateral.asp"-->
+                </div><!--#include virtual file="sim_wishlist_lateral.asp"--><!--#include virtual file="sim_magicbox_lateral.asp"-->
            </div>
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->

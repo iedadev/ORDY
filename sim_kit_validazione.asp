@@ -15,7 +15,7 @@ Dim sss, i
 
 i = 1
 
-sss = "SELECT * FROM SIM_Kit WHERE 1 = 1 AND VERIFICATO = 1"
+sss = "SELECT * FROM SIM_Kit WHERE 1 = 1 AND VERIFICATO = 1 AND ATTIVO = 1"
 sss = sss & " ORDER BY Datain"
 
 session("sss") = sss
@@ -40,6 +40,7 @@ Set rs = dbConn.Execute(sss)
 	    <!--#include virtual file="include/menu.asp"-->
         <div class="container-fluid">
             <div class="row-fluid">
+
                 <div class="span12" id="content">
                      <div class="row-fluid">
                         <!-- block -->
@@ -153,8 +154,7 @@ Set rs = dbConn.Execute(sss)
                             </div>
                         </div>
                         <div class="form-actions">
-                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i> <%=response.write (testobottoneindietro)%></button>
-                        	&nbsp;&nbsp;<a href="hd_reports_storico_demo_esporta.asp"><button class="btn btn-success tooltip-top" data-original-title="<%=response.write (etichettabottoneesporta)%>"><i class="icon-download icon-white"></i> <%=response.write (testobottoneesporta)%></button></a>
+                        	<a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
                         </div>
                         <!-- /block -->
                     </div>

@@ -60,106 +60,51 @@ Dim sss, i
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend><%=response.write (titolocategorie)%></legend></div>
+                            <div class="navbar navbar-inner block-header"><legend>Gestione Clienti &nbsp;&nbsp;<button type="button" class="btn btn-default">Elenco</button>&nbsp;<button type="button" class="btn btn-success">Modifica</button>&nbsp;<button type="button" class="btn btn-danger">Elimina</button></legend></div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                      <form name="P2" method="post" Action="sim_categorie_aggiunginuovo.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput"><%=response.write (ricercamacrocategorie)%>: </label>
+                                          <label class="control-label" for="focusedInput">Codice Cliente: </label>
                                           <div class="controls">
-                                          <select id="selectError" name="sim_IDMCat">
-                                              <option value=""></option>
-                                              <%
-                                              Set rs0 = dbConn.Execute("SELECT * FROM SIM_MacroCategorie ORDER BY MacroCategoria")
-                                              While Not rs0.EOF
-	                                              'Set rs = dbConn.Execute("SELECT * FROM SIM_Categorie WHERE IDcat = " & rs0("IDcat"))
-	                                              'If Not rs.EOF Then
-		                                              response.write "<option value='" & rs0("IDMCat") & "'>" & rs0("MacroCategoria") & "</option>"
-		                                          'End If
-                                              rs0.MoveNext
-                                              Wend
-                                              %>
-                                            </select>
-                                          </div>
+                                            <input name="ord_codcli" class="input-large focused" id="focusedInput" type="text" maxlength="3">
+                                            </div>
                                         </div>
                                            <div class="control-group">
-                                          <label class="control-label" for="focusedInput"><%=response.write (ricercacategorie)%>: </label>
+                                          <label class="control-label" for="focusedInput">Nome Cliente: </label>
                                           <div class="controls">
-                                            <input name="sim_categoria" class="input-xlarge focused" id="focusedInput" type="text">
+                                            <input name="ord_nomcli" class="input-large focused" id="focusedInput" type="text">
+                                            </div>
+                                        </div>
+                                           <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Indirizzo Cliente: </label>
+                                          <div class="controls">
+                                            <input name="ord_indcli" class="input-xlarge focused" id="focusedInput" type="text">
+                                            </div>
+                                        </div>
+                                           <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Email Cliente: </label>
+                                          <div class="controls">
+                                            <input name="ord_emacli" class="input-xlarge focused" id="focusedInput" type="text">
+                                            </div>
+                                        </div>
+                                           <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Telefono Cliente: </label>
+                                          <div class="controls">
+                                            <input name="ord_telcli" class="input-large focused" id="focusedInput" type="text">
                                             </div>
                                         </div>
                                         <div class="form-actions">
                                           <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneaggiungicat)%>"><%=response.write (testobottoneaggiungi)%> </button>&nbsp;
                                           <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
+
                                         </div>
                                       </fieldset>
                                     </form>
-                                </div>
+                                </div>   
                             </div>
-                            <div class="block-content collapse in">
-                                <div class="span12">
-  									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
-										<thead>
-
-                                             <% If request("Totale") <> 0 Then%>	
-                                            
-                                            <div align="center" style="border:2px solid red">
-                                            &nbsp;&nbsp;&nbsp;<%=response.write (messaggioalertcategorie)%>
-                                            </div>
-                                            <%end if%>
-											
-                                          <tr>
-												<th><%=response.write (titolotabellacategorie)%></th>
-                                                <th>&nbsp;</th>
-											</tr>
-										</thead>
-										<tbody>
-											<%
-											
-                                            i = 1
-										
-											sss =  "SELECT * FROM SIM_Categorie WHERE 1=1 order by Categoria"
-                                            Set rs = dbConn.Execute(sss)
-											
-											While Not rs.EOF
-											i = i + 1
- 
-                                            %>
-											<% If i/2 - Int(i/2) = 0 Then %>
-												<tr class="odd gradeA">
-											<% Else %>
-												<tr class="even gradeA">
-											<% End If %>
-												
-                                                <td>
-                                            <%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDMcat = " & rs("IDMcat"))
-                                                If Not rs.eof Then
-													'Response.write sss
-                                                    response.write rs("Categoria") 
-                                                Else
-													Response.write "&nbsp;"
-												End If
-											%>
-												</td>
-                                                <td>
-                                                   <a href="sim_categorie_modifica.asp?IDMCAT=<%= rs("IDMCat") %>&IDCat=<%= rs("IDCat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorymodify.png" width="32" height="32" title="<%=response.write (iconamodificacategorie)%>"></a>
-                                                   &nbsp;
-                                                   <a href="sim_categorie_elimina.asp?IDMCAT=<%= rs("IDMCat") %>&IDCat=<%= rs("IDCat") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/categorydelete.png" width="32" height="32" title="<%=response.write (iconacancellacategorie)%>"></a>
-                                                 </td>     
-											</tr>
-											<%
-											rs.MoveNext
-											Wend
-											%>
-
-										</tbody>
-									</table>
-                                </div>
-                          </div>
                         </div>
-
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->
 		 </div>

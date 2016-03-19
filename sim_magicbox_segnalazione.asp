@@ -129,10 +129,49 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
 								</table>
                             </div>
                             <div class="form-actions" align="center">
-                            <a href="sim_magicbox_carico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>&Categoria=<%= rs4("Categoria") %>&Sottocategoria=<%= rs5("Sottocategoria") %>&Nomekit=<%= rs("nomekit") %>&desckit=<%= rs("desckit") %>&stato=<%= rs2("stato") %>&qta=<%= rs("qta") %>&pos=<%= rs1("posizione") %>"><button class="btn btn-mini btn-info tooltip-top" data-original-title="<%=response.write (iconaupkitamb)%>"><i class="icon-pencil icon-white"></i><%=response.write (iconaupkitamb)%></button></a>
-                            &nbsp;&nbsp;<a href="sim_magicbox_scarico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>"><button class="btn btn-danger btn-mini tooltip-top" data-original-title="<%=response.write (iconadownkitamb)%>"><i class="icon-plus icon-white"></i><%=response.write (iconadownkitamb)%></button></a>
-                            &nbsp;&nbsp;<a href="sim_magicbox_segnalazione.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&IDUSR=<%= session("usr") %>"><button class="btn btn-warning btn-mini tooltip-top" data-original-title="<%=response.write (etichettabottoneinviasegnalazione)%>"><i class="icon-plus icon-white"></i><%=response.write (kitsegnalazionemb)%></button></a>
+                            
+                            <%s9="SELECT COUNT(A.IDKIT) as Totale, B.USR FROM SIM_Temp_MagicBox as A INNER JOIN SIM_User as B ON B.ID_USR = A.IDUSER WHERE A.IDKIT = " & rs("IDKIT") & " AND IN_OUT ='IN' GROUP BY B.USR "
+                                                'Response.write s9
+                                                'response.write session("usr")
+                                                
+
+                                                dim user, toto
+                                                user= session("usr")
+                                                
+                                                'response.write user
+
+                                                'response.end
+                                                
+                                                
+                                                Set rs9 = dbConn.Execute(s9)    
+                            
+                            
+                               If Not RS9.EOF Then
+                                   If (rs9("Totale") = 1 AND rs9("USR")= user) Then%>
+
+                                         <a href="sim_magicbox_scarico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>"><img src ="images/downkit.png" align="right" width="32" height="32" title="<%=response.write (iconadownkitamb)%>"></a>
+                                 
+                                <% Elseif (rs9("Totale") = 1 AND rs9("USR")<> user) then %>
+
+                                        <div class="alert alert-warning">
+                                          <strong>Warning!</strong> Il Kit non è disponibile in quanto in uso da:
+                                        </div>
+                                  
+                                  <%     
+                                        Response.write rs9("USR")
+                                        'Response.write rs9("Totale")
+                                 
+                                    end if
+                               Else 
+                                   'response.write "ASASAS"
+                               
+                                  'response.redirect "#?SEGNALAZIONE=1"%>
+                                    <%
+                                   End if                                                                              
+                                 %>
                             </div>
+                          
+
                         </div>
                         <!-- /block -->
                     </div>
@@ -141,7 +180,7 @@ Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE ID
                         <!-- block -->
                         <!-- /block -->
                     </div>
-                </div><!--#include virtual file="sim_magicbox_lateral.asp"-->
+                </div><!--#include virtual file="sim_wishlist_lateral.asp"--><!--#include virtual file="sim_magicbox_lateral.asp"-->
             </div>
             
             <hr>

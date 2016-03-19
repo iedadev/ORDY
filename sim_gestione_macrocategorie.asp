@@ -65,7 +65,7 @@ Dim sss, i
                                             </div>
                                         </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneaggiungi)%>"><%=response.write (testobottoneaggiungi)%></button>&nbsp;
+                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneaggiungimacrocat)%>"><%=response.write (testobottoneaggiungimacrocat)%></button>&nbsp;
                                           <button type="reset" class="btn" data-original-title="<%=response.write (etichettabottoneannulla)%>"><%=response.write (testobottoneannulla)%></button>&nbsp;
                                         </div>
                                       </fieldset>
@@ -76,14 +76,11 @@ Dim sss, i
                                 <div class="span12">
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
 										<thead>
-                                           
-                                            <% If request("Totale") <> 0 Then%>	
-                                            
-                                            <div align="center" style="border:2px solid red">
-                                                <%=response.write (messaggioalertmacrocategorie)%>
-                                            </div>
-                                            <%end if%>
-                                           
+                                           <% If request("Totale") <> 0 Then%>	
+                                             <div class="alert alert-danger">
+                                              <strong><%=response.write (titoloalert)%>!</strong><br><%=response.write (messaggioalertmacrocategorie)%>.
+                                            </div> 
+                                             <%end if%>	
 											<tr>
 												<th><%=response.write (titolotabellamacrocategorie)%></th>
 												<th>&nbsp;</th>

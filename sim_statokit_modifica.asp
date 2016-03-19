@@ -11,10 +11,10 @@ If session("ruolo") <> "A" Then
     response.redirect "main.asp"
 End If
 
-Dim sss, i
+Dim sss1, i
 
-sss =  "SELECT * FROM SIM_Stato WHERE IDStato = " & request("IDStato")
-Set rs = dbConn.Execute(sss)
+sss1 =  "SELECT * FROM SIM_Stato WHERE IDStato = " & request("IDStato")
+Set rs1 = dbConn.Execute(sss1)
 
 %>
 <!DOCTYPE html>
@@ -48,20 +48,23 @@ Set rs = dbConn.Execute(sss)
 	    <!--#include virtual file="include/menu.asp"-->
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span12" id="content">
+                 <% If session("ruolo") = "A" Then %>
+	                <!--#include virtual file="include/controlpanel.asp"-->    
+                <% End If %>
+                <div class="span6" id="content">
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header"><legend><%=response.write (titolomodificaskit)%></legend></div>
                             <div class="block-content collapse in">
-                                <div class="span12">
+                                <div class="span6">
                                      <form name="P2" method="post" Action="sim_statokit_modificafine.asp" class="form-horizontal" onsubmit="return controllo()">
-                                     <input type="hidden" name="IDStato"  value="<%= rs("IDStato") %>">
+                                     <input type="hidden" name="IDStato"  value="<%= rs1("IDStato") %>">
                                       <fieldset>
                                         <div class="control-group">
                                           <label class="control-label" for="focusedInput"><%=response.write (ricercastatokit)%>: </label>
                                           <div class="controls">
-                                            <input value="<%= rs("Stato") %>" name="stato" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
+                                            <input value="<%= rs1("Stato") %>" name="stato" class="input-xlarge focused" id="focusedInput" type="text">&nbsp;&nbsp;
                                           </div>
                                         </div>
                                         <div class="form-actions">
@@ -70,7 +73,7 @@ Set rs = dbConn.Execute(sss)
                                         </div>
                                       </fieldset>
                                     </form>
-		                        	<button onClick="javascript: history.go(-1)" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottoneindietro)%>"><i class="icon-backward icon-white"></i><%=response.write (testobottoneindietro)%></button>
+		                        	<a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="<%=response.write (etichettabottoneindietro)%>"></a>
                                 </div>
                             </div>
                         </div>
