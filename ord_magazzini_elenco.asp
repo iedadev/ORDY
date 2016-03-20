@@ -53,6 +53,13 @@ Set rs2 = dbConn.Execute(sss)
                             <div class="block-content collapse in">
                                  <!--#include virtual file="ord_controlpanelanagrafiche.asp"-->
                                 <div class="span8">
+
+                                    <% If request("Del") <> 0 Then%>	
+                                    <div class="alert alert-success">
+                                        <strong> Magazzino eliminato con successo.</strong>
+                                    </div>
+                                    <%end if%>
+
   									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 										<thead>
 											<tr>
@@ -102,9 +109,16 @@ Set rs2 = dbConn.Execute(sss)
 												End If
 												%>
 												</td>										
+												<% If rs2("stamag") = 0 Then %>
 												<td>
-                                                   <a href="ord_magazzini_modifica.asp?USER=<%= session("usr") %>&IDmag=<%= rs2("IDmag") %>&Nommag=<%= rs2("Nommag") %>&Indmag=<%= rs2("Indmag") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="Scheda Cliente"></a><br>
+                                                    <img src="images/userdelete.png" width="32" height="32" title="Magazzino non più attivo">
                                                 </td>
+                                                 <%Else%>
+                                                <td>
+                                                   <a href="ord_magazzini_modifica.asp?USER=<%= session("usr") %>&IDmag=<%= rs2("IDmag")%>&Nommag=<%= rs2("Nommag") %>&Indmag=<%= rs2("Indmag")%>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/buttonedit.png" width="32" height="32" title="Modifica Fornitore"></a>
+                                                   <a href="ord_magazzini_elimina.asp?USER=<%= session("usr") %>&IDmag=<%= rs2("IDmag") %>"><img src="images/buttondelete.png" width="32" height="32" title="Elimina Fornitore"></a><br>
+                                                </td>
+                                                <%End if%>
                                                 </tr>
 											<%
 											rs2.MoveNext

@@ -21,7 +21,7 @@ Dim sss, IP, NuovoID
 IP = Request.ServerVariables("REMOTE_ADDR")
 ' Scrive Log - Inizio
 
-sss = "INSERT INTO ORD_Articoli(Codart,Nomart,Przart,DataCreated) VALUES ('" & request("ord_codart") & "','" & request("ord_nomart") & "','" & request("ord_przart") & "',Now())"
+sss = "INSERT INTO ORD_Articoli(Codart,Nomart,Przart,Qtadisp, Qtamin,DataCreated) VALUES ('" & request("ord_codart") & "','" & request("ord_nomart") & "','" & request("ord_przart") & "','" & request("ord_qtadisp") & "','" & request("ord_qtamin") & "',Now())"
 response.write sss
 Set rs = dbConn.Execute(sss)
 

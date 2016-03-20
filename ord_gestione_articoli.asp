@@ -95,6 +95,18 @@ Dim sss, i
                                             <input name="ord_przart" class="input-xlarge focused" id="focusedInput" type="text" placeholder="0,00">
                                             </div>
                                         </div>
+                                          <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Qta Disponibile Articolo: </label>
+                                          <div class="controls">
+                                            <input name="ord_qtadisp" class="input-xlarge focused" id="focusedInput" type="text">
+                                            </div>
+                                        </div>
+                                          <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Qta Minima Articolo: </label>
+                                          <div class="controls">
+                                            <input name="ord_qtamin" class="input-xlarge focused" id="focusedInput" type="text">
+                                            </div>
+                                        </div>
                                         <div class="form-actions">
                                           <button type="submit" class="btn btn-primary tooltip-top">Aggiungi</button>&nbsp;
                                           <button type="reset" class="btn">Annulla</button>&nbsp;

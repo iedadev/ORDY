@@ -22,6 +22,9 @@ session("sss") = sss
 
 Set rs2 = dbConn.Execute(sss)
 
+'response.write rs2("stacli")
+
+
 %>
 <!DOCTYPE html>
 <html lang="it">
@@ -53,7 +56,15 @@ Set rs2 = dbConn.Execute(sss)
                             <div class="block-content collapse in">
                                  <!--#include virtual file="ord_controlpanelanagrafiche.asp"-->
                                 <div class="span8">
-  									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+  									
+                                    <% If request("Del") <> 0 Then%>	
+                                    <div class="alert alert-success">
+                                        <strong> Cliente eliminato con successo.</strong>
+                                    </div>
+                                    <%end if%>
+
+
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 										<thead>
 											<tr>
 												<th>Codice Cliente</th>
@@ -75,6 +86,7 @@ Set rs2 = dbConn.Execute(sss)
 												<tr class="even gradeA">
 											<% End If %>
 												<td>
+
 												<%
 												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDMcat = " & rs("IDMcat"))
                                                 If Not rs2.eof Then
@@ -129,16 +141,24 @@ Set rs2 = dbConn.Execute(sss)
 												End If
 												%>
 												</td>
+												<% If rs2("stacli") = 0 Then %>
 												<td>
-                                                   <a href="ord_clienti_modifica.asp?USER=<%= session("usr") %>&IDcli=<%= rs2("IDcli") %>&Nomcli=<%= rs2("Nomcli") %>&Indcli=<%= rs2("Indcli") %>&Emacli=<%= rs2("Emacli") %>&Telcli=<%= rs2("Telcli") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/editcard.png" width="32" height="32" title="Scheda Cliente"></a><br>
+                                                    <img src="images/userdelete.png" width="32" height="32" title="Cliente non più attivo">
                                                 </td>
+                                                 <%Else%>
+                                                <td>
+                                                   <a href="ord_clienti_modifica.asp?USER=<%= session("usr") %>&IDcli=<%= rs2("IDcli") %>&Nomcli=<%= rs2("Nomcli") %>&Indcli=<%= rs2("Indcli") %>&Emacli=<%= rs2("Emacli") %>&Telcli=<%= rs2("Telcli") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/buttonedit.png" width="32" height="32" title="Modifica Cliente"></a>
+                                                   <a href="ord_clienti_elimina.asp?USER=<%= session("usr") %>&IDcli=<%= rs2("IDcli") %>"><img src="images/buttondelete.png" width="32" height="32" title="Elimina Cliente"></a><br>
+                                                </td>
+                                                <%End if%>
                                                 </tr>
 											<%
-											rs2.MoveNext
+											rs2.MoveNext 
 											Wend
 											%>
 										</tbody>
 									</table>
+                                    
                                 </div>
                             </div>
                         </div>
