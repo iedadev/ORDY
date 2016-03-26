@@ -29,7 +29,7 @@ End If
          <div class="container-fluid">
             <div class="row-fluid">
             <% If session("ruolo") = "A" Then %>
-	            <!--#include virtual file="include/controlpanel.asp"-->
+	            <!--#include virtual file="ord_controlpanelmagazzino.asp"-->
             <%Else%>
                 <!--#include virtual file="sim_lastprops.asp"-->       
             <% End If %>
@@ -39,42 +39,34 @@ End If
                          <!-- block -->
                         <div align="center" class="block">
                             <div  class="navbar navbar-inner block-header">
-                            	<legend>mORDYan - Gestionale Magazzino</legend>
+                            	<legend>ORDY - Gestionale Magazzino</legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12" align="center">
 
                                     <table align="center" border="0">
-                                        <td align="center"><a href="ord_anagrafiche.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Anagrafiche"></a></td>
-                                        <td align="center"><a href="ord_magazzino.asp"><img src="images/magicbox2.png" width="200" height="200" title="Gestione Magazzino"></a></td>
-                                         <% If session("ruolo") = "A" Then %>
-                                        <td align="center"><a href="sim_comunicazione.asp"><img src="images/segnalazionimagicbox2.png" width="200" height="200" title="Gestione Comunicazioni"></a></td>
-                                         <%Else%>
-                                         <td align="center"><img src="images/comunication2.png" width="200" height="200" title="Gestione Comunicazioni"></td>
-                                         <% End If %>
-                                        <td align="center"><a href="sim_kit_creauser.asp"><img src="images/createnewkit2.png" width="200" height="200" title="Gestione Movimenti"></a></td>
-                                      </tr>
-                                      <tr align="center">
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Anagrafiche</font></td>
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Magazzino</font></td>
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Comunicazioni</font></td>
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Movimenti</font></td>
-                                      </tr>
-                                       <tr align="center">
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">&nbsp;</font></td>
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">&nbsp;</font></td>
-                                       </tr>
+                                        <td align="center"><a href="ord_gestione_articoliIN.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Articoli da Casa Madre"></a><br>Gestione Ordini da HD</td>
+                                        <td align="center"><a href="ord_gestione_articoliLC.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Ordini da LC"></a><br>Gestione Ordini da LC</td>
+                                        <td align="center"><a href="ord_gestione_articoliAS.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Assegnazioni Richieste Ordini"></a><br>Assegnazioni Ordini</td>
+                                        </tr>
                                       </table>
                                 </div>
                             </div>
                         </div>
+                       <!-- <div align="left" class="block">
+                            <div  class="navbar navbar-inner block-header">
+                            	<legend>Comunication</legend>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12" align="left">
+                                     Inserire le ultime comunicazioni agli utenti
+                                </div>-->
                             </div>
                         <!-- /block -->
                     </div>
 
                      <div class="row-fluid">
                         <!-- block -->
-
                         <!-- /block -->
                     </div>
                     

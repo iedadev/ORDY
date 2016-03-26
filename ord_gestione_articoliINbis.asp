@@ -1,13 +1,44 @@
-<%@ LANGUAGE="VBSCRIPT" %>
+﻿<%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
-<!--#include virtual file="language.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file="language.asp"-->
 <%
 If session("usr") = "" Then
     response.redirect "default.asp"
 End If
 
-'response.end
+'If session("ruolo") <> "A" Then
+  '  response.redirect "hd_todo.asp"
+'End If
+
+'Set dbConn = CreateObject("ADODB.Connection")
+'dbConn.Open Application("Connection1_ConnectionString")
+ 'response.write "E' ZERO"
+
+ 'nrord = request("nrordine")
+ pdfordine = "ordineHD_"&nrord1
+ nrord1 = request("nrord1")
+
+ codart = request("codart")
+
+ response.write nrord
+ response.write NumOrdine
+ response.write nrord1
+ response.write codart
+ 'response.end
+
+ 'response.write pdfordine
+
+s2 = "SELECT Numord FROM ORD_Arrivi WHERE Codart  =  " & request("Codart")
+'Set rs2 = dbConn.Execute(s2)
+response.write s2
+response.end
+
+'Set rs1 = dbConn.Execute(s1)
+
+'qtaarr = request("qta_arr")
+
+
 
 %>
 
@@ -21,68 +52,75 @@ End If
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-        <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        
+      <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+      <script type="text/javascript"> 
+        <!--
+        function controllo()
+        {
+		if (document.P2.barcode.value == "")
+			{
+			alert("Attenzione! Inserire il Codice articolo. Dato Obbligatorio");
+			document.P2.barcode.style.backgroundColor = 'Yellow';
+			document.P2.barcode.focus();
+			return false;
+			}
+		}
+		//-->
+		</script>
     </head>
     <body>
-              <!--#include virtual file="include/menu.asp"--> 
-
-         <div class="container-fluid">
+        <!--#include virtual file="include/menu.asp"-->    
+        <div class="container-fluid">
             <div class="row-fluid">
-            <% If session("ruolo") = "A" Then %>
-	            <!--#include virtual file="include/controlpanel.asp"-->
-            <%Else%>
-                <!--#include virtual file="sim_lastprops.asp"-->       
-            <% End If %>
-                <div class="span9" id="content">
+                <div class="span6" id="content">
                       <!-- morris stacked chart -->
                     <div class="row-fluid">
-                         <!-- block -->
-                        <div align="center" class="block">
-                            <div  class="navbar navbar-inner block-header">
-                            	<legend>mORDYan - Gestionale Magazzino</legend>
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                            	<legend>Gestione Ordini <%=response.write (nrord)%> da Helen Doron</legend>
                             </div>
                             <div class="block-content collapse in">
-                                <div class="span12" align="center">
-
-                                    <table align="center" border="0">
-                                        <td align="center"><a href="ord_anagrafiche.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Anagrafiche"></a></td>
-                                        <td align="center"><a href="ord_magazzino.asp"><img src="images/magicbox2.png" width="200" height="200" title="Gestione Magazzino"></a></td>
-                                         <% If session("ruolo") = "A" Then %>
-                                        <td align="center"><a href="sim_comunicazione.asp"><img src="images/segnalazionimagicbox2.png" width="200" height="200" title="Gestione Comunicazioni"></a></td>
-                                         <%Else%>
-                                         <td align="center"><img src="images/comunication2.png" width="200" height="200" title="Gestione Comunicazioni"></td>
-                                         <% End If %>
-                                        <td align="center"><a href="sim_kit_creauser.asp"><img src="images/createnewkit2.png" width="200" height="200" title="Gestione Movimenti"></a></td>
-                                      </tr>
-                                      <tr align="center">
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Anagrafiche</font></td>
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Magazzino</font></td>
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Comunicazioni</font></td>
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">Movimenti</font></td>
-                                      </tr>
-                                       <tr align="center">
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">&nbsp;</font></td>
-                                        <td><b><font face="Georgia, Times New Roman, Times, serif">&nbsp;</font></td>
-                                       </tr>
-                                      </table>
+                                <div class="span12">
+                                    <form name="P2" method="post" class="form-horizontal" Action="ord_gestione_articoli_barcode.asp?nrordine=<%response.write (nrord1)%>" onsubmit="return controllo()">
+                                      <fieldset>
+                                          <div class="control-group">
+                                          <label class="control-label" for="focusedInput">
+											Codice Articolo: </label> 
+                                          <div class="controls">
+                                          	<input name="barcode" class="input-small focused" id="focusedInput" type="text" style="width:150px; height: 30px">
+                                            <input type="radio" name="code" value="bar" checked >&nbsp;Barcode &nbsp;&nbsp;<input type="radio" name="code" value="hd">&nbsp;Codice HD<br>
+                                          </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Cerca</button>&nbsp;
+                                          <button type="reset" class="btn">Annulla</button>&nbsp;
+                                        </div>
+                                      </fieldset>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                            </div>
                         <!-- /block -->
                     </div>
 
                      <div class="row-fluid">
                         <!-- block -->
-
                         <!-- /block -->
                     </div>
-                    
+                </div><!-- nella parte laterale si potrebbe mettere Elenco dei movimenti dell'articolo-->
+                <div id="pdf"><br>
+                <object width="700" height="500" type="application/pdf" data="OrdiniHD/<%response.write pdfordine%>.pdf?#zoom=85&scrollbar=1&toolbar=1&navpanes=0"
+                     id="pdf_content">
+                    </div>
+                </p>
+                  </object>
                 </div>
             </div>
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->
-		            </div>
+		    </div>
         <!--/.fluid-container-->
         <link href="vendors/datepicker.css" rel="stylesheet" media="screen">
         <link href="vendors/uniform.default.css" rel="stylesheet" media="screen">

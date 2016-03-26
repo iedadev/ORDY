@@ -15,12 +15,16 @@ Dim sss, i
 
 i = 1
 
-sss = "SELECT * FROM ORD_Magazzini WHERE Stamag=1 and 1 = 1"
+sss = "SELECT * FROM ORD_Articoli WHERE ATTART ='Y' AND IDCodmag=1 AND 1 = 1 "
 'sss = sss & " ORDER BY Datain"
 
 session("sss") = sss
 
 Set rs2 = dbConn.Execute(sss)
+
+'response.write rs2("Attart")
+'response.write sss
+
 
 %>
 <!DOCTYPE html>
@@ -46,27 +50,22 @@ Set rs2 = dbConn.Execute(sss)
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                            	<legend>Elenco Magazzini &nbsp;&nbsp;
+                            	<legend>Elenco Articoli &nbsp;&nbsp;
                         	        <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="Indietro"></a>
-                                    </legend>
+                                </legend>
                             </div>
                             <div class="block-content collapse in">
-                                 <!--#include virtual file="ord_controlpanelanagrafiche.asp"-->
+                                 <!--#include virtual file="ord_controlpanelmagazzino.asp"-->
                                 <div class="span8">
-
-                                    <% If request("Del") <> 0 Then%>	
-                                    <div class="alert alert-success">
-                                        <strong> Magazzino eliminato con successo.</strong>
-                                    </div>
-                                    <%end if%>
-
-  									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+  									
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 										<thead>
-											<tr>
-												<th>Codice Magazzino</th>
-                                                <th>Nome Magazzino</th>
-												<th>Indirizzo Magazzino</th>
-												<th>&nbsp;</th>
+                                            <tr>
+												<th>Codice</th>
+                                                <th>Nome</th>
+												<th>Prz</th>
+												<th>Qta Disp</th>
+												<th>Qta Min</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -79,21 +78,12 @@ Set rs2 = dbConn.Execute(sss)
 											<% Else %>
 												<tr class="even gradeA">
 											<% End If %>
-												<td>
+                                            <td>
 												<%
+												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_KIT AS K, SIM_Macrocategorie AS CAT WHERE K.IDMCAT = CAT.IDMCAT AND K.IDMCat = " & rs("IDMcat"))
 												If Not rs2.eof Then
 													'Response.write sss
-                                                    response.write rs2("IDmag") 
-                                                Else
-													Response.write "&nbsp;"
-												End If
-												%>
-												</td>
-                                                <td>
-												<%
-												If Not rs2.eof Then
-													'Response.write sss
-                                                    Response.write rs2("Nommag")
+                                                    Response.write rs2("Codart")
 												Else
 													Response.write "&nbsp;"
 												End If
@@ -101,31 +91,56 @@ Set rs2 = dbConn.Execute(sss)
 												</td>
 												<td>
 												<%
+												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_KIT AS K, SIM_Categorie AS CAT WHERE K.IDCAT = CAT.IDCAT AND K.IDCat = " & rs("IDcat"))
 												If Not rs2.eof Then
 													'Response.write sss
-                                                    Response.write rs2("Indmag")
+                                                    Response.write rs2("Nomart")
 												Else
 													Response.write "&nbsp;"
 												End If
 												%>
 												</td>										
-												<% If rs2("stamag") = 0 Then %>
 												<td>
-                                                    <img src="images/userdelete.png" width="32" height="32" title="Magazzino non più attivo">
-                                                </td>
-                                                 <%Else%>
+                                                <%
+												'Set rs2 = dbConn.Execute("SELECT * FROM SIM_KIT AS K, SIM_Sottocategorie AS SCAT WHERE K.IDSCAT = SCAT.IDSCAT AND K.IDScat = " & rs("IDScat"))
+												If Not rs2.eof Then
+													'Response.write sss
+                                                    dim Numero
+                                                    Numero = rs2("Przart")
+                                                    Response.write "Euro: " & FormatNumber (Numero,2,,,-1)
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+												<td>
+												<%
+												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDCat = " & rs("IDCat"))
+												If Not rs2.eof Then
+													Response.write rs2("Qtadisp")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
                                                 <td>
-                                                   <a href="ord_magazzini_modifica.asp?USER=<%= session("usr") %>&IDmag=<%= rs2("IDmag")%>&Nommag=<%= rs2("Nommag") %>&Indmag=<%= rs2("Indmag")%>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/buttonedit.png" width="32" height="32" title="Modifica Fornitore"></a>
-                                                   <a href="ord_magazzini_elimina.asp?USER=<%= session("usr") %>&IDmag=<%= rs2("IDmag") %>"><img src="images/buttondelete.png" width="32" height="32" title="Elimina Fornitore"></a><br>
-                                                </td>
-                                                <%End if%>
+												<%
+												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDCat = " & rs("IDCat"))
+												If Not rs2.eof Then
+													Response.write rs2("Qtamin")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
                                                 </tr>
 											<%
-											rs2.MoveNext
+											rs2.MoveNext 
 											Wend
 											%>
 										</tbody>
 									</table>
+                                    
                                 </div>
                             </div>
                         </div>

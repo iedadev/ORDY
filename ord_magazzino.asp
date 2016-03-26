@@ -46,10 +46,9 @@ End If
 
                                     <table align="center" border="0">
                                         <td align="center"><a href="ord_gestione_articoli.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Articoli"></a><br>Articoli</td>
-                                        <td align="center"><a href="ord_gestione_inventario.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Controllo Inventario"></a><br>Inventario</td>
                                         <td align="center"><a href="ord_gestione_movimenti.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Controllo Movimenti"></a><br>Movimenti</td>
-                                        <td align="center"><a href="ord_gestione_sottoscorta.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Controllo Sottoscorta"></a><br>Sottoscorta</td>
-                                        <td align="center"><a href="ord_gestione_valorizzazione.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Controllo Valorizzazione"></a><br>Valorizzazione</td>
+                                        <td align="center"><a href="ord_articoli_sottoscorta.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Controllo Sottoscorta"></a><br>Sottoscorta</td>
+                                        <td align="center"><a href="ord_articoli_valorizzazione.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Controllo Valorizzazione"></a><br>Valorizzazione</td>
                                       </tr>
                                       </table>
                                 </div>

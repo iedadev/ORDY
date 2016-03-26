@@ -46,7 +46,7 @@ End If
 
                                     <table align="center" border="0">
                                         <tr align="center">
-                                        <td align="center"><a href="ord_gestione_clienti.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Clienti"></a><br>Clienti</td>
+                                        <td align="center"><a href="ord_gestione_clienti.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Clienti"></a><br>Learning Center</td>
                                         <td align="center"><a href="ord_gestione_fornitori.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Fornitori"></a><br>Fornitori</td>
                                         <td align="center"><a href="ord_gestione_magazzini.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Magazzini"></a><br>Magazzini</td>
                                        </tr>

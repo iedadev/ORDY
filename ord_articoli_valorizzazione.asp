@@ -67,48 +67,34 @@ Dim sss, i
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Gestione Articoli &nbsp;&nbsp;<a href="ord_articoli_elenco.asp"><button type="button" class="btn btn-default">Elenco</button></legend></a></div>
+                            <div class="navbar navbar-inner block-header"><legend>Valorizzazione Giacenze Magazzino</legend><h6><small>Crea un elenco delle giacenze di magazzino valorizzato al costo</small></h6>
+                                </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                     <% If request("New") <> 0 Then%>	
-                                    <div class="alert alert-success">
-                                        <strong> Articolo aggiunto con successo.</strong>
-                                    </div>
-                                    <%end if%>	
-                                     <form name="P2" method="post" Action="ord_articoli_aggiungi.asp" class="form-horizontal" onsubmit="return controllo()">
+                                     <form name="P2" method="post" Action="ord_articoli_valorizzazione_totale.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
                                            <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Codice Prodotto: </label>
+                                          <label class="control-label" for="focusedInput">Ultima Valorizzazione: </label>
+                                        </div>
+                                           <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Data Elaborazione: </label>
                                           <div class="controls">
-                                            <input name="ord_codart" class="input-large focused" id="focusedInput" type="text">
+                                              <label class="radio-inline"><input type="radio" name="optradio">&nbsp;Data Odierna</label>
+                                              <label class="radio-inline"><input type="radio" name="optradio">&nbsp;Inserisci Data</label> <input name="ord_codart" class="input-large focused" id="focusedInput" type="text">
                                             </div>
                                         </div>
                                            <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Nome Articolo: </label>
-                                          <div class="controls">
-                                            <input name="ord_nomart" class="input-xlarge focused" id="focusedInput" type="text">
+                                                <label class="control-label" for="focusedInput">Valorizzazione: </label>  
+                                           <div class="controls">
+                                           <i>Totale in Euro per Numero di articoli</i>&nbsp;&nbsp;<button type="button" class="btn btn-danger">Dettaglio</button>
+                                               <!--nel dettaglio verranno visualizzati i singoli articoli con la qta ed il relativo valore-->
+                                               <!--SELECT Sum(ORD_Articoli.Przart) AS SommaDiPrzart FROM ORD_Articoli -->
+                                               <!--SELECT Count (*) as Totale FROM ORD_Articoli -->
                                             </div>
-                                        </div>
-                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Prezzo Articolo: </label>
-                                          <div class="controls">
-                                            <input name="ord_przart" class="input-xlarge focused" id="focusedInput" type="text" placeholder="0,00">
-                                            </div>
-                                        </div>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Qta Disponibile Articolo: </label>
-                                          <div class="controls">
-                                            <input name="ord_qtadisp" class="input-xlarge focused" id="focusedInput" type="text">
-                                            </div>
-                                        </div>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Qta Minima Articolo: </label>
-                                          <div class="controls">
-                                            <input name="ord_qtamin" class="input-xlarge focused" id="focusedInput" type="text">
-                                            </div>
-                                        </div>
+                                          </div>
                                         <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top">Aggiungi</button>&nbsp;
+                                           <button type="submit" class="btn btn-primary tooltip-top">Aggiungi</button>&nbsp;
+                                           <button type="button" class="btn btn-info">Storico</button>&nbsp;
                                           <button type="reset" class="btn">Annulla</button>&nbsp;
                                         </div>
                                       </fieldset>

@@ -21,16 +21,6 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM ORD_Articoli")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="ord_gestione_inventario.asp"><span class="badge badge-success pull-right"><%= rs("Totale") %></span>Inventario</a>
-            <% Else %>
-            <a href="#><span class="badge badge-important pull-right"><%= rs("Totale") %></span>Inventario</a>
-            <% End If %>
-        </li>
-        <li>
-			<%
-			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM ORD_Articoli")
-			If rs("Totale") > 0 Then
-			%>
             <a href="ord_gestione_movimenti.asp"><span class="badge badge-success pull-right"><%= rs("Totale") %></span>Movimenti</a>
             <% Else %>
             <a href="#"><span class="badge badge-important pull-right"><%= rs("Totale") %></span>Movimenti</a>
@@ -38,12 +28,12 @@
         </li>
         <li>
 			<%
-			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM ORD_Articoli")
+			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM ORD_Articoli WHERE ATTART ='Y' AND Qtadisp < Qtamin")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="ord_gestione_sottoscorta.asp"><span class="badge badge-success pull-right"><%= rs("Totale") %></span>Sottoscorta</a>
+            <a href="ord_articoli_sottoscorta.asp"><span class="badge badge-important pull-right"><%= rs("Totale") %></span>Sottoscorta</a>
             <% Else %>
-            <a href="#"><span class="badge badge-important pull-right"><%= rs("Totale") %></span>Sottoscorta</a>
+            <a href="#"><span class="badge badge-success pull-right"><%= rs("Totale") %></span>Sottoscorta</a>
             <% End If %>
         </li>
         <li>
@@ -51,7 +41,7 @@
 			Set rs = dbConn.Execute("SELECT COUNT(*) as Totale FROM ORD_Articoli")
 			If rs("Totale") > 0 Then
 			%>
-            <a href="ord_gestione_valorizzazione.asp"><span class="badge badge-success pull-right"><%= rs("Totale") %></span>Valorizzazione</a>
+            <a href="ord_articoli_valorizzazione.asp"><span class="badge badge-success pull-right"><%= rs("Totale") %></span>Valorizzazione</a>
             <% Else %>
             <a href="#"><span class="badge badge-important pull-right"><%= rs("Totale") %></span>Valorizzazione</a>
             <% End If %>

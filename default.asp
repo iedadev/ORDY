@@ -61,9 +61,9 @@ Set rs = nothing
 </head>
 <body id="login">
 <div class="container">
-        <p align="center"><img src="images/portada.png" alt="SIM" ></p>
+        <p align="center"><img src="images/ordy.png" width="290" height="290" alt="ORDY" ></p>
 		<form class="form-signin" name="accesso" action="default.asp?ARRIVO=Login" method="post">
-			<h2 class="form-signin-heading" align="center">ORDY<br>Milano Fiera</h2>
+			<h2 class="form-signin-heading" align="center">mORDYan<br><small>Milano Fiera</small></h2>
 			<input name="usr" type="text" class="input-block-level" placeholder="Username">
 			<input name="pwd" type="password" class="input-block-level" placeholder="Password">
 			<% If Len(Trim(request("msg"))) > 0 Then %>

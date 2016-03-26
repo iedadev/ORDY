@@ -15,7 +15,7 @@ Dim sss, i
 
 i = 1
 
-sss = "SELECT * FROM ORD_Fornitori WHERE 1 = 1"
+sss = "SELECT * FROM ORD_Fornitori WHERE Stafor=1 AND 1 = 1"
 'sss = sss & " ORDER BY Datain"
 
 session("sss") = sss

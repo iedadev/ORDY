@@ -148,7 +148,6 @@ Set rs2 = dbConn.Execute(sss)
                                                  <%Else%>
                                                 <td>
                                                    <a href="ord_clienti_modifica.asp?USER=<%= session("usr") %>&IDcli=<%= rs2("IDcli") %>&Nomcli=<%= rs2("Nomcli") %>&Indcli=<%= rs2("Indcli") %>&Emacli=<%= rs2("Emacli") %>&Telcli=<%= rs2("Telcli") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/buttonedit.png" width="32" height="32" title="Modifica Cliente"></a>
-                                                   <a href="ord_clienti_elimina.asp?USER=<%= session("usr") %>&IDcli=<%= rs2("IDcli") %>"><img src="images/buttondelete.png" width="32" height="32" title="Elimina Cliente"></a><br>
                                                 </td>
                                                 <%End if%>
                                                 </tr>
