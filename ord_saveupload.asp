@@ -1,4 +1,4 @@
-<!--#INCLUDE FILE="upload.class"-->
+﻿<!--#INCLUDE FILE="upload.class"-->
 <%
 Dim oUpload
 Dim oFile

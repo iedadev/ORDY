@@ -52,6 +52,7 @@ Set rs2 = dbConn.Execute(sss)
                             <div class="navbar navbar-inner block-header">
                             	<legend>Elenco Articoli &nbsp;&nbsp;
                         	        <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="Indietro"></a>
+                                    <a href="delete.asp"<img src="images/delete.png" width="32" height="32" title="Elimina">Elimina Articolo</a>
                                 </legend>
                             </div>
                             <div class="block-content collapse in">

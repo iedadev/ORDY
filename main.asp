@@ -45,8 +45,8 @@ End If
                                 <div class="span12" align="center">
 
                                     <table align="center" border="0">
-                                        <td align="center"><a href="ord_anagrafiche.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Anagrafiche"></a></td>
-                                        <td align="center"><a href="ord_magazzino.asp"><img src="images/magicbox2.png" width="200" height="200" title="Gestione Magazzino"></a></td>
+                                        <td align="center"><a href="ord_anagrafiche.asp"> <img src="images/anagrafiche.png" width="128" height="128" title="Gestione Anagrafiche"></a></td>
+                                        <td align="center"><a href="ord_magazzino.asp"><img src="images/magazzino.png" width="128" height="128" title="Gestione Magazzino"></a></td>
                                          <% If session("ruolo") = "A" Then %>
                                         <td align="center"><a href="sim_comunicazione.asp"><img src="images/segnalazionimagicbox2.png" width="200" height="200" title="Gestione Comunicazioni"></a></td>
                                          <%Else%>

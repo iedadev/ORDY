@@ -33,7 +33,7 @@ End If
             <%Else%>
                 <!--#include virtual file="sim_lastprops.asp"-->       
             <% End If %>
-                <div class="span9" id="content">
+                <div class="span6" id="content">
                       <!-- morris stacked chart -->
                     <div class="row-fluid">
                          <!-- block -->
@@ -45,9 +45,13 @@ End If
                                 <div class="span12" align="center">
 
                                     <table align="center" border="0">
-                                        <td align="center"><a href="ord_gestione_articoliIN.asp"> <img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Articoli da Casa Madre"></a><br>Gestione Ordini da HD</td>
-                                        <td align="center"><a href="ord_gestione_articoliLC.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Gestione Ordini da LC"></a><br>Gestione Ordini da LC</td>
-                                        <td align="center"><a href="ord_gestione_articoliAS.asp"><img src="images/ricercamagicbox2.png" width="200" height="200" title="Assegnazioni Richieste Ordini"></a><br>Assegnazioni Ordini</td>
+                                        <td align="center"><a href="ord_gestione_articoliIN.asp"> <img src="images/database.png" width="128" height="128" title="Gestione Articoli da Casa Madre"></a><br>Ordini da HD</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><a href="ord_gestione_articoliLC.asp"><img src="images/database2.png" width="128" height="128" title="Gestione Ordini da LC"></a><br>Ordini da LC</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><a href="ord_gestione_articoliAS.asp"><img src="images/stack.png" width="128" height="128" title="Assegnazioni Richieste Ordini"></a><br>Assegnazioni</td>
                                         </tr>
                                       </table>
                                 </div>

@@ -77,5 +77,6 @@ NumOrdine = request("NumOrd")
 response.write NumOrdine
 'response.end
 
-response.redirect "ord_gestione_articoliINbis.asp?&codart=" & request("Codart")
+response.redirect "ord_gestione_articoliIN.asp?nrordine=99"                             
 %>
+

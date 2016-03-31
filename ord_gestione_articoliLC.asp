@@ -11,34 +11,9 @@ End If
   '  response.redirect "hd_todo.asp"
 'End If
 
- nrord = request("nrordine")
- pdfordine = "ordineHD_"&nrord
- 'nrord1 = request("NumOrdine")
-
- response.write nrord
- response.write "--" & pdfordine
- 'response.write NumOrdine
- 'response.write nrord1
- 'response.end
-
- 'response.write pdfordine
-
-if request("nrordine") = 99  then
-
-sss =  "SELECT Numord FROM ORD_Arrivi WHERE IDArr = (SELECT MAX(IDarr)  FROM ORD_Arrivi)"
-Set rs = dbConn.Execute(sss)
-
-nrord = rs("Numord")
-pdfordine = rs("Numord")
-pdfordine = "ordineHD_"&pdfordine
-
-
-response.write sss
-response.write pdfordine
-
-end if
-
-
+'Set dbConn = CreateObject("ADODB.Connection")
+'dbConn.Open Application("Connection1_ConnectionString")
+ 'response.write "E' ZERO"
 %>
 
 <!DOCTYPE html>
@@ -52,21 +27,7 @@ end if
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
         
-      <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-      <script type="text/javascript"> 
-        <!--
-        function controllo()
-        {
-		if (document.P2.barcode.value == "")
-			{
-			alert("Attenzione! Inserire il Codice articolo. Dato Obbligatorio");
-			document.P2.barcode.style.backgroundColor = 'Yellow';
-			document.P2.barcode.focus();
-			return false;
-			}
-		}
-		//-->
-		</script>
+        <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
         <!--#include virtual file="include/menu.asp"-->    
@@ -78,96 +39,66 @@ end if
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                            	<legend>Gestione Ordini <%=response.write (nrord)%> da Helen Doron</legend>
+                            	<legend>Richieste da LC</legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                      <%If nrord <> " " then%>
-                                    <form name="P2" method="post" class="form-horizontal" Action="ord_gestione_articoli_barcode.asp?nrordine=<%response.write (nrord)%>" onsubmit="return controllo()">
+                                    <form method="post" Action="ord_gestine_articoliLC_barcode.asp" class="form-horizontal">
                                       <fieldset>
                                           <div class="control-group">
                                           <label class="control-label" for="focusedInput">
-											Codice Articolo: </label> 
+											Barcode o Codice articolo: </label>
                                           <div class="controls">
-                                             <input name="barcode" class="input-small focused" id="focusedInput" type="text" style="width:150px; height: 30px">
-                                               
-                                              <input type="radio" name="code" value="bar" checked >&nbsp;Barcode &nbsp;&nbsp;<input type="radio" name="code" value="hd">&nbsp;Codice HD<br>
+                                          	<input name="barcode" class="input-small focused" id="focusedInput" type="text" style="width:300px;">
                                           </div>
                                         </div>
                                         <div class="form-actions">
+                                          <%'response.write request("BARCODE")%>
                                             <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Cerca</button>&nbsp;
                                           <button type="reset" class="btn">Annulla</button>&nbsp;
                                         </div>
                                       </fieldset>
                                     </form>
-                                <%End if%> 
                                 </div>
-                              <% if  nrord = "" Then
-                                     'response.write "passqui"
-                               %>
                                 <table class="table table-condensed">
-									<tbody>  
-                                    Per visualizzare la scheda dell'ordine inserire il codice dell'ordine.
-                                        <form name="P3" method="post" Action="ord_gestione_articoliIN.asp" class="form-horizontal">
-                                      <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">
-											Numero Ordine: </label> 
-                                          <div class="controls">
-                                          	<input name="nrordine" class="input-small focused" id="focusedInput" type="text" style="width:100x;">
-                                           </div>
-                                        </div>
-                                        <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Cerca</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
-                                        </div>
-                                      </fieldset>
-                                    </form>
-                            </tbody>
-								</table> 
-                                <table class="table table-condensed">
-									<tbody>  
-                                    Caricare il file pdf dell'ordine rinominando il file in Ordine HD_nrOrdine (es OrdineHD_160612)
-                                        <form method="post" enctype="multipart/form-data" action="ord_saveupload.asp" class="form-horizontal">
-                                              <div align="center">
-                                                <center>
-                                                <table border="0" style="border-collapse: collapse" bordercolor="#111111" width="74%" id="AutoNumber1">
-                                                    <input type="file" name="File1" size="20"></b></font></td>
-                                                </table>
-                                                  <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">
-											upload Ordine: </label> 
-                                                   <div class="controls">
-                                                    <input type="submit" value="Submit" name="B1" class="input-small focused" id="focusedInput" style="width:100x;"></b></font></td>
-                                                  </div>
-                                                </div>
-                                                <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Carica</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
-                                        </div>
-                                      </fieldset>
-                                            </form>
-                            </tbody>
+									<tbody>
+                                        <tr>
+											<th>Codice prodotto</th>
+											<th>Nome Prodotto</th>
+										</tr>
+                                        <tr>
+										    <td>&nbsp;</td>
+											<td>&nbsp;</td>
+											<td>&nbsp;</td>
+										</tr>
+                                       <td colspan="4">&nbsp;</td>
+										<tr>
+											<th>Data Ordine</th>
+											<th>Data Pagamento</th>
+											<th>Qta Richiesta</th>
+										</tr>
+                                        <tr>
+											<td><%= Date() %></td>
+											<td><div class="controls">
+                                          	<input name="datapagamento" class="input-small focused" id="focusedInput" type="text" style="width:100px;">
+                                          </div></td>
+											<td><div class="controls">
+                                          	<input name="qtarichiesta" class="input-small focused" id="focusedInput" type="text" style="width:50px;">
+                                          </div></td>
+										</tr>
+									</tbody>
 								</table>
-                                 <%end if%>
                             </div>
                         </div>
                         <!-- /block -->
                     </div>
-                  
+
                      <div class="row-fluid">
                         <!-- block -->
                         <!-- /block -->
                     </div>
-                </div><!-- nella parte laterale si potrebbe mettere Elenco dei movimenti dell'articolo-->
-                <div id="pdf"><br>
-                <object width="700" height="500" type="application/pdf" data="OrdiniHD/<%response.write pdfordine%>.pdf?#zoom=85&scrollbar=1&toolbar=1&navpanes=0"
-                     id="pdf_content">
-                    </div>
-                </p>
-                  </object>
                 </div>
+                <!--#include virtual file="sim_wishlist_lateral.asp"--><!--#include virtual file="sim_magicbox_lateral.asp"-->
             </div>
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->

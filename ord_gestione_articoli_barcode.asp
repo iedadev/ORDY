@@ -87,7 +87,15 @@ end if
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                    <form method="post" class="form-horizontal" Action="ord_gestione_articoli_qtamagazzino.asp?codart=<%= rs("Codart") %>&qtaarr=<%= request("qta_arr") %>&NumOrd=<% response.write nrordine %>"> 
+
+                                   <% if nrordine ="" Then %>
+                                        <div class="alert alert-danger">
+                                        <strong>Attenzione!</strong> E' necessario creare un ordine di riferimento.<br>
+                                            Torna indietro
+                                        </div>
+                                    <%else%>
+                                  <form method="post" class="form-horizontal" Action="ord_gestione_articoli_qtamagazzino.asp?codart=<%= rs("Codart") %>&qtaarr=<%= request("qta_arr") %>&NumOrd=<% response.write nrordine %>"> 
+                                    <%end if%>
                                 </div>
                                 <table class="table table-condensed">
 									<tbody>
@@ -131,12 +139,12 @@ end if
                                 <tr>
 										    <td>
                                                 <div class="controls">
-                                          	    <input name="qta_arr" class="input-small focused" id="focusedInput" type="number" min="0" max="999" maxlength="3" style="width:80px; height: 20px">
+                                          	    <input name="qta_arr" class="input-small focused" id="focusedInput" type="number" min="0" max="999" maxlength="3" style="width:80px; height: 30px">
                                                 </div>
                                             </td>
 											<td>
                                                 <div class="controls">
-                                                    <input name="qta_min" class="input-small focused" id="focusedInput" type="number" min="0" max="999" maxlength="3" value="<%= rs("Qtamin") %>"style="width:80px; height: 20px">
+                                                    <input name="qta_min" class="input-small focused" id="focusedInput" type="number" min="0" max="999" maxlength="3" value="<%= rs("Qtamin") %>"style="width:80px; height: 30px">
                                                 </div>
                                             </td>
                                             <td>
@@ -158,14 +166,67 @@ end if
                         <!-- block -->
                         <!-- /block -->
                     </div>
-                </div><!-- nella parte laterale si potrebbe mettere Elenco dei movimenti dell'articolo-->
-                <div id="pdf"><br>
-                <object width="700" height="500" type="application/pdf" data="public/ordineHD_.pdf?#zoom=85&scrollbar=1&toolbar=1&navpanes=0"
-                     id="pdf_content">
-                     <p>
-               Qui inserisci i commenti se il file per qualche motivo non si vede .</p>
-                  </object>
                 </div>
+
+                <div class="span6 id="sidebar"><br>
+			                <div class="span12">
+                            <div class="navbar navbar-inner block-header">
+                            	<legend>Storico Movimenti Articolo <%= rs("Codart") %>
+                            </div>
+                                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+										<thead>
+											<tr>
+												<th>Codice</th>
+												<th>Qta arrivata</th>
+												<th>Data arrivo</th>
+                                                <th>Nr. Ordine</th>
+                                                <th>&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody>
+											<%
+												i = 1
+												iduser=session("id_usr")
+                                                codart = rs("Codart")
+                                                'Response.Write(Session("id_usr"))
+
+                                                sss = "SELECT Codart,Qtaarr,Dataarr,Numord FROM ORD_arrivi WHERE Codart=" & codart
+                                                Set rs = dbConn.Execute(sss)
+
+                                                if Rs.eof then 
+                                                %><br>
+                                                <div class="alert alert-info span10">
+                                                  <strong>Info!</strong> Non hai ancora caricato nessun articolo per questo codice
+                                                </div>
+                                                <%
+                                                 End if
+												'Response.Write sss
+                                                'Response.Write rs("POS")
+
+													While Not rs.EOF
+													i = i + 1
+													%>
+													<% If i/2 - Int(i/2) = 0 Then %>
+														<tr class="odd gradeA">
+													<% Else %>
+														<tr class="even gradeA">
+													<% End If %>
+		
+														<td><%= rs("Codart") %></td>
+														<td><%= rs("Qtaarr") %></td>
+                                                        <td><%= rs("Dataarr") %></td>
+                                                        <td><%= rs("Numord") %></td>
+													</tr>
+													<%
+													rs.MoveNext
+													Wend
+													%>
+
+										</tbody>
+									</table>
+                             </div>
+
+</div>
             </div>
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->
