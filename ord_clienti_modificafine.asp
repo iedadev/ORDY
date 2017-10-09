@@ -1,6 +1,7 @@
 ﻿<%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file ="include/security.asp"-->
 
 <!DOCTYPE html>
 <html lang="it">
@@ -8,14 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 </html>
-<%
-If session("usr") = "" Then
-    response.redirect "default.asp"
-End If
 
-If session("ruolo") <> "A" Then
-    response.redirect "main.asp"
-End If
+<%
 
 Dim sss, IP
 IP = Request.ServerVariables("REMOTE_ADDR")
@@ -23,6 +18,7 @@ IP = Request.ServerVariables("REMOTE_ADDR")
 
 sss = "UPDATE ORD_Clienti SET Nomcli = " 
 sss = sss & "'" & request("ord_nomcli") & "'"
+sss = sss & ", Refcli = '" & request("ord_refcli") & "'"
 sss = sss & ", Indcli = '" & request("ord_indcli") & "'"
 sss = sss & ", emacli = '" & request("ord_emacli") & "'"
 sss = sss & ", telcli = '" & request("ord_telcli") & "'"

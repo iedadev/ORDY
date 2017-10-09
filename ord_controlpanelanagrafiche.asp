@@ -11,9 +11,9 @@
 			Set rs = dbConn.Execute(sss)
 			If rs("Totale") > 0 Then
 			%>
-            <a href="ord_gestione_clienti.asp"><span class="badge badge-success pull-right"><%= rs("Totale") %></span>Clienti</a>
+            <a href="ord_gestione_clienti.asp"><span class="badge badge-success pull-right"><%= rs("Totale") %></span>Learning Center</a>
             <% Else %>
-            <a href="#"><span class="badge badge-important pull-right"><%= rs("Totale") %></span>Clienti</a>
+            <a href="#"><span class="badge badge-important pull-right"><%= rs("Totale") %></span>Learning Center</a>
             <% End If %>
         </li>
         <li>

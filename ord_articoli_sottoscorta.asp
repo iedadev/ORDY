@@ -2,14 +2,8 @@
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
+<!--#include virtual file ="include/security.asp"-->
 <%
-If session("usr")= "" Then
-    response.redirect "default.asp"
-End If
-
-If session("ruolo") <> "A" Then
-    response.redirect "main.asp"
-End If
 
 Dim sss, i
 
@@ -27,41 +21,92 @@ Set rs2 = dbConn.Execute(sss)
 
 
 %>
-<!DOCTYPE html>
-<html lang="it">
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!--#include virtual file="include/title.asp"-->
-        <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="assets/styles.css" rel="stylesheet" media="screen">
-        <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
-        
-        <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body>
-	    <!--#include virtual file="include/menu.asp"-->
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span12" id="content">
-                     <div class="row-fluid">
-                         
-                        <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                            	<legend>Elenco Articoli Sottoscorta &nbsp;&nbsp;
-                        	        <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="Indietro"></a>
-                                </legend>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        <!--#include virtual file="include/navigation.asp"-->
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+               
+                 <!--#include virtual file="include/heading.asp"--> 
+               
+                 <!-- /.row -->
+
+<div class="row">
+                    <div class="col-lg-4 text-center">
+                       		<div class="panel panel-danger">
+                            <div class="panel-heading">
+                            <div class="panel-body">
+                                     <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-envelope-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-center">
+                                        <div class="huge">Articoli Sottoscorta</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="block-content collapse in">
-                                 <!--#include virtual file="ord_controlpanelmagazzino.asp"-->
-                                <div class="span8">
-  									
-                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+                                </div>
+                        </div>
+                           <div class="panel-footer">
+                                    <span class="pull-left"><a href="xls_art_sottoscorta.asp"><img src="images/excel.png" width="32" height="32" title="Crea file excel"> <b> Esporta file in Excel</b></a></span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                    </div>
+                    <div class="col-lg-8 text-center">
+                        <div class="panel panel-default">
+
+                            <div class="panel-body">
+                             <div class="navbar navbar-inner block-header">
+                            	<legend>Elenco Articoli Sottoscorta </legend>
+                            </div>
+
+                           <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 										<thead>
                                             <tr>
 												<th>Codice</th>
+                                                <th>Barcode</th>
                                                 <th>Nome</th>
 												<th>Prz</th>
 												<th>Qta Disp</th>
@@ -80,10 +125,19 @@ Set rs2 = dbConn.Execute(sss)
 											<% End If %>
                                             <td>
 												<%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_KIT AS K, SIM_Macrocategorie AS CAT WHERE K.IDMCAT = CAT.IDMCAT AND K.IDMCat = " & rs("IDMcat"))
 												If Not rs2.eof Then
 													'Response.write sss
                                                     Response.write rs2("Codart")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+                                                <td>
+												<%
+											    If Not rs2.eof Then
+													'Response.write sss
+                                                    Response.write rs2("Barcode")
 												Else
 													Response.write "&nbsp;"
 												End If
@@ -140,67 +194,26 @@ Set rs2 = dbConn.Execute(sss)
 											%>
 										</tbody>
 									</table>
-                                    
-                                </div>
                             </div>
+                          </div>
                         </div>
-                        <!-- /block -->
-                    </div>
-                </div>
+</div>
+                            
             </div>
-            <hr>
-		    <!--#include virtual file="include/piede.asp"-->
+            <!-- /.container-fluid -->
+
         </div>
-        <!--/.fluid-container-->
+        <!-- /#page-wrapper -->
 
-        <script src="vendors/jquery-1.9.1.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+    </div>
+    <!-- /#wrapper -->
 
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-        <script src="assets/scripts.js"></script>
-        <script src="assets/DT_bootstrap.js"></script>
-        <script>
-        $(function() {
-            
-        });
-        </script>
-        <script>
-        $(function() {
-            $('.tooltip').tooltip();	
-			$('.tooltip-left').tooltip({ placement: 'left' });	
-			$('.tooltip-right').tooltip({ placement: 'right' });	
-			$('.tooltip-top').tooltip({ placement: 'top' });	
-			$('.tooltip-bottom').tooltip({ placement: 'bottom' });
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-			$('.popover-left').popover({placement: 'left', trigger: 'hover'});
-			$('.popover-right').popover({placement: 'right', trigger: 'hover'});
-			$('.popover-top').popover({placement: 'top', trigger: 'hover'});
-			$('.popover-bottom').popover({placement: 'bottom', trigger: 'hover'});
+</body>
 
-			$('.notification').click(function() {
-				var $id = $(this).attr('id');
-				switch($id) {
-					case 'notification-sticky':
-						$.jGrowl("Stick this!", { sticky: true });
-					break;
-
-					case 'notification-header':
-						$.jGrowl("A message with a header", { header: 'Important' });
-					break;
-
-					default:
-						$.jGrowl("Hello world!");
-					break;
-				}
-			});
-        });
-        </script>
-    </body>
 </html>
-<%
-Set rs = Nothing
-Set rs1 = Nothing
-Set rs2 = Nothing
-Set dbconn = Nothing
-%>

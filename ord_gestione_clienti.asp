@@ -2,105 +2,168 @@
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
+<!--#include virtual file ="include/security.asp"-->
 <%
-If session("usr")= "" Then
-    response.redirect "default.asp"
-End If
-
-If session("ruolo") <> "A" Then
-    response.redirect "main.asp"
-End If
 
 Dim sss, i
 
-%>
-<!DOCTYPE html>
-<html lang="it">
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!--#include virtual file="include/title.asp"-->
-        <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="assets/styles.css" rel="stylesheet" media="screen">
-        <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+i = 1
 
-        <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script type="text/javascript"> 
+sss = "SELECT * FROM ORD_Clienti WHERE 1 = 1"
+'sss = sss & " ORDER BY Datain"
+session("sss") = sss
+set rs2 = dbConn.Execute(sss)
+
+'response.write sss
+'response.write rs2("stacli")
+'response.end
+
+%>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+   <script type="text/javascript"> 
         <!--
         function controllo()
         {
 		if (document.P2.ord_nomcli.value == "")
 			{
-			alert("Attenzione!.Dato Obbligatorio");
+			alert("Attenzione! Nome Cliente Dato Obbligatorio");
 			document.P2.ord_nomcli.style.backgroundColor = 'Yellow';
 			document.P2.ord_nomcli.focus();
 			return false;
 			}
+       if (document.P2.ord_refcli.value == "")
+			{
+			alert("Attenzione! Referente Dato Obbligatorio");
+			document.P2.ord_refcli.style.backgroundColor = 'Yellow';
+			document.P2.ord_refcli.focus();
+			return false;
+			}
         if (document.P2.ord_indcli.value == "")
 			{
-			alert("Attenzione!.Dato Obbligatorio");
+			alert("Attenzione! Indirizzo Cliente Dato Obbligatorio");
 			document.P2.ord_indcli.style.backgroundColor = 'Yellow';
 			document.P2.ord_indcli.focus();
 			return false;
 			}
         if (document.P2.ord_emacli.value == "")
 			{
-			alert("Attenzione!.Dato Obbligatorio");
+			alert("Attenzione! Email Cliente Dato Obbligatorio");
 			document.P2.ord_emacli.style.backgroundColor = 'Yellow';
 			document.P2.ord_emacli.focus();
+			return false;
+			}
+         if (document.P2.ord_telcli.value == "")
+			{
+			alert("Attenzione! Telefono Cliente Dato Obbligatorio");
+			document.P2.ord_telcli.style.backgroundColor = 'Yellow';
+			document.P2.ord_telcli.focus();
 			return false;
 			}
 		}
 		//-->
 		</script>
-    </head>
-    <body>
-	    <!--#include virtual file="include/menu.asp"-->
-       <div class="container-fluid">
-                        <div class="row-fluid">
-             <% If session("ruolo") = "A" Then %>
-	            <!--#include virtual file="ord_controlpanelanagrafiche.asp"-->    
-             <% End If %>
-                 <div class="span6" id="content">
-                      <!-- morris stacked chart -->
-                    <div class="row-fluid">
-                        <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header"><legend>Gestione Clienti &nbsp;&nbsp;<a href="ord_clienti_elenco.asp"><button type="button" class="btn btn-default">Elenco</button></a></legend></div>
-                            <div class="block-content collapse in">
-                                <div class="span12">
-                                     <% If request("New") <> 0 Then%>	
+
+     <!--Intestazione-->
+
+    <!--#include virtual file="include/title.asp"-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        <!--#include virtual file="include/navigation.asp"-->
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+               
+                 <!--#include virtual file="include/heading.asp"--> 
+               
+                 <!-- /.row -->
+
+<div class="row">
+ <div class="col-lg-2 text-center">
+                       		<div class="panel panel-primary">
+                            <div class="panel-heading">
+                            <div class="panel-body">
+                                     <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-users fa-3x"></i>
+                                    </div>
+                                    <div class="col-xs-6 text-center">
+                                        <div class="huge">Gestione Learning Center</div>
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                        </div>
+                    </div>
+ <div class="col-lg-3 text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                             <div class="navbar navbar-inner block-header">
+                            	<legend>Gestione Learning Center </legend>
+                            </div>
+                                <% If request("New") <> 0 Then%>	
                                     <div class="alert alert-success">
-                                        <strong> Cliente aggiunto con successo.</strong>
+                                        <strong> Learning Center aggiunto con successo.</strong>
                                     </div>
                                     <%end if%>	
                                      <form name="P2" method="post" Action="ord_clienti_aggiungi.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
-                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Nome Cliente: </label>
-                                          <div class="controls">
-                                            <input name="ord_nomcli" class="input-large focused" id="focusedInput" type="text">
-                                            </div>
-                                        </div>
-                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Indirizzo Cliente: </label>
-                                          <div class="controls">
-                                            <input name="ord_indcli" class="input-xlarge focused" id="focusedInput" type="text">
-                                            </div>
-                                        </div>
-                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Email Cliente: </label>
-                                          <div class="controls">
-                                            <input name="ord_emacli" class="input-xlarge focused" id="focusedInput" type="text">
-                                            </div>
-                                        </div>
-                                           <div class="control-group">
-                                          <label class="control-label" for="focusedInput">Telefono Cliente: </label>
-                                          <div class="controls">
-                                            <input name="ord_telcli" class="input-large focused" id="focusedInput" type="text">
-                                            </div>
-                                        </div>
+                                          <div class="form-group">
+                                          <label  for="focusedInput">Learning Center   
+                                          	<input name="ord_nomcli" class="form-control" id="focusedInput" type="text" style="width:200px;">
+                                         </div></label>
+                                           <div class="form-group">
+                                          <label  for="focusedInput">Referente LC   
+                                          	<input name="ord_refcli" class="form-control" id="focusedInput" type="text" style="width:200px;">
+                                         </div></label>
+                                           <div class="form-group">
+                                          <label  for="focusedInput">Indirizzo
+                                          	<input name="ord_indcli" class="form-control" id="focusedInput" type="text" style="width:200px;">
+                                         </div></label>
+                                           <div class="form-group">
+                                          <label  for="focusedInput">Email    
+                                          	<input name="ord_emacli" class="form-control" id="focusedInput" type="text" style="width:200px;">
+                                         </div></label>
+                                           <div class="form-group">
+                                          <label  for="focusedInput">Telefono  
+                                          	<input name="ord_telcli" class="form-control" id="focusedInput" type="text" style="width:200px;">
+                                         </div></label>
+                                          <br>
                                         <div class="form-actions">
                                           <button type="submit" class="btn btn-primary tooltip-top">Aggiungi</button>&nbsp;
                                           <button type="reset" class="btn">Annulla</button>&nbsp;
@@ -108,100 +171,132 @@ Dim sss, i
                                       </fieldset>
                                     </form>
                                 </div>
+                        </div>
+                    </div>
+ <div class="col-lg-7 text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                            <div class="navbar navbar-inner block-header">
+                            	<legend>Elenco Learning Center </legend>
+                            </div>
+                            <div class="block-content collapse in">      
+                                <div class="span12">
+
+                                    <% If request("Del") <> 0 Then%>	
+                                    <div class="alert alert-success">
+                                        <strong> Learning Center eliminato con successo.</strong>
+                                    </div>
+                                    <%end if%>
+
+
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+										<thead>
+											<tr>
+                                                <th>Nome LC</th>
+                                                <th>Referente</th>
+												<th>Indirizzo</th>
+												<th>Email</th>
+												<th>Telefono</th>
+                                                <th>&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody>
+											<%
+											While Not rs2.EOF
+											i = i + 1
+											%>
+											<% If i/2 - Int(i/2) = 0 Then %>
+												<tr class="odd gradeA">
+											<% Else %>
+												<tr class="even gradeA">
+											<% End If %>
+
+                                                <td>
+												<%
+												If Not rs2.eof Then
+													'Response.write sss
+                                                    Response.write rs2("Nomcli")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+                                                 <td>
+												<%
+												If Not rs2.eof Then
+													'Response.write sss
+                                                    Response.write rs2("Refcli")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+												<td>
+												<%
+												If Not rs2.eof Then
+													'Response.write sss
+                                                    Response.write rs2("Indcli")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>										
+												<td>
+                                                <%
+												'Set rs2 = dbConn.Execute("SELECT * FROM SIM_KIT AS K, SIM_Sottocategorie AS SCAT WHERE K.IDSCAT = SCAT.IDSCAT AND K.IDScat = " & rs("IDScat"))
+												If Not rs2.eof Then
+													'Response.write sss
+                                                    Response.write rs2("Emacli")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+												<td>
+												<%
+												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDCat = " & rs("IDCat"))
+												If Not rs2.eof Then
+													Response.write rs2("Telcli")
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
+												<% If rs2("stacli") = 0 Then %>
+												<td>
+                                                    <img src="images/userdelete.png" width="32" height="32" title="LC non più attivo">
+                                                </td>
+                                                 <%Else%>
+                                                <td>
+                                                   <a href="ord_clienti_modifica.asp?USER=<%= session("usr") %>&IDcli=<%= rs2("IDcli") %>&Nomcli=<%= rs2("Nomcli") %>&Refcli=<%=rs2("Refcli")%>&Indcli=<%= rs2("Indcli") %>&Emacli=<%= rs2("Emacli") %>&Telcli=<%= rs2("Telcli") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/buttonedit.png" width="32" height="32" title="Modifica Cliente"></a>
+                                                    <a href="ord_clienti_elimina.asp?USER=<%= session("usr") %>&IDcli=<%= rs2("IDcli") %>&Nomcli=<%= rs2("Nomcli") %>&Refcli=<%=rs2("Refcli")%>&Indcli=<%= rs2("Indcli") %>&Emacli=<%= rs2("Emacli") %>&Telcli=<%= rs2("Telcli") %>&TipoQuery=<%= request("TipoQuery") %>"><img src="images/buttondelete.png" width="32" height="32" title="Elimina Cliente"></a>
+                                                </td>
+                                                <%End if%>
+                                                </tr>
+											<%
+											rs2.MoveNext 
+											Wend
+											%>
+										</tbody>
+									</table>
+                                </div>
+                            </div>
                             </div>
                         </div>
-            <hr>
-		    <!--#include virtual file="include/piede.asp"-->
-		 </div>
-        <!--/.fluid-container-->
-        <link href="vendors/datepicker.css" rel="stylesheet" media="screen">
-        <link href="vendors/uniform.default.css" rel="stylesheet" media="screen">
-        <link href="vendors/chosen.min.css" rel="stylesheet" media="screen">
-        <link href="vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
-        <script src="vendors/jquery-1.9.1.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/jquery.uniform.min.js"></script>
-        <script src="vendors/chosen.jquery.min.js"></script>
-        <script src="vendors/bootstrap-datepicker.js"></script>
-        <script src="vendors/wysiwyg/wysihtml5-0.3.0.js"></script>
-        <script src="vendors/wysiwyg/bootstrap-wysihtml5.js"></script>
-        <script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
-        <script src="assets/scripts.js"></script>
-        <script src="assets/DT_bootstrap.js"></script>
-        <script>
-        $(function() {
-            
-        });
-        </script>
-        <script>
-        $(function() {
-            $('.tooltip').tooltip();	
-			$('.tooltip-left').tooltip({ placement: 'left' });	
-			$('.tooltip-right').tooltip({ placement: 'right' });	
-			$('.tooltip-top').tooltip({ placement: 'top' });	
-			$('.tooltip-bottom').tooltip({ placement: 'bottom' });
+                    </div>
+</div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
 
-			$('.popover-left').popover({placement: 'left', trigger: 'hover'});
-			$('.popover-right').popover({placement: 'right', trigger: 'hover'});
-			$('.popover-top').popover({placement: 'top', trigger: 'hover'});
-			$('.popover-bottom').popover({placement: 'bottom', trigger: 'hover'});
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-			$('.notification').click(function() {
-				var $id = $(this).attr('id');
-				switch($id) {
-					case 'notification-sticky':
-						$.jGrowl("Stick this!", { sticky: true });
-					break;
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-					case 'notification-header':
-						$.jGrowl("A message with a header", { header: 'Important' });
-					break;
+</body>
 
-					default:
-						$.jGrowl("Hello world!");
-					break;
-				}
-			});
-        });
-        </script>
-<script>
-        $(function() {
-            $(".datepicker").datepicker();
-            $(".uniform_on").uniform();
-            $(".chzn-select").chosen();
-            $('.textarea').wysihtml5();
-
-            $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index+1;
-                var $percent = ($current/$total) * 100;
-                $('#rootwizard').find('.bar').css({width:$percent+'%'});
-                // If it's the last tab then hide the last button and show the finish instead
-                if($current >= $total) {
-                    $('#rootwizard').find('.pager .next').hide();
-                    $('#rootwizard').find('.pager .finish').show();
-                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
-                } else {
-                    $('#rootwizard').find('.pager .next').show();
-                    $('#rootwizard').find('.pager .finish').hide();
-                }
-            }});
-            $('#rootwizard .finish').click(function() {
-                alert('Finished!, Starting over!');
-                $('#rootwizard').find("a[href*='tab1']").trigger('click');
-            });
-        });
-        </script>
-
-    </body>
 </html>
-<%
-Set dbconn = nothing
-Set rs = nothing
-Set rs1 = nothing
-Set rs2 = nothing
-Set rs3 = nothing
-Set rs4 = nothing
-Set rs5 = nothing
-Set rs6 = nothing
-%>

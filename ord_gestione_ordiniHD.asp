@@ -15,8 +15,8 @@ End If
  pdfordine = "ordineHD_"&nrord
  'nrord1 = request("NumOrdine")
 
- response.write nrord
- response.write "--" & pdfordine
+ 'response.write nrord
+ 'response.write "--" & pdfordine
  'response.write NumOrdine
  'response.write nrord1
  'response.end
@@ -33,8 +33,8 @@ pdfordine = rs("Numord")
 pdfordine = "ordineHD_"&pdfordine
 
 
-response.write sss
-response.write pdfordine
+'response.write sss
+'response.write pdfordine
 
 end if
 
@@ -72,36 +72,21 @@ end if
         <!--#include virtual file="include/menu.asp"-->    
         <div class="container-fluid">
             <div class="row-fluid">
+            <% If session("ruolo") = "A" Then %>
+	            <!--#include virtual file="ord_controlpanelmovimenti.asp"-->
+            <%Else%>
+                <!--#include virtual file="sim_lastprops.asp"-->       
+            <% End If %>
                 <div class="span6" id="content">
                       <!-- morris stacked chart -->
                     <div class="row-fluid">
+
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                             	<legend>Gestione Ordini <%=response.write (nrord)%> da Helen Doron</legend>
                             </div>
                             <div class="block-content collapse in">
-                                <div class="span12">
-                                      <%If nrord <> " " then%>
-                                    <form name="P2" method="post" class="form-horizontal" Action="ord_gestione_articoli_barcode.asp?nrordine=<%response.write (nrord)%>" onsubmit="return controllo()">
-                                      <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">
-											Codice Articolo: </label> 
-                                          <div class="controls">
-                                             <input name="barcode" class="input-small focused" id="focusedInput" type="text" style="width:150px; height: 30px">
-                                               
-                                              <input type="radio" name="code" value="bar" checked >&nbsp;Barcode &nbsp;&nbsp;<input type="radio" name="code" value="hd">&nbsp;Codice HD<br>
-                                          </div>
-                                        </div>
-                                        <div class="form-actions">
-                                            <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Cerca</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
-                                        </div>
-                                      </fieldset>
-                                    </form>
-                                <%End if%> 
-                                </div>
                               <% if  nrord = "" Then
                                      'response.write "passqui"
                                %>

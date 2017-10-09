@@ -2,66 +2,57 @@
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
-<%
-If session("usr") = "" Then
-    response.redirect "default.asp"
-End If
+<!--#include virtual file ="include/security.asp"-->
 
-'If session("ruolo") <> "A" Then
-  '  response.redirect "hd_todo.asp"
-'End If
+<%
 
 If session("id_usr")= "" Then
     response.redirect "default.asp"
 End If
 
-Dim sss, i 
+Dim sss, i , test
 
-sss6 = "SELECT COUNT(*) as Totale FROM SIM_Kit WHERE BARCODE = '" & request("BARCODE") & "'"  'cosi si passa una stringa!!!!
+codice= request("code")
+nrordine= request("nrordine")
+
+
+response.write nrordine
+
+if request("code")= "bar" then
+
+sss6 = "SELECT COUNT(*) as Totale FROM ORD_Articoli WHERE Barcode = '" & request("BARCODE") & "'"
 			Set rs6 = dbConn.Execute(sss6)
-			'response.write "XXX"
+			'response.write sss6
+            'response.end
             If rs6("Totale") = 0 Then
                 'response.write "Il totale è 0"
-		        response.redirect "sim_magicbox_barcode_start.asp"
+		        response.redirect "ord_gestione_articoliLC.asp"
+                ' inserire gestione errori per articolo non trovato
             End If
+else
+sss6 = "SELECT COUNT(*) as Totale FROM ORD_Articoli WHERE Codart = " & request("BARCODE")
+			Set rs6 = dbConn.Execute(sss6)
+			'response.write sss6
+            'response.end
+            If rs6("Totale") = 0 Then
+                'response.write "Il totale è 0"
+		       response.redirect "ord_gestione_articoliLC.asp"
+                ' inserire gestione errori per articolo non trovato
+            End If
+end if
 
-sss =  "SELECT * FROM SIM_Kit WHERE BARCODE = '" & request("BARCODE") & "'"  'cosi si passa una stringa!!!!
+if request("code")= "bar" then
+
+sss =  "SELECT * FROM ORD_Articoli WHERE BARCODE = '" & request("BARCODE") & "'"
+Set rs = dbConn.Execute(sss)
+
+else
+
+sss =  "SELECT * FROM ORD_Articoli WHERE CODART = " & request("BARCODE")
 Set rs = dbConn.Execute(sss)
 'response.write sss
-
-Set rs1 = dbConn.Execute("SELECT IDPOS,Posizione FROM SIM_Posizione WHERE IDPOS= " & rs("POS"))
-Set rs2 = dbConn.Execute("SELECT IDSTATO,Stato FROM SIM_Stato WHERE IDStato= " & rs("IDStato"))
-Set rs3 = dbConn.Execute("SELECT Macrocategoria FROM SIM_Macrocategorie WHERE IDMcat = " & rs("IDMcat"))
-Set rs4 = dbConn.Execute("SELECT Categoria FROM SIM_Categorie WHERE IDCat = " & rs("IDCat"))
-Set rs5 = dbConn.Execute("SELECT Sottocategoria FROM SIM_Sottocategorie WHERE IDScat = " & rs("IDScat"))
-
-If request("SEGNALAZIONE")= 1 Then
-'response.write "XXX"
-                                                    
-sss2 = "INSERT INTO SIM_Kit_SEGNALAZIONI (ID_KIT, ID_USR, BARCODE,SEGNALAZIONE,DATAIN) VALUES ("
-sss2 = sss2 & request("IDKIT") & ", "
-sss2 = sss2 & request("IDUSR") & ", "
-sss2 = sss2 & "'" & request("BARCODE") & "', "
-sss2 = sss2 & "'" & request("NOTE") & "', "
-sss2 = sss2 & "Date())" 
-
-sss3 = "INSERT INTO SIM_Comunicazioni (DATA,OGGETTO, TESTO, MITTENTE, DESTINATARIO, STATOLETTURA) VALUES ("
-sss3 = sss3 & "Date()" & ", "
-sss3 = sss3 & "3" & ", "
-sss3 = sss3 & "'" & "Segnalazione per barcode " & request("BARCODE") & "', "
-sss3 = sss3 & request("IDUSR") & ", "
-sss3 = sss3 & "35" & ", "
-sss3 = sss3 & "0" & ")"
-
-'response.write sss2
-'response.write sss3
 'response.end
-
-Set rs6 = dbConn.Execute(sss2)
-Set rs7 = dbConn.Execute(sss3)
-
-End if
-'response.write "AAA"
+end if
 
 %>
 
@@ -75,78 +66,8 @@ End if
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-       
+        
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-      <script type="text/javascript"> 
-        <!--
-        function controllo()
-        {
-		if (document.P2.kit_IDMCat.value == "")
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.kit_IDMCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDMCat.focus();
-			return false;
-			}
-		if (document.P2.kit_IDCat.value == "")
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.kit_IDCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDCat.focus();
-			return false;
-			}
-		if (document.P2.kit_IDSCat.value == "")
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.kit_IDSCat.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDSCat.focus();
-			return false;
-			}
-		if (document.P2.kit_nomekit.value == "")
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.kit_nomekit.style.backgroundColor = 'Yellow';
-			document.P2.kit_nomekit.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDPosizione.value == ""))
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.kit_IDPosizione.style.backgroundColor = 'Yellow';
-            document.P2.kit_IDPosizione.focus();
-			return false;
-			}
-		if (document.P2.kit_quantita.value == "")
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.kit_quantita.style.backgroundColor = 'Yellow';
-			document.P2.kit_quantita.focus();
-			return false;
-			}
-		if (document.P2.Kit_Data_Acquisto.value == "")
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.Kit_Data_Acquisto.style.backgroundColor = 'Yellow';
-			document.P2.Kit_Data_Acquisto.focus();
-			return false;
-			}
-		if ((document.P2.kit_IDStato.value == ""))
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			document.P2.kit_IDStato.style.backgroundColor = 'Yellow';
-			return false;
-			}	
-        if ((document.P2.Barcode.value == ""))
-			{
-			alert(<%=response.write (datoobbligatorio)%>);
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
-			document.P2.kit_Barcode.style.backgroundColor = 'Yellow';
-			return false;
-			}
-		}
-		//-->
-		</script> <!--funzione di controllo-->
     </head>
     <body>
         <!--#include virtual file="include/menu.asp"-->    
@@ -158,119 +79,59 @@ End if
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                            	<legend><%=response.write (titolomagicbox)%></legend>
+                            	<legend>Gestione Richieste Ordini da Learning Center</legend>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                    <form method="post" Action="sim_magicbox_barcode_start.asp" class="form-horizontal">
-                                      <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">
-                                             <%=response.write (ricercabarcode)%>:</label>
-                                          <div class="controls">
-                                          	<input name="barcode" class="input-small focused" id="focusedInput" type="text" style="width:300px;">
-                                          </div>
-                                        </div>
-                                        <div class="form-actions">
-                                          <%'response.write request("BARCODE")%>
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="<%=response.write (etichettabottonecerca)%>"><%=response.write (testobottonecerca)%></button>&nbsp;
-                                          <button type="reset" class="btn"><%=response.write (testobottoneannulla)%></button>&nbsp;
-                                        </div>
-                                      </fieldset>
-                                    </form>
                                 </div>
                                 <table class="table table-condensed">
-                                   <tbody>
+									<tbody>
                                         <tr>
-											<th><%=response.write (titolotabellamacrocategorie)%></th>
-											<th><%=response.write (titolotabellacategorie)%></th>
-											<th><%=response.write (titolotabellasottocategorie)%></th>
-                                           <!-- <th rowspan="4"><img src="images/icone/unnamed.jpg" width="100" height="75"></th> --> <!--fotografia kit-->
+											<th>Codice Articolo</th>
+                                            <th>Barcode</th>
+											<th>Nome Articolo</th>
 										</tr>
                                         <tr>
-										    <td><%= rs3("Macrocategoria") %>&nbsp;</td>
-											<td><%= rs4("Categoria") %>&nbsp;</td>
-											<td><%= rs5("Sottocategoria") %>&nbsp;</td>
+										    <td><%= rs("Codart") %></td>
+                                            <td><%= rs("Barcode") %></td>
+											<td><%= rs("Nomart") %></td>
 										</tr>
-                                       <td colspan="4">&nbsp;</td>
+                                       <td colspan="6">&nbsp;</td>
 										<tr>
-											<th><%=response.write (ricercanomekit)%></th>
-											<th><%=response.write (ricercabarcode)%></th>
-											<th><%=response.write (ricercadataacquisto)%></th>
-										</tr>
+											<th>Barcode</th>
+                                            <th>Articolo Attivo</th>
+											<th>Quantità in Magazzino</th>
+											<th>Quantità Minima</th>
+										</tr>  
                                         <tr>
-											<td><%= rs("NomeKit") %>&nbsp;</td>
-											<td><%= rs("Barcode") %>&nbsp;</td>
-											<td><%= rs("Datain") %>&nbsp;</td>
+                                            <td><%= rs("Barcode") %></td>
+											<td><%= rs("Attart") %></td>
+											<td><%= rs("Qtadisp") %></td>
+											<td><%= rs("Qtamin") %></td>
 										</tr>
-                                        <td colspan="4">&nbsp;</td>
-                                        <tr>
-											<th><%=response.write (ricercastatokit)%> e <%=response.write (ricercaposizioni)%></th>
-                                            <th><%=response.write (ricercaqta)%></th>
-											<%If session("ruolo") <> "U" Then %>
-                                            <th><%=response.write (ricercaprezzo)%></th>
-                                             <%End If%>
+									<td colspan="6">&nbsp;</td>
+                                    <tr>    
+                                        <!-- mettere condizione di If che visualizza la parte sotto dopo aver inserito il barcode-->
+                                        	<th>Quantità Richiesta:</th>
+											<th>&nbsp;</th>
 										</tr>
-                                        <tr>
-                                            <td><%= rs2("Stato") %>&nbsp;-&nbsp;<%= rs1("Posizione") %></td>
-											<td><%= rs("Qta") %>&nbsp;</td>
-                                            <%If session("ruolo") <> "U" Then %>
-                                            <td><%= rs("Prz") %>&nbsp;</td>
-                                            <%End If%>
-                                        </tr>
-                                        <td colspan="4">&nbsp;</td>
-										<tr>
-											<td colspan="2"><strong><%=response.write (ricercadesckit)%>:</strong>&nbsp;<%= rs("Desckit") %></td>
-										    <td colspan="2"><strong><%=response.write (ricercakeyword)%>:</strong>&nbsp;<%= rs("Keywords") %> </td>
-										</tr>
-                                     </tbody>
+                                <tr>
+										    <td>
+                                                <div class="controls">
+                                          	    <input name="qta_arr" class="input-small focused" id="focusedInput" type="number" min="0" max="999" maxlength="3" style="width:80px; height: 30px">
+                                                </div>
+                                            </td>
+                                            <td>
+                                            <div class="form-actions">
+                                                <button type="submit" class="btn btn-success" data-original-title="Cerca">Conferma</button>&nbsp;
+                                                <button type="submit" class="btn btn-success" data-original-title="Cerca">Inserisci Richiesta</button>&nbsp;
+                                                <button type="reset" class="btn btn-default">Annulla</button>&nbsp;
+                                             </div>
+                                             </form>
+                                            </td>
+								</tr>
+                            </tbody>
 								</table>
-                            </div>
-                            <div class="form-actions" align="center">
-                            
-                            <%s9="SELECT COUNT(A.IDKIT) as Totale, B.USR FROM SIM_Temp_MagicBox as A INNER JOIN SIM_User as B ON B.ID_USR = A.IDUSER WHERE A.IDKIT = " & rs("IDKIT") & " AND IN_OUT ='IN' GROUP BY B.USR "
-                                                'Response.write s9
-                                                'response.write session("usr")
-                                                
-
-                                                dim user, toto
-                                                user= session("usr")
-                                                
-                                                'response.write user
-
-                                                'response.end
-                                                
-                                                
-                                                Set rs9 = dbConn.Execute(s9)    
-                            
-                            
-                               If Not RS9.EOF Then
-                                   If (rs9("Totale") = 1 AND rs9("USR")= user) Then%>
-
-                                         <a href="sim_magicbox_scarico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>"><img src ="images/downkit.png" align="right" width="32" height="32" title="<%=response.write (iconadownkitamb)%>"></a>
-                                 
-                                 <% Elseif (rs9("Totale") = 1 AND rs9("USR")<> user) then %>
-
-                                        <div class="alert alert-warning">
-                                          <strong>Warning!</strong> Il Kit non è disponibile in quanto in uso da:
-                                        </div>
-                                  
-                                  <%     
-                                        Response.write rs9("USR")
-                                        'Response.write rs9("Totale")
-                                 
-                                    end if
-                               Else 
-                                   'response.write "ASASAS"%>
-                                   <a href="sim_magicbox_carico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>&Categoria=<%= rs4("Categoria") %>&Sottocategoria=<%= rs5("Sottocategoria") %>&Nomekit=<%= rs("nomekit") %>&desckit=<%= rs("desckit") %>&stato=<%= rs2("idstato") %>&qta=<%= rs("qta") %>&pos=<%= rs1("idpos") %>"><img src="images/upkit.png" align="right" width="32" height="32" title="<%=response.write (iconaupkitamb)%>"></a>&nbsp;&nbsp;
-                                   <a href="sim_magicbox_scarico.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("Barcode") %>"><img src ="images/downkit.png" align="right" width="32" height="32" title="<%=response.write (iconadownkitamb)%>"></a>
-                                 <%
-                                   End if                                                                              
-                                 %>
-
-                           <%If request("SEGNALAZIONE")= 0 Then%>   
-                            &nbsp;&nbsp;<a href="sim_magicbox_segnalazione.asp?IDKit=<%= rs("IDKit") %>&BARCODE=<%= rs("BARCODE") %>&IDUSR=<%= session("usr") %>"><img src="images/segnalationkit.png" align="right" width="32" height="32" title="<%=response.write (iconasegnalaanomaliamb)%>"></a>
-                            <%End If%>
                             </div>
                         </div>
                         <!-- /block -->
@@ -280,9 +141,67 @@ End if
                         <!-- block -->
                         <!-- /block -->
                     </div>
-                </div><!--#include virtual file="sim_wishlist_lateral.asp"--><!--#include virtual file="sim_magicbox_lateral.asp"-->
+                </div>
+
+                <div class="span4 id="sidebar"><br>
+			                <div class="span4">
+                            <div class="navbar navbar-inner block-header">
+                            	<legend>Storico Movimenti Articolo <%= rs("Codart") %>
+                            </div>
+                                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+										<thead>
+											<tr>
+												<th>Codice</th>
+												<th>Qta arrivata</th>
+												<th>Data arrivo</th>
+                                                <th>Nr. Ordine</th>
+											</tr>
+										</thead>
+										<tbody>
+											<%
+												i = 1
+												iduser=session("id_usr")
+                                                codart = rs("Codart")
+                                                'Response.Write(Session("id_usr"))
+
+                                                sss = "SELECT Codart,Qtaarr,Dataarr,Numord FROM ORD_arrivi WHERE Codart=" & codart
+                                                Set rs = dbConn.Execute(sss)
+
+                                                if Rs.eof then 
+                                                %><br>
+                                                <div class="alert alert-info span10">
+                                                  <strong>Info!</strong> Non hai ancora caricato nessun articolo per questo codice
+                                                </div>
+                                                <%
+                                                 End if
+												'Response.Write sss
+                                                'Response.Write rs("POS")
+
+													While Not rs.EOF
+													i = i + 1
+													%>
+													<% If i/2 - Int(i/2) = 0 Then %>
+														<tr class="odd gradeA">
+													<% Else %>
+														<tr class="even gradeA">
+													<% End If %>
+		
+														<td><%= rs("Codart") %></td>
+														<td><%= rs("Qtaarr") %></td>
+                                                        <td><%= rs("Dataarr") %></td>
+                                                        <td><%= rs("Numord") %></td>
+													</tr>
+													<%
+													rs.MoveNext
+													Wend
+													%>
+
+										</tbody>
+									</table>
+                             </div>
+
+</div>
             </div>
-            
             <hr>
 		    <!--#include virtual file="include/piede.asp"-->
 		    </div>

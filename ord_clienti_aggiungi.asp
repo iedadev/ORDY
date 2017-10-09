@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file ="include/security.asp"-->
 
 <!DOCTYPE html>
 <html lang="it">
@@ -9,27 +10,20 @@
 </head>
 </html>
 <%
-If session("usr")= "" Then
-    response.redirect "default.asp"
-End If
-
-If session("ruolo") <> "A" Then
-    response.redirect "hd_todo.asp"
-End If
-
+    
 Dim sss, IP, NuovoID
 IP = Request.ServerVariables("REMOTE_ADDR")
 ' Scrive Log - Inizio
 
-sss = "INSERT INTO ORD_Clienti (Nomcli,Indcli,Emacli,Telcli,DataCreated) VALUES ('" & request("ord_nomcli") & "','" & request("ord_indcli") & "','" & request("ord_emacli") & "','" & request("ord_telcli") & "',Now())"
-Set rs = dbConn.Execute(sss)
+sss = "INSERT INTO ORD_Clienti (Nomcli,Refcli,Indcli,Emacli,Telcli,DataCreated,Stacli) VALUES ('" & request("ord_nomcli") & "','" & request("ord_refcli") & "','" & request("ord_indcli") & "','" & request("ord_emacli") & "','" & request("ord_telcli") & "',Now(),1)"
+Set rs1 = dbConn.Execute(sss)
 
 sss = "SELECT MAX(IDcli) as nuovo FROM ORD_Clienti"
-Set rs = dbConn.Execute(sss)
-NuovoID = rs("nuovo")
+Set rs2 = dbConn.Execute(sss)
+NuovoID = rs2("nuovo")
 
 sss = "INSERT INTO ORD_Logs (IPRemoto, Utente, Operazione, DataOperazione) VALUES ('" & IP & "', '" & session("usr") & "', 'Aggiunto Nuovo Cliente " & NuovoID & "', Now())"
-Set rs = dbConn.Execute(sss)
+Set rs3 = dbConn.Execute(sss)
 ' Scrive Log - Fine
 
 response.redirect "ord_gestione_clienti.asp?New=1"

@@ -2,14 +2,7 @@
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="language.asp"-->
 <!--#include virtual file="config.asp"-->
-<%
-If session("usr") = "" Then
-    response.redirect "default.asp"
-End If
-
-'response.end
-
-%>
+<!--#include virtual file ="include/security.asp"-->
 
 <!DOCTYPE html>
 <html lang="it">

@@ -1,6 +1,7 @@
 <%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
+<!--#include virtual file ="include/security.asp"-->
 
 <!DOCTYPE html>
 <html lang="it">
@@ -9,13 +10,6 @@
 </head>
 </html>
 <%
-If session("usr")= "" Then
-    response.redirect "default.asp"
-End If
-
-If session("ruolo") <> "A" Then
-    response.redirect "hd_todo.asp"
-End If
 
 Dim sss, IP, NuovoID
 IP = Request.ServerVariables("REMOTE_ADDR")

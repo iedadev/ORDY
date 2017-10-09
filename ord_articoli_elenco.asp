@@ -2,20 +2,15 @@
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
-<%
-If session("usr")= "" Then
-    response.redirect "default.asp"
-End If
+<!--#include virtual file ="include/security.asp"-->
 
-If session("ruolo") <> "A" Then
-    response.redirect "main.asp"
-End If
+<%
 
 Dim sss, i
 
 i = 1
 
-sss = "SELECT * FROM ORD_Articoli WHERE ATTART ='Y' AND IDCodmag=1 AND 1 = 1 "
+sss = "SELECT * FROM ORD_Articoli WHERE ATTART ='Y' AND 1 = 1 "
 'sss = sss & " ORDER BY Datain"
 
 session("sss") = sss
@@ -24,7 +19,6 @@ Set rs2 = dbConn.Execute(sss)
 
 'response.write rs2("Attart")
 'response.write sss
-
 
 %>
 <!DOCTYPE html>
@@ -41,32 +35,43 @@ Set rs2 = dbConn.Execute(sss)
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-	    <!--#include virtual file="include/menu.asp"-->
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12" id="content">
                      <div class="row-fluid">
-                         
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                             	<legend>Elenco Articoli &nbsp;&nbsp;
-                        	        <a href="javascript:history.back()"><img src="images/back.png" width="32" height="32" title="Indietro"></a>
-                                    <a href="delete.asp"<img src="images/delete.png" width="32" height="32" title="Elimina">Elimina Articolo</a>
+                        	        <a href="ord_articoli_elenco.asp"><button type="button" class="btn btn-success">Torna Indietro</button></a>
+									 <a href="main.asp"><button type="button" class="btn btn-primary">Home</button></a>
                                 </legend>
                             </div>
+							
+							<% If request("Del") = 1 Then%>	
+                                    <div class="alert alert-success" align="center">
+                                        <strong> Articolo eliminato con successo.</strong>
+                                    </div>
+                                  <%end if%>
+									
+							<% If request("MOD") = 1 Then%>	
+                                    <div class="alert alert-success" align="center">
+                                       <strong> Articolo modificato con successo.</strong>
+                                    </div>
+                                  <%end if%>
+							
                             <div class="block-content collapse in">
-                                 <!--#include virtual file="ord_controlpanelmagazzino.asp"-->
-                                <div class="span8">
-  									
+                                <div class="span12">	
                                     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 										<thead>
                                             <tr>
 												<th>Codice</th>
+                                                <th>Barcode</th>
                                                 <th>Nome</th>
 												<th>Prz</th>
 												<th>Qta Disp</th>
 												<th>Qta Min</th>
+												<th>&nbsp;</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -81,7 +86,6 @@ Set rs2 = dbConn.Execute(sss)
 											<% End If %>
                                             <td>
 												<%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_KIT AS K, SIM_Macrocategorie AS CAT WHERE K.IDMCAT = CAT.IDMCAT AND K.IDMCat = " & rs("IDMcat"))
 												If Not rs2.eof Then
 													'Response.write sss
                                                     Response.write rs2("Codart")
@@ -90,10 +94,20 @@ Set rs2 = dbConn.Execute(sss)
 												End If
 												%>
 												</td>
+                                                <td>
+												<%
+												If Not rs2.eof Then
+													'Response.write sss
+                                                    brc=rs2("Barcode")
+													Response.write brc
+												Else
+													Response.write "&nbsp;"
+												End If
+												%>
+												</td>
 												<td>
 												<%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_KIT AS K, SIM_Categorie AS CAT WHERE K.IDCAT = CAT.IDCAT AND K.IDCat = " & rs("IDcat"))
-												If Not rs2.eof Then
+											    If Not rs2.eof Then
 													'Response.write sss
                                                     Response.write rs2("Nomart")
 												Else
@@ -103,7 +117,6 @@ Set rs2 = dbConn.Execute(sss)
 												</td>										
 												<td>
                                                 <%
-												'Set rs2 = dbConn.Execute("SELECT * FROM SIM_KIT AS K, SIM_Sottocategorie AS SCAT WHERE K.IDSCAT = SCAT.IDSCAT AND K.IDScat = " & rs("IDScat"))
 												If Not rs2.eof Then
 													'Response.write sss
                                                     dim Numero
@@ -116,7 +129,6 @@ Set rs2 = dbConn.Execute(sss)
 												</td>
 												<td>
 												<%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDCat = " & rs("IDCat"))
 												If Not rs2.eof Then
 													Response.write rs2("Qtadisp")
 												Else
@@ -126,13 +138,20 @@ Set rs2 = dbConn.Execute(sss)
 												</td>
                                                 <td>
 												<%
-												'Set rs1 = dbConn.Execute("SELECT * FROM SIM_Kit WHERE IDCat = " & rs("IDCat"))
 												If Not rs2.eof Then
 													Response.write rs2("Qtamin")
 												Else
 													Response.write "&nbsp;"
 												End If
 												%>
+												</td>
+												<td>
+												<%
+												If Not rs2.eof Then%>
+												 <a href="ord_articoli_mag_modifica.asp?CODART=<%=rs2("CODART")%>&BARCODE=<%=brc%>"><img src="images/buttonedit.png" width="32" height="32" title="Modifica Articolo"></a>
+												 <a href="ord_articoli_mag_elimina.asp?CODART=<%=rs2("CODART")%>&BARCODE=<%=brc%>"><img src="images/buttondelete.png" width="32" height="32" title="Elimina Articolo"></a>
+												<% End If%>
+												
 												</td>
                                                 </tr>
 											<%
@@ -150,7 +169,6 @@ Set rs2 = dbConn.Execute(sss)
                 </div>
             </div>
             <hr>
-		    <!--#include virtual file="include/piede.asp"-->
         </div>
         <!--/.fluid-container-->
 

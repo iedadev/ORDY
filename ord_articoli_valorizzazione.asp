@@ -2,14 +2,9 @@
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
-<%
-If session("usr")= "" Then
-    response.redirect "default.asp"
-End If
+<!--#include virtual file ="include/security.asp"-->
 
-If session("ruolo") <> "A" Then
-    response.redirect "main.asp"
-End If
+<%
 
 Dim sss, i
 

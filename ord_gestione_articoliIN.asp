@@ -1,22 +1,17 @@
-﻿<%@ LANGUAGE="VBSCRIPT" %>
+<%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
-<%
-If session("usr") = "" Then
-    response.redirect "default.asp"
-End If
+<!--#include virtual file ="include/security.asp"-->
 
-'If session("ruolo") <> "A" Then
-  '  response.redirect "hd_todo.asp"
-'End If
+<%
 
  nrord = request("nrordine")
  pdfordine = "ordineHD_"&nrord
  'nrord1 = request("NumOrdine")
 
- response.write nrord
- response.write "--" & pdfordine
+ 'response.write nrord
+ 'response.write "--" & pdfordine
  'response.write NumOrdine
  'response.write nrord1
  'response.end
@@ -25,7 +20,7 @@ End If
 
 if request("nrordine") = 99  then
 
-sss =  "SELECT Numord FROM ORD_Arrivi WHERE IDArr = (SELECT MAX(IDarr)  FROM ORD_Arrivi)"
+sss =  "SELECT Numord, Dataarr FROM ORD_Arrivi WHERE IDArr = (SELECT MAX(IDarr)  FROM ORD_Arrivi) ORDER BY DATAARR ASC"
 Set rs = dbConn.Execute(sss)
 
 nrord = rs("Numord")
@@ -33,27 +28,25 @@ pdfordine = rs("Numord")
 pdfordine = "ordineHD_"&pdfordine
 
 
-response.write sss
-response.write pdfordine
+'response.write sss
+'response.write pdfordine
 
 end if
 
 
 %>
+    <!DOCTYPE html>
+<html lang="en">
 
-<!DOCTYPE html>
-<html lang="it">
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!--#include virtual file="include/title.asp"-->
-        <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="assets/styles.css" rel="stylesheet" media="screen">
-        <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-        
-      <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-      <script type="text/javascript"> 
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script type="text/javascript"> 
         <!--
         function controllo()
         {
@@ -67,194 +60,221 @@ end if
 		}
 		//-->
 		</script>
-    </head>
-    <body>
-        <!--#include virtual file="include/menu.asp"-->    
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span6" id="content">
-                      <!-- morris stacked chart -->
-                    <div class="row-fluid">
-                        <!-- block -->
-                        <div class="block">
+
+     <!--Intestazione-->
+	
+	<!--#include virtual file="include/title.asp"-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        <!--#include virtual file="include/navigation.asp"-->
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+               
+                 <!--#include virtual file="include/heading.asp"--> 
+               
+                 <!-- /.row -->
+
+<div class="row">
+                    <div class="col-lg-4  text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
                             <div class="navbar navbar-inner block-header">
-                            	<legend>Gestione Ordini <%=response.write (nrord)%> da Helen Doron</legend>
+                            	<% if request("nrordine") = 98  then%>
+
+                            	<legend>Gestione Ordini da Helen Doron</legend>
+
+                                <%else%>
+
+                                <legend>Gestione Ordini <%=response.write (nrord)%> da Helen Doron</legend>
+
+                                <%end if%>
                             </div>
-                            <div class="block-content collapse in">
+                                <div class="block-content collapse in">
                                 <div class="span12">
+								
+                                        <%if request("Err")  = 3 then %>
+                                                <div class="alert alert-danger">
+                                                  <strong>Attenzione!</strong>Articolo già inserito in questo ordine.
+                                                </div>
+                                       <% end if%>
+								
+								
                                       <%If nrord <> " " then%>
                                     <form name="P2" method="post" class="form-horizontal" Action="ord_gestione_articoli_barcode.asp?nrordine=<%response.write (nrord)%>" onsubmit="return controllo()">
                                       <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">
-											Codice Articolo: </label> 
-                                          <div class="controls">
-                                             <input name="barcode" class="input-small focused" id="focusedInput" type="text" style="width:150px; height: 30px">
-                                               
-                                              <input type="radio" name="code" value="bar" checked >&nbsp;Barcode &nbsp;&nbsp;<input type="radio" name="code" value="hd">&nbsp;Codice HD<br>
-                                          </div>
-                                        </div>
-                                        <div class="form-actions">
-                                            <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Cerca</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
-                                        </div>
-                                      </fieldset>
-                                    </form>
-                                <%End if%> 
-                                </div>
-                              <% if  nrord = "" Then
-                                     'response.write "passqui"
-                               %>
-                                <table class="table table-condensed">
-									<tbody>  
-                                    Per visualizzare la scheda dell'ordine inserire il codice dell'ordine.
-                                        <form name="P3" method="post" Action="ord_gestione_articoliIN.asp" class="form-horizontal">
-                                      <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">
-											Numero Ordine: </label> 
-                                          <div class="controls">
-                                          	<input name="nrordine" class="input-small focused" id="focusedInput" type="text" style="width:100x;">
-                                           </div>
-                                        </div>
+                                          <div class="form-group">
+                                          <label  for="focusedInput">Codice Articolo
+                                          <input name="barcode" class="form-control" id="focusedInput" type="text" style="width:200px;">
+                                              </div></label> 
+                                        
+                                             <input type="radio" name="code" value="bar" checked >&nbsp;Barcode &nbsp;&nbsp;<input type="radio" name="code" value="hd">&nbsp;Codice HD
+                                          <br><br>
                                         <div class="form-actions">
                                           <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Cerca</button>&nbsp;
                                           <button type="reset" class="btn">Annulla</button>&nbsp;
                                         </div>
+                                          
                                       </fieldset>
                                     </form>
-                            </tbody>
-								</table> 
-                                <table class="table table-condensed">
-									<tbody>  
-                                    Caricare il file pdf dell'ordine rinominando il file in Ordine HD_nrOrdine (es OrdineHD_160612)
-                                        <form method="post" enctype="multipart/form-data" action="ord_saveupload.asp" class="form-horizontal">
-                                              <div align="center">
-                                                <center>
-                                                <table border="0" style="border-collapse: collapse" bordercolor="#111111" width="74%" id="AutoNumber1">
-                                                    <input type="file" name="File1" size="20"></b></font></td>
-                                                </table>
-                                                  <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">
-											upload Ordine: </label> 
-                                                   <div class="controls">
-                                                    <input type="submit" value="Submit" name="B1" class="input-small focused" id="focusedInput" style="width:100x;"></b></font></td>
-                                                  </div>
-                                                </div>
-                                                <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Carica</button>&nbsp;
-                                          <button type="reset" class="btn">Annulla</button>&nbsp;
-                                        </div>
-                                      </fieldset>
-                                            </form>
-                            </tbody>
-								</table>
-                                 <%end if%>
+                                    <div align="right">
+                                    <a href="main.asp"><button type="button" class="btn btn-success" align="right">Torna alla home</button></a>
+                                    </div>
+                                <%End if%> 
+                                
+
+                                <% if request("nrordine") = 98  then%>
+
+                                   <div class="alert alert-danger">
+                                      <strong>Attenzione!</strong> Il codice inserito non è presente tra gli articoli di magazzino.
+                                    </div>
+
+                                    <%end if%>
+
+
+                                </div>
+                            </div>
                             </div>
                         </div>
-                        <!-- /block -->
                     </div>
-                  
-                     <div class="row-fluid">
-                        <!-- block -->
-                        <!-- /block -->
+                    <div class="col-lg-8 text-center">
+                        <div class="panel panel-default">
+
+                            <div class="panel-body">
+                             <div class="navbar navbar-inner block-header">
+							 
+							         <% if request("nrordine") = 98  then%>
+
+                            	<legend>Articoli Ordine</legend>
+
+                                <%else%>
+
+								     <legend> Articoli Ordine  <%=response.write (nrord)%> &nbsp; &nbsp; &nbsp; &nbsp;
+
+                                <%end if%>
+							 
+                            	
+                                 <a href="ord_gestione_nrordine.asp"><button type="button" class="btn btn-success" align="right">Torna Elenco ordini</button></a>
+                                </legend> 
+                                 
+                            </div>
+
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+										<thead>
+											<tr>
+												<th>Codice Articolo</th>
+												<th>Qta arrivata</th>
+												<th>Data arrivo</th>
+                                               <th>Nome Articolo</th>
+                                               <th>Prezzo </th>
+												<th>#</th>
+											</tr>
+										</thead>
+										<tbody>
+											<%
+                                                'storico articoli per il nr ordine
+												i = 1
+												iduser=session("id_usr")
+                                                'codart = rsnord("Codart")
+                                                'codart = rs("Numord")
+                                                codart = request("nrordine")
+                                                'Response.Write(Session("id_usr"))
+                                                if request("nrordine") <> ""  then
+                                               ' sss = "SELECT Codart,Qtaarr,Dataarr,Numord FROM ORD_arrivi WHERE numord=" & codart
+                                               sss ="SELECT ORD_Arrivi.NumOrd, ORD_Arrivi.Qtaarr, ORD_Arrivi.Codart, ORD_Articoli.Nomart, ORD_arrivi.Dataarr, "
+                                               sss = sss & "ORD_Articoli.Przart FROM ORD_Arrivi INNER JOIN ORD_Articoli ON ORD_Arrivi.Codart = ORD_Articoli.Codart WHERE ORD_Arrivi.NumOrd=" & codart 
+                                               'response.write sss
+                                                Set rsnord = dbConn.Execute(sss)
+                                               'response.end
+                                                
+                                                if rsnord.eof then 
+                                                %><br>
+                                                <div class="alert alert-info span10">
+                                                  <strong>Info!</strong> Non hai ancora caricato nessun articolo per questo codice
+                                                </div>
+                                                <%
+                                                 End if
+												'Response.Write sss
+                                                'Response.Write rs("POS")
+
+													While Not rsnord.EOF
+													i = i + 1
+													%>
+													<% If i/2 - Int(i/2) = 0 Then %>
+														<tr class="odd gradeA">
+													<% Else %>
+														<tr class="even gradeA">
+													<% End If %>
+		
+														<td><%= rsnord("Codart") %></td>
+														<td><%= rsnord("Qtaarr") %></td>
+                                                        <td><%= rsnord("Dataarr") %></td>
+                                                        <td><%= rsnord("Nomart") %></td>
+                                                        <td><%
+																dim Numero
+																Numero = rsnord("Przart")
+																Response.write "Euro: " & FormatNumber (Numero,2,,,-1) %>
+														</td>
+														<td><a href="ord_articoli_ordine_modifica.asp?NUMORD=<%=rsnord("Numord")%>&codart=<%= rsnord("Codart") %>"<i class="fa fa-pencil fa-2x" title="Modifica"></i></a>
+
+													</tr>
+													<%
+													rsnord.MoveNext
+													Wend
+													%>
+
+										</tbody>
+									</table>
+                                 <%else
+                                        Response.write "nulla"
+                                      end if
+                                %>
+                            </div>
+                        </div>
                     </div>
-                </div><!-- nella parte laterale si potrebbe mettere Elenco dei movimenti dell'articolo-->
-                <div id="pdf"><br>
-                <object width="700" height="500" type="application/pdf" data="OrdiniHD/<%response.write pdfordine%>.pdf?#zoom=85&scrollbar=1&toolbar=1&navpanes=0"
-                     id="pdf_content">
-                    </div>
-                </p>
-                  </object>
-                </div>
+</div>
+                            
             </div>
-            <hr>
-		    <!--#include virtual file="include/piede.asp"-->
-		    </div>
-        <!--/.fluid-container-->
-        <link href="vendors/datepicker.css" rel="stylesheet" media="screen">
-        <link href="vendors/uniform.default.css" rel="stylesheet" media="screen">
-        <link href="vendors/chosen.min.css" rel="stylesheet" media="screen">
+            <!-- /.container-fluid -->
 
-        <link href="vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
+        </div>
+        <!-- /#page-wrapper -->
 
-        <script src="vendors/jquery-1.9.1.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/jquery.uniform.min.js"></script>
-        <script src="vendors/chosen.jquery.min.js"></script>
-        <script src="vendors/bootstrap-datepicker.js"></script>
+    </div>
+    <!-- /#wrapper -->
 
-        <script src="vendors/wysiwyg/wysihtml5-0.3.0.js"></script>
-        <script src="vendors/wysiwyg/bootstrap-wysihtml5.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-        <script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-
-        <script src="assets/scripts.js"></script>
-        <script>
-        $(function() {
-            $(".datepicker").datepicker();
-            $(".uniform_on").uniform();
-            $(".chzn-select").chosen();
-            $('.textarea').wysihtml5();
-
-            $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index+1;
-                var $percent = ($current/$total) * 100;
-                $('#rootwizard').find('.bar').css({width:$percent+'%'});
-                // If it's the last tab then hide the last button and show the finish instead
-                if($current >= $total) {
-                    $('#rootwizard').find('.pager .next').hide();
-                    $('#rootwizard').find('.pager .finish').show();
-                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
-                } else {
-                    $('#rootwizard').find('.pager .next').show();
-                    $('#rootwizard').find('.pager .finish').hide();
-                }
-            }});
-            $('#rootwizard .finish').click(function() {
-                alert('Finished!, Starting over!');
-                $('#rootwizard').find("a[href*='tab1']").trigger('click');
-            });
-        });
-        </script>
-        <script>
-        $(function() {
-            $('.tooltip').tooltip();	
-			$('.tooltip-left').tooltip({ placement: 'left' });	
-			$('.tooltip-right').tooltip({ placement: 'right' });	
-			$('.tooltip-top').tooltip({ placement: 'top' });	
-			$('.tooltip-bottom').tooltip({ placement: 'bottom' });
-
-			$('.popover-left').popover({placement: 'left', trigger: 'hover'});
-			$('.popover-right').popover({placement: 'right', trigger: 'hover'});
-			$('.popover-top').popover({placement: 'top', trigger: 'hover'});
-			$('.popover-bottom').popover({placement: 'bottom', trigger: 'hover'});
-
-			$('.notification').click(function() {
-				var $id = $(this).attr('id');
-				switch($id) {
-					case 'notification-sticky':
-						$.jGrowl("Stick this!", { sticky: true });
-					break;
-
-					case 'notification-header':
-						$.jGrowl("A message with a header", { header: 'Important' });
-					break;
-
-					default:
-						$.jGrowl("Hello world!");
-					break;
-				}
-			});
-        });
-        </script>
-    </body>
+</body>
 
 </html>
-<%
-Set rs = Nothing
-Set dbConn = Nothing
-%>

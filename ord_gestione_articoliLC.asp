@@ -1,61 +1,168 @@
-﻿<%@ LANGUAGE="VBSCRIPT" %>
+<%@ LANGUAGE="VBSCRIPT" %>
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="config.asp"-->
 <!--#include virtual file="language.asp"-->
+<!--#include virtual file ="include/security.asp"-->
+
 <%
-If session("usr") = "" Then
-    response.redirect "default.asp"
-End If
 
-'If session("ruolo") <> "A" Then
-  '  response.redirect "hd_todo.asp"
-'End If
+Dim sss, i 
 
-'Set dbConn = CreateObject("ADODB.Connection")
-'dbConn.Open Application("Connection1_ConnectionString")
- 'response.write "E' ZERO"
+sss6 = "SELECT COUNT(*) as Totale FROM ORD_Articoli WHERE  ATTART = 'Y'  AND BARCODE = '" & request("BARCODE") & "'"  'cosi si passa una stringa!!!!
+			Set rs6 = dbConn.Execute(sss6)
+             If rs6("Totale") = 0 Then
+                sss7 = "SELECT COUNT(*) as Totale FROM ORD_Articoli WHERE ATTART = 'N' AND BARCODE = '" & request("BARCODE") & "'"  'cosi si passa una stringa!!!!
+                Set rs7 = dbConn.Execute(sss7)
+                            If rs7("Totale") = 0 Then
+                                    response.redirect "ord_gestione_articoliLC_start.asp?Nocode=1" 'articolo non presente
+                            else
+                                    response.redirect "ord_gestione_articoliLC_start.asp?Nocode=2"  'articolo presente ma non attivo
+                            end if
+            end if
+
+sss3 =  "SELECT * FROM ORD_Articoli WHERE BARCODE = '" & request("BARCODE") & "'"  'cosi si passa una stringa!!!!
+Set rs3 = dbConn.Execute(sss3)
+
+sss2 =  "SELECT NomCli FROM ORD_Clienti WHERE IDCLI = " & request("ord_lc") 
+Set rs2 = dbConn.Execute(sss2)
+
+'response.write sss6
+'response.write sss3
+'response.write sss2
+'response.end
+
+
+'response.write sss3
+'response.write sss2
+'response.end
+
+'response.write"FAR PARTIRE COMUNICAZIONE DI ORDINE PRESO IN CARICO"
+
 %>
+    <!DOCTYPE html>
+<html lang="en">
 
-<!DOCTYPE html>
-<html lang="it">
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!--#include virtual file="include/title.asp"-->
-        <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="assets/styles.css" rel="stylesheet" media="screen">
-        <link href="vendors/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
-        
-        <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body>
-        <!--#include virtual file="include/menu.asp"-->    
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span6" id="content">
-                      <!-- morris stacked chart -->
-                    <div class="row-fluid">
-                        <!-- block -->
-                        <div class="block">
-                            <div class="navbar navbar-inner block-header">
-                            	<legend>Richieste da LC</legend>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--Intestazione-->
+	
+	<!--#include virtual file="include/title.asp"-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        <!--#include virtual file="include/navigation.asp"-->
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+               
+                 <!--#include virtual file="include/heading.asp"--> 
+               
+                 <!-- /.row -->
+
+<div class="row">
+<div class="col-lg-4 text-center">
+                       		<div class="panel panel-primary">
+                            <div class="panel-heading">
+                            <div class="panel-body">
+                                     <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-center">
+                                        <div class="huge">Ordini da Learning Center</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="block-content collapse in">
-                                <div class="span12">
-                                    <form method="post" Action="ord_gestine_articoliLC_barcode.asp" class="form-horizontal">
+                                </div>
+                        </div>
+                    </div>
+<div class="col-lg-6 text-center">
+                        <div class="panel panel-default">
+
+                            <div class="panel-body">
+                             <div class="navbar navbar-inner block-header">
+                            	<legend>Richieste da Learning Center </legend>
+                            </div>
+                                      <form name="P2" method="post" Action="ord_gestione_articoliLC_richiesta.asp" class="form-horizontal" onsubmit="return controllo()">
                                       <fieldset>
-                                          <div class="control-group">
-                                          <label class="control-label" for="focusedInput">
-											Barcode o Codice articolo: </label>
-                                          <div class="controls">
-                                          	<input name="barcode" class="input-small focused" id="focusedInput" type="text" style="width:300px;">
-                                          </div>
-                                        </div>
-                                        <div class="form-actions">
-                                          <%'response.write request("BARCODE")%>
-                                            <button type="submit" class="btn btn-primary tooltip-top" data-original-title="Cerca">Cerca</button>&nbsp;
+                                          <div class="form-group">
+                                          <label  for="focusedInput">Numero Ordine 
+                                          <input name="nr_ordine" class="form-control" id="focusedInput" readonly  type="text" value="<%=request("nr_ordine")%>" style="width:200px;">
+                                           </div></label> 
+
+                                          <div class="form-group">
+                                          <label  for="focusedInput">Learning Center
+                                          <input name="ord_lc" class="form-control" id="focusedInput" readonly  type="text" value="<%=rs2("Nomcli")%>" style="width:200px;">
+                                           </div></label>  
+                                          
+                                           <div class="form-group">
+                                          <label  for="focusedInput">Data Ordine
+                                           <input name="Data_Ordine" class="form-control" id="focusedInput"  readonly  type="text" value="<%=request("Data_Ordine")%>" style="width:100px;">
+                                           </div></label> 
+
+                                                        <% if request ("nocode") = 1 then %>
+                                                            <div class="alert alert-danger">
+                                                              <strong>Attenzione!</strong> Il codice inserito non corrisponde a nessun prodotto.
+                                                            </div>
+                                                        <%end if%>
+ 
+                                                        <% if request ("nocode") = 2 then %>
+                                                            <div class="alert alert-danger">
+                                                              <strong>Attenzione!</strong> Il codice inserito <%=request("nr_ordine")%> corrisponde ad un articolo non attivo. Vuoi attivarlo?
+                                                            </div>
+                                                        <%end if%>
+
+                                           <div class="form-group">
+                                          <label  for="focusedInput">Codice Articolo
+                                           <input name="Barcode" class="form-control" id="focusedInput" readonly  type="text" value="<%=request("barcode")%>" style="width:200px;">
+                                           </div></label> 
+
+                                           <div class="form-group">
+                                          <label  for="focusedInput">Numero Articolo
+                                           <input name="codart" class="form-control" id="focusedInput" readonly  type="text" value="<%=rs3("codart")%>" style="width:200px;">
+                                           </div></label> 
+
+                                           <div class="form-group">
+                                          <label  for="focusedInput">Qta Richiesta 
+                                          <input name="qta_ric" class="form-control" id="focusedInput" type="number" min="0" max="999" maxlength="3" style="width:100px;">
+                                           </div></label> 
+
+                                          <br>
+                                          <div class="form-actions">
+                                          <button type="submit" class="btn btn-primary tooltip-top">Conferma richiesta</button>&nbsp;
                                           <button type="reset" class="btn">Annulla</button>&nbsp;
+
                                         </div>
                                       </fieldset>
                                     </form>
@@ -63,129 +170,54 @@ End If
                                 <table class="table table-condensed">
 									<tbody>
                                         <tr>
-											<th>Codice prodotto</th>
-											<th>Nome Prodotto</th>
+											<th>Barcode</th>
+											<th>Codice articolo</th>
+											<th>Nome articolo</th>
 										</tr>
                                         <tr>
-										    <td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
+										    <td><%=rs3("Barcode")%></td>
+											<td><%=rs3("Codart")%></td>
+											<td><%=rs3("Nomart")%></td>
 										</tr>
                                        <td colspan="4">&nbsp;</td>
 										<tr>
-											<th>Data Ordine</th>
-											<th>Data Pagamento</th>
-											<th>Qta Richiesta</th>
+											<th>Prezzo</th>
+											<th>Qta disponibile</th>
 										</tr>
                                         <tr>
-											<td><%= Date() %></td>
-											<td><div class="controls">
-                                          	<input name="datapagamento" class="input-small focused" id="focusedInput" type="text" style="width:100px;">
-                                          </div></td>
-											<td><div class="controls">
-                                          	<input name="qtarichiesta" class="input-small focused" id="focusedInput" type="text" style="width:50px;">
-                                          </div></td>
+											<td>
+                                                    <%
+                                                    dim Numero
+                                                    Numero = rs3("Przart")
+                                                    Response.write "Euro: " & FormatNumber (Numero,2,,,-1)
+                                                    %>
+                                            </td>
+											<td><%=rs3("qtadisp")%></td>
 										</tr>
 									</tbody>
 								</table>
                             </div>
                         </div>
-                        <!-- /block -->
-                    </div>
-
-                     <div class="row-fluid">
-                        <!-- block -->
-                        <!-- /block -->
-                    </div>
-                </div>
-                <!--#include virtual file="sim_wishlist_lateral.asp"--><!--#include virtual file="sim_magicbox_lateral.asp"-->
+<div class="col-lg-2 text-center">
+        <div></div>
+</div>
+</div>
+                            
             </div>
-            <hr>
-		    <!--#include virtual file="include/piede.asp"-->
-		    </div>
-        <!--/.fluid-container-->
-        <link href="vendors/datepicker.css" rel="stylesheet" media="screen">
-        <link href="vendors/uniform.default.css" rel="stylesheet" media="screen">
-        <link href="vendors/chosen.min.css" rel="stylesheet" media="screen">
+            <!-- /.container-fluid -->
 
-        <link href="vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
+        </div>
+        <!-- /#page-wrapper -->
 
-        <script src="vendors/jquery-1.9.1.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/jquery.uniform.min.js"></script>
-        <script src="vendors/chosen.jquery.min.js"></script>
-        <script src="vendors/bootstrap-datepicker.js"></script>
+    </div>
+    <!-- /#wrapper -->
 
-        <script src="vendors/wysiwyg/wysihtml5-0.3.0.js"></script>
-        <script src="vendors/wysiwyg/bootstrap-wysihtml5.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-        <script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-
-        <script src="assets/scripts.js"></script>
-        <script>
-        $(function() {
-            $(".datepicker").datepicker();
-            $(".uniform_on").uniform();
-            $(".chzn-select").chosen();
-            $('.textarea').wysihtml5();
-
-            $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index+1;
-                var $percent = ($current/$total) * 100;
-                $('#rootwizard').find('.bar').css({width:$percent+'%'});
-                // If it's the last tab then hide the last button and show the finish instead
-                if($current >= $total) {
-                    $('#rootwizard').find('.pager .next').hide();
-                    $('#rootwizard').find('.pager .finish').show();
-                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
-                } else {
-                    $('#rootwizard').find('.pager .next').show();
-                    $('#rootwizard').find('.pager .finish').hide();
-                }
-            }});
-            $('#rootwizard .finish').click(function() {
-                alert('Finished!, Starting over!');
-                $('#rootwizard').find("a[href*='tab1']").trigger('click');
-            });
-        });
-        </script>
-        <script>
-        $(function() {
-            $('.tooltip').tooltip();	
-			$('.tooltip-left').tooltip({ placement: 'left' });	
-			$('.tooltip-right').tooltip({ placement: 'right' });	
-			$('.tooltip-top').tooltip({ placement: 'top' });	
-			$('.tooltip-bottom').tooltip({ placement: 'bottom' });
-
-			$('.popover-left').popover({placement: 'left', trigger: 'hover'});
-			$('.popover-right').popover({placement: 'right', trigger: 'hover'});
-			$('.popover-top').popover({placement: 'top', trigger: 'hover'});
-			$('.popover-bottom').popover({placement: 'bottom', trigger: 'hover'});
-
-			$('.notification').click(function() {
-				var $id = $(this).attr('id');
-				switch($id) {
-					case 'notification-sticky':
-						$.jGrowl("Stick this!", { sticky: true });
-					break;
-
-					case 'notification-header':
-						$.jGrowl("A message with a header", { header: 'Important' });
-					break;
-
-					default:
-						$.jGrowl("Hello world!");
-					break;
-				}
-			});
-        });
-        </script>
-    </body>
+</body>
 
 </html>
-<%
-Set rs = Nothing
-Set dbConn = Nothing
-%>

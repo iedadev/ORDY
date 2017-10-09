@@ -71,7 +71,7 @@ this.rtrim=function rtrim(s) {
 	return ns.replace(/\s+$/,"");
 }
 
-this.file=function file(path){
+this.file=function file(path){;
    	var f
    	var ar = new Array()
    	try{

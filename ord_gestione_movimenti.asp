@@ -2,14 +2,8 @@
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="language.asp"-->
 <!--#include virtual file="config.asp"-->
-<%
-If session("usr") = "" Then
-    response.redirect "default.asp"
-End If
+<!--#include virtual file ="include/security.asp"-->
 
-'response.end
-
-%>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -29,7 +23,7 @@ End If
          <div class="container-fluid">
             <div class="row-fluid">
             <% If session("ruolo") = "A" Then %>
-	            <!--#include virtual file="ord_controlpanelmagazzino.asp"-->
+	            <!--#include virtual file="ord_controlpanelmovimenti.asp"-->
             <%Else%>
                 <!--#include virtual file="sim_lastprops.asp"-->       
             <% End If %>
@@ -45,13 +39,17 @@ End If
                                 <div class="span12" align="center">
 
                                     <table align="center" border="0">
-                                        <td align="center"><a href="ord_gestione_articoliIN.asp"> <img src="images/database.png" width="128" height="128" title="Gestione Articoli da Casa Madre"></a><br>Ordini da HD</td>
+                                        <!-- <td align="center"><a href="ord_gestione_ordiniHD.asp"> <img src="images/database.png" width="128" height="128" title="Gestione Articoli da Casa Madre"></a><br>Ordini da HD</td>-->
+                                        <td align="center"><a href="ord_gestione_nrordine.asp"> <img src="images/database.png" width="128" height="128" title="Gestione Articoli da Casa Madre"></a><br>Ordini da HD</td>
                                         <td>&nbsp;&nbsp;&nbsp;</td>
                                         <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td align="center"><a href="ord_gestione_articoliLC.asp"><img src="images/database2.png" width="128" height="128" title="Gestione Ordini da LC"></a><br>Ordini da LC</td>
+                                        <td align="center"><a href="ord_gestione_articoliLC_start.asp"><img src="images/database2.png" width="128" height="128" title="Gestione Ordini da LC"></a><br>Ordini da LC</td>
                                         <td>&nbsp;&nbsp;&nbsp;</td>
                                         <td>&nbsp;&nbsp;&nbsp;</td>
                                         <td align="center"><a href="ord_gestione_articoliAS.asp"><img src="images/stack.png" width="128" height="128" title="Assegnazioni Richieste Ordini"></a><br>Assegnazioni</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><a href="ord_gestione_ordini_ricerca.asp"><img src="images/stack.png" width="128" height="128" title="Gestione Pagamenti Ordini"></a><br>Gestione Ordini</td>
                                         </tr>
                                       </table>
                                 </div>

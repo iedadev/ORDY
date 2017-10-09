@@ -31,8 +31,12 @@ If request("ARRIVO") = "Login" then
 			Set rs = dbConn.Execute(sss)
 		' Scrive Log - Fine
 
-		response.redirect "main.asp" 'sim_inventario_magicbox.asp
-        
+		if session("ruolo") = "U" then
+        response.redirect "main_user.asp"
+        else
+        response.redirect "main.asp" 
+        end if
+
 	End If
 Else
 	session("id_usr") = ""
@@ -58,12 +62,47 @@ Set rs = nothing
     	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+    <!--new-->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+     <!--Intestazione-->
+	
+	<!--#include virtual file="include/title.asp"-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
 </head>
 <body id="login">
 <div class="container">
-        <p align="center"><img src="images/ordy.png" width="290" height="290" alt="ORDY" ></p>
 		<form class="form-signin" name="accesso" action="default.asp?ARRIVO=Login" method="post">
-			<h2 class="form-signin-heading" align="center">mORDYan<br><small>Milano Fiera</small></h2>
+			<img src="images/ordy.png" width="290" height="290" alt="ORDY" >
+			<h2 class="form-signin-heading" align="center">mORDYan<br><small>Gestionale Magazzino</small></h2>
 			<input name="usr" type="text" class="input-block-level" placeholder="Username">
 			<input name="pwd" type="password" class="input-block-level" placeholder="Password">
 			<% If Len(Trim(request("msg"))) > 0 Then %>
@@ -77,12 +116,9 @@ Set rs = nothing
             </div>
     <div align="center">
       <p><font face="Verdana, Arial, Helvetica, sans-serif"><br>
-        Version 2016.1</font></p>
+        Version 2016.10</font></p>
       <font face="Verdana, Arial, Helvetica, sans-serif" size="2"><br>
-        <a href="mailto:iedadev@gmail.com?subject=SIM:Richiesta Username/Password">Dimenticata Username/Password?</a></font> 
-        
-        
-           
+        <a href="mailto:segreteria@motherwords.it?subject=ORDY:Richiesta Username/Password">Dimenticata Username/Password?</a></font> 
     </div>
   </form>
   </div>

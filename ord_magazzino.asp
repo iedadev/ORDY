@@ -2,14 +2,7 @@
 <!--#include virtual file="include/funzioni.asp"-->
 <!--#include virtual file="language.asp"-->
 <!--#include virtual file="config.asp"-->
-<%
-If session("usr") = "" Then
-    response.redirect "default.asp"
-End If
-
-'response.end
-
-%>
+<!--#include virtual file ="include/security.asp"-->
 
 <!DOCTYPE html>
 <html lang="it">
@@ -31,7 +24,7 @@ End If
             <% If session("ruolo") = "A" Then %>
 	            <!--#include virtual file="ord_controlpanelmagazzino.asp"-->
             <%Else%>
-                <!--#include virtual file="sim_lastprops.asp"-->       
+                <!--#include virtual file="sim_lastprops.asp"-->       <!-- inserire gli ultimi ordini ricevuti ??-->
             <% End If %>
                 <div class="span9" id="content">
                       <!-- morris stacked chart -->

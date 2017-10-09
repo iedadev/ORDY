@@ -1,0 +1,1 @@
+= '" & request("BARCODE") & "'"  'cosi si passa una stringa!!!!
